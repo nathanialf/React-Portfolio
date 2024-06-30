@@ -1,5 +1,5 @@
 import Head from 'next/head';
-import Image from 'next/image';
+
 import { Tooltip } from 'react-tooltip'
 import { 
   IconBrandAmazon,
@@ -15,7 +15,8 @@ import {
 } from '@tabler/icons-react';
 
 import styles from '../styles/Home.module.css';
-import 'react-tooltip/dist/react-tooltip.css'
+
+import 'react-tooltip/dist/react-tooltip.css';
 
 export default function Home() {
   return (
@@ -37,7 +38,17 @@ export default function Home() {
         <div className={styles.card}>
           <div className={styles.name}>
             <span>Nathanial Fine</span>
-            <Image src="/images/DEFNF2022.png" height={80} width={80}/>
+            <picture>
+              <source
+                srcset="/images/darkmode/defnf.png"
+                media="(prefers-color-scheme: dark)"
+              />
+              <img
+                src="/images/lightmode/defnf.png"
+                height={80}
+                width={80}
+              />
+            </picture>
           </div>
 
           <span className={styles.title}>

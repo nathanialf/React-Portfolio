@@ -12,3 +12,9 @@ svg {
   top: 0.2em;
   margin-right: 0.2em;
 }
+
+@media (prefers-color-scheme: dark) {
+  a {
+    color: white;
+  }
+}

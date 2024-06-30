@@ -1,6 +1,6 @@
 .container {
   background-color: white;
-  background-image: url(../public/images/_DSF0691-30.jpg);
+  background-image: url(../public/images/lightmode/background.jpg);
   background-position: center;
   background-size: cover;
   position: fixed;
@@ -24,6 +24,8 @@
   z-index: 999;
   pointer-events:none;
   border-radius: 1em;
+
+  color: black;
 }
 
 .card {
@@ -102,5 +104,30 @@
 
   .link {
     border-width: 1px;
+  }
+}
+
+/* Media query for if system preference is dark mode */
+@media (prefers-color-scheme: dark) {
+  .container { 
+    background-image: url(../public/images/darkmode/background.jpg);
+  }
+
+  .link:hover {
+    border-color: #2e3a4a;
+    background-color: #2e3a4a;
+  }
+
+  .card {
+    box-shadow: 0 0.2rem 0.2rem #161c24;
+
+    color: white;
+  }
+
+  /* Media query for smaller devices */
+  @media screen and (max-width: 768px) {
+    .card {
+      box-shadow: none;
+    }
   }
 }
