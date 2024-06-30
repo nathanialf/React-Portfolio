@@ -1,5 +1,6 @@
 import Head from 'next/head';
-import Image from 'next/image'
+import Image from 'next/image';
+import { Tooltip } from 'react-tooltip'
 import { 
   IconBrandAmazon,
   IconBrandDiscord,
@@ -14,6 +15,7 @@ import {
 } from '@tabler/icons-react';
 
 import styles from '../styles/Home.module.css';
+import 'react-tooltip/dist/react-tooltip.css'
 
 export default function Home() {
   return (
@@ -23,6 +25,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
         <meta name="theme-color" content="#9fc2c2"/>
       </Head>
+
+      {/* Copyright and Tooltip. 
+            Used at the bottom of main
+            This is how I learned about react comments, they suck. */}
+      <a data-tooltip-id="copyright-tooltip" data-tooltip-content="Background shot on Fujifilm XT-5" className={styles.copyright}>
+        &copy; 2024 Nathanial Fine
+      </a>
 
       <main>
         <div className={styles.card}>
@@ -87,14 +96,12 @@ export default function Home() {
             </span>
           </a>
         
-          <p>I am getting married in 2025.</p>
-          <p>Enthusiast</p>
+          <p>Upgrading to Husband in 2025.</p>
+          <p>Enthusiast.</p>
         </div>
 
         
-        <span className={styles.copyright}>
-          &copy; 2024 Nathanial Fine
-        </span>
+        <Tooltip id="copyright-tooltip" />
       </main>
     </div>
   );
