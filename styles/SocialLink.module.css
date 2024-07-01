@@ -1,0 +1,41 @@
+.link {
+  display: inline-block;
+  font-size: 1em;
+  padding: 0em .5em .1em .5em;
+  margin: .2em .4em .2em 0em;
+
+  border-width: 1px;
+  border-radius: 1em;
+  border: solid;
+}
+
+.link:hover {
+  border-color: #6d8585;
+  background-color: #6d8585;
+
+  -webkit-transition: background-color 100ms linear;
+  -ms-transition: background-color 100ms linear;
+  transition: background-color 100ms linear;
+  -webkit-transition: border-color 100ms linear;
+  -ms-transition: border-color 100ms linear;
+  transition: border-color 100ms linear;
+}
+
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+  .link {
+    border-width: 1px;
+  }
+}
+
+/* Media query for if system preference is dark mode */
+@media (prefers-color-scheme: dark) {
+  .link:hover {
+    border-color: #2e3a4a;
+    background-color: #2e3a4a;
+  }
+  
+  /* Media query for smaller devices */
+  @media screen and (max-width: 768px) {
+  }
+}
