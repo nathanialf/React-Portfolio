@@ -3,22 +3,21 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start"
+    "start": "next start",
+    "lint": "next link"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.7.0",
-    "@types/react-router-dom": "^5.3.3",
     "next": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
     "react-tooltip": "^5.27.0"
   },
   "engines": {
     "node": ">=18"
   },
   "devDependencies": {
-    "@types/node": "20.14.9",
-    "@types/react": "18.3.3",
-    "typescript": "5.5.2"
+    "@types/node": "^20.14.9",
+    "@types/react": "^18.3.3",
+    "typescript": "^5.5.2"
   }
 }

@@ -7,7 +7,6 @@ I've never made a website with NextJS or React so this is still a work in progre
 - Setting the theme-color to the average color of the page
 - Geolocation difference "2,000 miles away" next to the San Francisco `title`
 - Make link buttons better. Kinda plain at the moment.
-- General reactification and improvements
 
 ### Additional page ideas
 - Photography portfolio
