@@ -1,4 +1,4 @@
-"use client";
+'use client';
 
 import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
@@ -12,11 +12,11 @@ export default function Copyright() {
   */}
   return (
     <div>
-      <a data-tooltip-id="copyright-tooltip" data-tooltip-content="Background shot on Fujifilm XT by Nathanial Fine" className={styles.copyright}>
+      <a data-tooltip-id='copyright-tooltip' data-tooltip-content='Background shot on Fujifilm XT-5 by Nathanial Fine' className={styles.copyright}>
         &copy; 2024 Nathanial Fine
       </a>
 
-      <Tooltip id="copyright-tooltip" />
+      <Tooltip id='copyright-tooltip' />
     </div>
   )
 }
