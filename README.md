@@ -4,7 +4,6 @@ I've never made a website with NextJS or React so this is still a work in progre
 
 ## TODO
 - Animate slight color banding or gradients to add a little visual flair to the blurred card. This should be minimal and not distracting. Probably OpenGL? Not sure
-- Setting the theme-color to the average color of the page
 - Geolocation difference "2,000 miles away" next to the San Francisco `title`
 - Make link buttons better. Kinda plain at the moment.
 
