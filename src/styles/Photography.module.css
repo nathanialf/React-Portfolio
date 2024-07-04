@@ -8,10 +8,18 @@
 }
 
 .header {
-  display: block;
+  display: flex;
   font-size: 4rem;
   text-align: center;
-  padding-top: 4rem;
+  padding-top: 10rem;
+  align-items: center;
+  justify-content: center;
+}
+
+.header img {
+  display: inline-block;
+  margin-right: 1rem;
+  margin-top: 1rem;
 }
 
 .sub_header {
@@ -24,7 +32,7 @@
   display: block;
   text-align: center;
   font-size: 1em;
-  padding-bottom: 4rem;
+  padding-bottom: 10rem;
 }
 
 .flex_container {
@@ -37,6 +45,7 @@
 .image_container {
   display: inline-block;
   width: 100%;
+  margin-bottom: 1em;
 }
 
 .image_container img {
@@ -44,10 +53,12 @@
 }
 
 .image_details {
+  margin-top: -2.5em;
   background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
   color: white;
   padding: .25em 0 .25em .5em;
   display: block;
+  position: relative;
 }
 
 .image_details_text {
@@ -55,7 +66,7 @@
   font-size: .8em;
 }
 
-/* Media query for smaller devices */
+/* Media query for medium devices */
 @media screen and (min-width: 768px) and (max-width: 1400px) {
   .image_container {
     display: block;
@@ -71,10 +82,13 @@
 
 /* Media query for smaller devices */
 @media screen and (max-width: 768px) {
+  .header {
+    display:inline-block;
+  }
+
   .image_container {
     display: block;
     width: 100%;
-    margin: 0rem 0rem 2rem 0rem;
   }
 
   .flex_container {
@@ -87,7 +101,7 @@
 /* Media query for if system preference is dark mode */
 @media (prefers-color-scheme: dark) {
   .container {
-    background: linear-gradient(180deg, rgba(0,0,0,1) 0%, rgba(22,68,126,1) 100%);
+    background: linear-gradient(180deg, rgba(13,34,56,1) 0%, rgba(34,155,222,1) 100%);
     background-color: black;
     color: white;
   }
