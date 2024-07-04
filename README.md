@@ -5,8 +5,9 @@ I've never made a website with NextJS or React so this is still a work in progre
 ## TODO
 - Animate slight color banding or gradients to add a little visual flair to the blurred card. This should be minimal and not distracting. Probably OpenGL? Not sure
 - Geolocation difference "2,000 miles away" next to the San Francisco `title`
-- Make link buttons better. Kinda plain at the moment.
-- Build Photography portfolio route
+- Make link buttons better. Kinda plain at the  moment.
+- Fix issue of `image_details` separating from the image in the `image_container`
+- Add some lightbox kinda of view when clicking on image
 
 ### Additional page ideas
 - Photography portfolio
