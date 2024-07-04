@@ -11,6 +11,7 @@ import {
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandThreads,
+  IconCamera,
   IconMail,
   IconMapPin
 } from '@tabler/icons-react';
@@ -100,6 +101,12 @@ const Homepage = () => {
             encoded
             href='https://letterboxd.com/nathanialfine/'
             icon={<IconBrandLetterboxd stroke={2} width='1em' height='1em'/>}
+            text='nathanialfine'
+          />
+          <SocialLink 
+            encoded
+            href='/photography/'
+            icon={<IconCamera stroke={2} width='1em' height='1em'/>}
             text='nathanialfine'
           />
         
