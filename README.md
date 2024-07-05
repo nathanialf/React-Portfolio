@@ -7,6 +7,7 @@ I've never made a website with NextJS or React so this is still a work in progre
 - Geolocation difference "2,000 miles away" next to the San Francisco `title`
 - Make link buttons better. Kinda plain at the  moment.
 - Add some lightbox kinda of view when clicking on image
+- Image curation
 
 ### Additional page ideas
 - Photography portfolio
