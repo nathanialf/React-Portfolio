@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import SocialLink from '../ui/SocialLink';
+import UnderscoreLink from '../ui/UnderscoreLink';
 import DEFNFImage from '../ui/DEFNFImage';
 import Copyright from '../ui/Copyright';
 import {
@@ -11,7 +12,6 @@ import {
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandThreads,
-  IconCamera,
   IconMail,
   IconMapPin
 } from '@tabler/icons-react';
@@ -101,15 +101,15 @@ export default function Homepage() {
           icon={<IconBrandLetterboxd stroke={2} width='1em' height='1em' />}
           text='nathanialfine'
         />
-        <SocialLink
-          encoded
-          href='/photography/'
-          icon={<IconCamera stroke={2} width='1em' height='1em' />}
-          text='Photography'
-        />
 
         <p>Upgrading to Husband in 2025.</p>
-        <p>Enthusiast.</p>
+        <p>Enthusiast.&nbsp;"
+          <UnderscoreLink
+            encoded
+            href='/photography/'
+            text='Photographer'
+          />."
+        </p>
       </div>
 
       <Copyright />

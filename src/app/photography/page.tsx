@@ -3,7 +3,6 @@ import { promises as fs } from 'fs';
 import DEFNFImage from '../../ui/DEFNFImage';
 import Image from 'next/image'
 
-
 import styles from '../../styles/Photography.module.css';
 
 export const metadata: Metadata = {
@@ -20,7 +19,6 @@ export default async function Photography() {
       <span className={styles.header}><DEFNFImage /> Photography</span>
       <span className={styles.sub_header}>I am not a photographer</span>
       <span className={styles.sub_sub_header}>Photographed by Nathanial Fine</span>
-      <p style={{marginLeft: 1 + 'em'}}>Im going to be curating the photos soon</p>
       <div className={styles.flex_container}>
         {photos.map(function(data) {
           return (

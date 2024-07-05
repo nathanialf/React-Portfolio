@@ -18,28 +18,40 @@
     "fstop": "4",
     "focal": "22",
     "iso": "125",
-    "shutter": "1/500"
-  },
-  {
-    "source": "/images/darkmode/background.jpg",
-    "title": "Fountain at Sharon Park",
-    "year": "2023",
-    "camera": "Fujifilm XT-5",
-    "fstop": "4",
-    "focal": "80",
-    "iso": "6400",
-    "shutter": "1/60",
+    "shutter": "1/500",
     "hidden": true
   },
   {
-    "source": "/photography/_DSF0196.jpg",
-    "title": "Chotto Matte in San Francisco",
-    "year": "2023",
+    "source": "/photography/IMG_1461.jpg",
+    "title": "Banana Drink from Tartine Manufactory",
+    "year": "2024",
+    "camera": "Apple iPhone 15 Pro Max",
+    "fstop": "2.2",
+    "focal": "2",
+    "iso": "40",
+    "shutter": "1/250",
+    "hidden": true
+  },
+  {
+    "source": "/photography/IMG_0670.jpg",
+    "title": "South Park in San Francisco",
+    "year": "2024",
+    "camera": "Apple iPhone 15 Pro Max",
+    "fstop": "2.8",
+    "focal": "15",
+    "iso": "50",
+    "shutter": "1/1150",
+    "hidden": true
+  },
+  {
+    "source": "/photography/_DSF0726.jpg",
+    "title": "Glass Hut at Google Visitor Center",
+    "year": "2024",
     "camera": "Fujifilm XT-5",
     "fstop": "4",
-    "focal": "54",
-    "iso": "3200",
-    "shutter": "1/30"
+    "focal": "80",
+    "iso": "200",
+    "shutter": "1/1100"
   },
   {
     "source": "/photography/_DSF0570.jpg",
@@ -97,19 +109,7 @@
     "fstop": "5",
     "focal": "80",
     "iso": "800",
-    "shutter": "1/4400",
-    "hidden": true
-  },
-  {
-    "source": "/photography/IMG_0670.jpg",
-    "title": "South Park in San Francisco",
-    "year": "2024",
-    "camera": "Apple iPhone 15 Pro Max",
-    "fstop": "2.8",
-    "focal": "15",
-    "iso": "50",
-    "shutter": "1/1150",
-    "hidden": true
+    "shutter": "1/4400"
   },
   {
     "source": "/photography/IMG_0685.jpg",
@@ -134,6 +134,26 @@
     "hidden": true
   },
   {
+    "source": "/photography/_DSF0737.jpg",
+    "title": "White Sculpture at Google Visitor Center",
+    "year": "2024",
+    "camera": "Fujifilm XT-5",
+    "fstop": "4",
+    "focal": "20",
+    "iso": "200",
+    "shutter": "1/1800"
+  },
+  {
+    "source": "/photography/IMG_1208.jpg",
+    "title": "Pine and Kearny in San Francisco",
+    "year": "2024",
+    "camera": "Apple iPhone 15 Pro Max",
+    "fstop": "1.8",
+    "focal": "6",
+    "iso": "1000",
+    "shutter": "1/25"
+  },
+  {
     "source": "/photography/IMG_0683.jpg",
     "title": "2nd and Clementina in San Francisco",
     "year": "2024",
@@ -144,23 +164,24 @@
     "shutter": "1/60"
   },
   {
-    "source": "/photography/_DSF0726.jpg",
-    "title": "Glass Hut at Google Visitor Center",
-    "year": "2024",
+    "source": "/images/darkmode/background.jpg",
+    "title": "Fountain at Sharon Park",
+    "year": "2023",
     "camera": "Fujifilm XT-5",
     "fstop": "4",
     "focal": "80",
-    "iso": "200",
-    "shutter": "1/1100"
+    "iso": "6400",
+    "shutter": "1/60",
+    "hidden": true
   },
   {
-    "source": "/photography/_DSF0737.jpg",
-    "title": "White Sculpture at Google Visitor Center",
-    "year": "2024",
+    "source": "/photography/_DSF0196.jpg",
+    "title": "Chotto Matte in San Francisco",
+    "year": "2023",
     "camera": "Fujifilm XT-5",
     "fstop": "4",
-    "focal": "20",
-    "iso": "200",
-    "shutter": "1/1800"
+    "focal": "54",
+    "iso": "3200",
+    "shutter": "1/30"
   }
 ]

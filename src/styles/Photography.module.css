@@ -45,7 +45,6 @@
 .image_container {
   display: inline-block;
   width: 100%;
-  margin-bottom: 1em;
 }
 
 .image_container img {
@@ -54,7 +53,10 @@
 
 .image_details {
   margin-top: -2.5em;
-  background: linear-gradient(90deg, rgba(0,0,0,1) 0%, rgba(255,255,255,0) 100%);
+  background: linear-gradient(to right, black, transparent);
+  width:75%;
+  background-size: cover;
+  filter: contrast(100%) brightness(100%);
   color: white;
   padding: .25em 0 .25em .5em;
   display: block;
