@@ -54,7 +54,7 @@
 .image_details {
   margin-top: -2.5em;
   background: linear-gradient(to right, black, transparent);
-  width:75%;
+  width:85%;
   background-size: cover;
   filter: contrast(100%) brightness(100%);
   color: white;
