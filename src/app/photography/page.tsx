@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import { promises as fs } from 'fs';
-import BackButton from '../../ui/BackButton';
+import HomeButton from '../../ui/HomeButton';
 import DEFNFImage from '../../ui/DEFNFImage';
 import Image from 'next/image'
 
@@ -17,7 +17,7 @@ export default async function Photography() {
 
   return (
     <div className={styles.container}>
-      <BackButton />
+      <HomeButton />
       <span className={styles.header}><DEFNFImage /> Photography</span>
       <span className={styles.sub_header}>I am not a photographer</span>
       <span className={styles.sub_sub_header}>Photographed by Nathanial Fine</span>

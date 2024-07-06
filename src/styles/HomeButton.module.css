@@ -1,4 +1,4 @@
-.back_button {
+.home_button {
   position: absolute;
   background: transparent;
   border: none;
@@ -7,14 +7,14 @@
   top: 1em;
 }
 
-.back_button span {
+.home_button span {
   position: absolute;
   top: .3rem;
 }
 
 /* Media query for if system preference is dark mode */
 @media (prefers-color-scheme: dark) {
-  .back_button {
+  .home_button {
     color:white;
   }
 }
