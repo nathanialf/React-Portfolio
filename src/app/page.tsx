@@ -13,6 +13,8 @@ import {
   IconBrandSteam,
   IconBrandThreads,
   IconBrandTwitch,
+  IconBrandYoutube,
+  IconBrandBluesky,
   IconMail,
   IconMapPin
 } from '@tabler/icons-react';
@@ -104,19 +106,24 @@ export default function Homepage() {
         />
         <SocialLink
           encoded
+          href='https://www.youtube.com/@NathanialFine'
+          icon={<IconBrandYoutube stroke={2} width='1em' height='1em' />}
+          text='@NathanialFine'
+        />
+        <SocialLink
+          encoded
+          href='https://bsky.app/profile/defnf.com'
+          icon={<IconBrandBluesky stroke={2} width='1em' height='1em' />}
+          text='@defnf.com'
+        />
+        <SocialLink
+          encoded
           href='https://letterboxd.com/nathanialfine/'
           icon={<IconBrandLetterboxd stroke={2} width='1em' height='1em' />}
           text='nathanialfine'
         />
 
-        <p>Upgrading to Husband in 2025.</p>
-        <p>Enthusiast.&nbsp;"
-          <UnderscoreLink
-            encoded
-            href='/photography/'
-            text='Photographer'
-          />."
-        </p>
+        <p>Husband.</p>
       </div>
 
       <Copyright />
