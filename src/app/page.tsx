@@ -12,6 +12,7 @@ import {
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandThreads,
+  IconBrandTwitch,
   IconMail,
   IconMapPin
 } from '@tabler/icons-react';
@@ -94,6 +95,12 @@ export default function Homepage() {
           href=''
           icon={<IconBrandDiscord stroke={2} width='1em' height='1em' />}
           text='nathanialf'
+        />
+        <SocialLink
+          encoded
+          href='https://www.twitch.tv/nathanialfine'
+          icon={<IconBrandTwitch stroke={2} width='1em' height='1em' />}
+          text='nathanialfine'
         />
         <SocialLink
           encoded
