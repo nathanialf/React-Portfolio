@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import Copyright from '../ui/Copyright';
-import Card from '../ui/Card';
+import FloatingCard from '../ui/FloatingCard';
 
 import styles from '../styles/Homepage.module.css';
 
@@ -22,7 +22,7 @@ export default function Homepage() {
           priority
         />
       </picture>
-      <Card />
+      <FloatingCard />
       <Copyright />
     </div>
   );
