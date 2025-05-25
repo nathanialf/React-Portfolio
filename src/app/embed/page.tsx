@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import FullCard from '../ui/FullCard';
+import FullCard from '../../ui/FullCard';
 
-import styles from '../styles/Homepage.module.css';
+import styles from '../../styles/Homepage.module.css';
 
 export default function Embed() {
   return (
