@@ -1,16 +1,14 @@
 .card {
   position: fixed;
-  top: 50%;
-  left: 50%;
-  -webkit-transform: translate(-50%, -50%);
-  transform: translate(-50%, -50%);
-
-  width: 400px;
-  padding: 2em;
-  border-radius: 1em;
+  top: 0;
+  left: 0;
+  width: 96%; /* Adjust width for smaller screens */
+  height: 100%;
+  border-radius: 0;
+  padding: 2%;
 
   backdrop-filter: blur(.75rem);
-  box-shadow: 0 0.1rem 0.1rem #ababab99;
+  box-shadow: none;
 }
 
 .card::after {
@@ -28,36 +26,6 @@
   pointer-events:none;
 
   color: black;
-}
-
-.name {
-  font-size: 2em;
-  width: 100%;
-  padding-bottom: 1em;
-}
-
-.name span {
-  margin-top: .5em;
-}
-
-.name img {
-  float: right;
-}
-
-.title {
-  display: block;
-  font-size: 1em;
-  margin-bottom: .5em;
-}
-
-/* Media query for smaller devices */
-@media screen and (max-width: 768px) {
-  .card {
-    width: 90%; /* Adjust width for smaller screens */
-    max-width: 95%; /* Remove max-width restriction */
-    border-radius: 0em;
-    box-shadow: none;
-  }
 }
 
 /* Media query for if system preference is dark mode */

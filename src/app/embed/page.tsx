@@ -1,10 +1,9 @@
 import Image from 'next/image';
-import Copyright from '../ui/Copyright';
-import FloatingCard from '../ui/FloatingCard';
+import FullCard from '../../ui/FullCard';
 
-import styles from '../styles/Homepage.module.css';
+import styles from '../../styles/Homepage.module.css';
 
-export default function Homepage() {
+export default function Embed() {
   return (
     <div className={styles.container}>
       <picture>
@@ -22,8 +21,7 @@ export default function Homepage() {
           priority
         />
       </picture>
-      <FloatingCard />
-      <Copyright />
+      <FullCard />
     </div>
   );
 }
