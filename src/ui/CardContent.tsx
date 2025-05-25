@@ -1,6 +1,6 @@
 import React from 'react';
-import SocialLink from './SocialLink'; // Changed from { SocialLink } to SocialLink
-import DEFNFImage from './DEFNFImage';   // Changed from { DEFNFImage } to DEFNFImage
+import SocialLink from './SocialLink';
+import DEFNFImage from './DEFNFImage';
 import {
   IconBrandAmazon,
   IconBrandDiscord,
