@@ -10,8 +10,6 @@ import {
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandThreads,
-  IconBrandTwitch,
-  IconBrandYoutube,
   IconBrandBluesky,
   IconMail,
   IconMapPin
@@ -46,12 +44,6 @@ const CardContent: React.FC = () => {
         href='https://www.linkedin.com/in/nathanial-fine/'
         icon={<IconBrandLinkedin stroke={2.25} width='1em' height='1em' />}
         text='nathanial-fine'
-      />
-      <SocialLink
-        encoded
-        href='https://www.youtube.com/@NathanialFine'
-        icon={<IconBrandYoutube stroke={2} width='1em' height='1em' />}
-        text='NathanialFine'
       />
       <SocialLink
         encoded
