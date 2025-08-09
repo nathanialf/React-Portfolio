@@ -2,7 +2,6 @@ import React from 'react';
 import SocialLink from './SocialLink';
 import DEFNFImage from './DEFNFImage';
 import {
-  IconBrandAmazon,
   IconBrandDiscord,
   IconBrandGithub,
   IconBrandInstagram,
@@ -11,6 +10,8 @@ import {
   IconBrandSteam,
   IconBrandThreads,
   IconBrandBluesky,
+  IconDeviceLaptop,
+  IconHeart,
   IconMail,
   IconMapPin
 } from '@tabler/icons-react';
@@ -26,12 +27,18 @@ const CardContent: React.FC = () => {
 
       <span className={styles.title}>
         <IconMapPin stroke={2} width='1em' height='1em' />
-        San Francisco
+        San Francisco Bay Area
       </span>
       <span className={styles.title}>
-        <IconBrandAmazon stroke={2} width='1em' height='1em' />
-        SysDev Engineer II @ Amazon
+        <IconDeviceLaptop stroke={2} width='1em' height='1em' />
+        DevOps | Site Reliability Engineer
       </span>
+      <span className={styles.title}>
+        <IconHeart stroke={2} width='1em' height='1em' />
+        Husband
+      </span>
+
+      <br></br>
 
       <SocialLink
         encoded
@@ -87,7 +94,6 @@ const CardContent: React.FC = () => {
         icon={<IconBrandLetterboxd stroke={2} width='1em' height='1em' />}
         text='nathanialfine'
       />
-      <p>Husband.</p>
     </>
   );
 };

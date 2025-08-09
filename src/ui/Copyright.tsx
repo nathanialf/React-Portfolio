@@ -13,7 +13,7 @@ export default function Copyright() {
   return (
     <div>
       <a data-tooltip-id='copyright-tooltip' data-tooltip-content='Background shot on Fujifilm XT-5 by Nathanial Fine' className={styles.copyright}>
-        &copy; 2024 Nathanial Fine
+        &copy; 2025 Nathanial Fine
       </a>
 
       <Tooltip id='copyright-tooltip' />
