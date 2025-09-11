@@ -1,0 +1,45 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5em;
+  height: 2.5em;
+  margin: 0.2em 0.4em 0.2em 0em;
+  
+  border-radius: 0.5em;
+  background-color: rgba(159, 194, 194, 0.1);
+  
+  /* Subtle styling - informational only */
+  cursor: default;
+  box-sizing: border-box;
+  
+  /* Ensure perfect centering */
+  flex-shrink: 0;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.badge svg,
+.badge img {
+  display: block;
+  margin: auto;
+}
+
+.badge:hover {
+  background-color: rgba(159, 194, 194, 0.2);
+
+  -webkit-transition: background-color 100ms linear;
+  -ms-transition: background-color 100ms linear;
+  transition: background-color 100ms linear;
+}
+
+/* Media query for if system preference is dark mode */
+@media (prefers-color-scheme: dark) {
+  .badge {
+    background-color: rgba(159, 194, 194, 0.15);
+  }
+  
+  .badge:hover {
+    background-color: rgba(159, 194, 194, 0.25);
+  }
+}

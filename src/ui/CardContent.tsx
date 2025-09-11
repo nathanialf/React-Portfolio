@@ -1,7 +1,11 @@
 import React from 'react';
 import SocialLink from './SocialLink';
+import CompanyBadge from './CompanyBadge';
 import DEFNFImage from './DEFNFImage';
 import {
+  IconBrandAmazon,
+  IconBrandAws,
+  IconBrandBluesky,
   IconBrandDiscord,
   IconBrandGithub,
   IconBrandInstagram,
@@ -9,7 +13,6 @@ import {
   IconBrandLinkedin,
   IconBrandSteam,
   IconBrandThreads,
-  IconBrandBluesky,
   IconDeviceLaptop,
   IconHeart,
   IconMail,
@@ -31,7 +34,7 @@ const CardContent: React.FC = () => {
       </span>
       <span className={styles.title}>
         <IconDeviceLaptop stroke={2} width='1em' height='1em' />
-        DevOps | Site Reliability Engineer
+        DevOps | TPM
       </span>
       <span className={styles.title}>
         <IconHeart stroke={2} width='1em' height='1em' />
@@ -93,6 +96,30 @@ const CardContent: React.FC = () => {
         href='https://letterboxd.com/nathanialfine/'
         icon={<IconBrandLetterboxd stroke={2} width='1em' height='1em' />}
         text='nathanialfine'
+      />
+
+      <div className={styles.previously}>Previously</div>
+
+      <CompanyBadge
+        companyName="Amazon.com"
+        startDate="2023"
+        endDate="2025"
+        icon={<IconBrandAmazon stroke={2} width='1.5em' height='1.5em' />}
+        tooltipId="amazon-tooltip"
+      />
+      <CompanyBadge
+        companyName="AWS"
+        startDate="2020"
+        endDate="2023"
+        icon={<IconBrandAws stroke={2} width='1.5em' height='1.5em' />}
+        tooltipId="aws-tooltip"
+      />
+      <CompanyBadge
+        companyName="Infosys"
+        startDate="2017"
+        endDate="2020"
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
+        tooltipId="infosys-tooltip"
       />
     </>
   );

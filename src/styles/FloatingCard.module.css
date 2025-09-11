@@ -44,7 +44,6 @@
 @media (prefers-color-scheme: dark) {
   .card {
     box-shadow: 0 0.2rem 0.2rem #161c24;
-
     color: white;
   }
 
