@@ -104,14 +104,14 @@ const CardContent: React.FC = () => {
         companyName="Amazon.com"
         startDate="2023"
         endDate="2025"
-        icon={<IconBrandAmazon stroke={2} width='1.5em' height='1.5em' />}
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
         tooltipId="amazon-tooltip"
       />
       <CompanyBadge
         companyName="AWS"
         startDate="2020"
         endDate="2023"
-        icon={<IconBrandAws stroke={2} width='1.5em' height='1.5em' />}
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
         tooltipId="aws-tooltip"
       />
       <CompanyBadge
