@@ -104,21 +104,21 @@ const CardContent: React.FC = () => {
         companyName="Amazon.com"
         startDate="2023"
         endDate="2025"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
         tooltipId="amazon-tooltip"
       />
       <CompanyBadge
         companyName="AWS"
         startDate="2020"
         endDate="2023"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
         tooltipId="aws-tooltip"
       />
       <CompanyBadge
         companyName="Infosys"
         startDate="2017"
         endDate="2020"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" style={{width: '24px', height: '24px', objectFit: 'contain', filter: 'brightness(0) invert(1)'}} />}
+        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
         tooltipId="infosys-tooltip"
       />
     </>

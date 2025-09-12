@@ -7,7 +7,7 @@
   margin: 0.2em 0.4em 0.2em 0em;
   
   border-radius: 0.5em;
-  background-color: rgba(159, 194, 194, 0.1);
+  background-color: rgba(159, 194, 194, 0.2);
   
   /* Subtle styling - informational only */
   cursor: default;
@@ -17,6 +17,8 @@
   flex-shrink: 0;
   text-align: center;
   vertical-align: middle;
+
+  color: black;
 }
 
 .badge svg,
@@ -25,8 +27,17 @@
   margin: auto;
 }
 
+/* Light mode - icons should be black */
+.badge svg {
+  color: black;
+}
+
+.badge img {
+  filter: brightness(0);
+}
+
 .badge:hover {
-  background-color: rgba(159, 194, 194, 0.2);
+  background-color: rgba(159, 194, 194, 0.3);
 
   -webkit-transition: background-color 100ms linear;
   -ms-transition: background-color 100ms linear;
@@ -37,6 +48,16 @@
 @media (prefers-color-scheme: dark) {
   .badge {
     background-color: rgba(159, 194, 194, 0.15);
+    color: white;
+  }
+  
+  /* Dark mode - icons should be white */
+  .badge svg {
+    color: white;
+  }
+
+  .badge img {
+    filter: brightness(0) invert(1);
   }
   
   .badge:hover {
