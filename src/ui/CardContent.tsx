@@ -1,11 +1,10 @@
 import React from 'react';
+import Image from 'next/image';
 import SocialLink from './SocialLink';
-import EmailSocialLink from './EmailSocialLink';
+import EmailLink from './EmailLink';
 import CompanyBadge from './CompanyBadge';
 import DEFNFImage from './DEFNFImage';
 import {
-  IconBrandAmazon,
-  IconBrandAws,
   IconBrandBluesky,
   IconBrandDiscord,
   IconBrandGithub,
@@ -44,7 +43,7 @@ const CardContent: React.FC = () => {
 
       <br></br>
 
-      <EmailSocialLink
+      <EmailLink
         href='mailto:nathanial+website@defnf.com'
         icon={<IconMail stroke={2} width='1em' height='1em' />}
         text='nathanial@defnf.com'
@@ -105,21 +104,21 @@ const CardContent: React.FC = () => {
         companyName="Amazon.com"
         startDate="2023"
         endDate="2025"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
+        icon={<Image src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" width={24} height={24} style={{objectFit: 'contain'}} />}
         tooltipId="amazon-tooltip"
       />
       <CompanyBadge
         companyName="AWS"
         startDate="2020"
         endDate="2023"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
+        icon={<Image src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" width={24} height={24} style={{objectFit: 'contain'}} />}
         tooltipId="aws-tooltip"
       />
       <CompanyBadge
         companyName="Infosys"
         startDate="2017"
         endDate="2020"
-        icon={<img src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" style={{width: '24px', height: '24px', objectFit: 'contain'}} />}
+        icon={<Image src="https://upload.wikimedia.org/wikipedia/commons/9/95/Infosys_logo.svg" alt="Infosys" width={24} height={24} style={{objectFit: 'contain'}} />}
         tooltipId="infosys-tooltip"
       />
     </>

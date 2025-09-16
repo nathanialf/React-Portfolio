@@ -5,7 +5,7 @@ import {
 // This uses just the google fonts name
 import { Outfit } from 'next/font/google'
 import '../styles/global.css'
-import React, { Children } from 'react'
+import React from 'react'
  
 export const metadata: Metadata = {
   title: {

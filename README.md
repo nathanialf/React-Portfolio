@@ -1,29 +1,80 @@
-# React Portfolio Website.
+# Nathanial Fine - Portfolio Website
 
-I've never made a website with NextJS or React so this is still a work in progress. I'm probably overly reliant on traditional HTML/CSS and want to make this closer to an intended react site down the line. First step was to get the new design how I intended it to be and we can build from there.
+A modern Next.js portfolio website featuring responsive design, dark/light mode support, and comprehensive testing.
 
-## TODO
-- Animate slight color banding or gradients to add a little visual flair to the blurred card. This should be minimal and not distracting. Probably OpenGL? Not sure
-- Geolocation difference "2,000 miles away" next to the San Francisco `title`
-- Make link buttons better. Kinda plain at the  moment.
-- Add some lightbox kinda of view when clicking on image
-- Image curation
+## Features
 
-### Additional page ideas
-- Photography portfolio
-- Blog if I have something to write about
-  - Blog will be the example I follow so that will be in a feature branch
+- **Responsive Design** - Mobile-first approach with CSS modules
+- **Dark/Light Mode** - Adaptive images based on user's color scheme preference
+- **Interactive Components** - Social links with copy-to-clipboard functionality
+- **Company Badges** - Hover tooltips with employment details
+- **Comprehensive Testing** - 85+ unit tests with Jest and React Testing Library
+- **Performance Optimized** - Next.js Image optimization and static generation
 
-## How to build/run
+## Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **UI Library**: React 19
+- **Language**: TypeScript
+- **Styling**: CSS Modules
+- **Testing**: Jest + React Testing Library
+- **Linting**: ESLint with Next.js configuration
+- **Icons**: Tabler Icons React
+- **Deployment**: AWS Amplify
+
+## Development Commands
+
+```bash
+npm run dev      # Start development server (localhost:3000)
+npm run build    # Build for production
+npm run start    # Start production server
+npm run test     # Run test suite
+npm run lint     # Run ESLint
+```
+
+## Project Structure
 
 ```
-npm run build
+src/
+├── app/           # Next.js app router pages
+│   ├── layout.tsx # Global layout with Google Fonts
+│   ├── page.tsx   # Homepage with floating card
+│   └── embed/     # Embeddable version
+├── ui/            # Reusable UI components
+│   ├── CardContent.tsx    # Main content component
+│   ├── SocialLink.tsx     # Social media links
+│   ├── EmailLink.tsx      # Email with copy functionality
+│   ├── CompanyBadge.tsx   # Employment badges
+│   └── DEFNFImage.tsx     # Responsive logo
+├── styles/        # CSS modules
+└── ...
+tst/              # Test files
+public/           # Static assets
 ```
 
-```
-npm run dev
+## Key Components
+
+- **CardContent** - Main portfolio content shared between card variants
+- **EmailLink** - Email contact with clipboard copy functionality  
+- **SocialLink** - Social media links with consistent styling
+- **CompanyBadge** - Previous employment with tooltip details
+- **DEFNFImage** - Logo that adapts to dark/light mode
+
+## Deployment
+
+The site deploys automatically to [defnf.com](https://defnf.com) via AWS Amplify on push to main branch.
+
+## Testing
+
+Run the comprehensive test suite covering all components:
+
+```bash
+npm test
 ```
 
-Accessible via localhost:3000
-
-Deploys to https://defnf.com via AWS Amplify
+The test suite includes 85+ unit tests covering:
+- Component rendering and props
+- User interactions and events
+- Accessibility features
+- Edge cases and error handling
+- Browser compatibility (clipboard API)
