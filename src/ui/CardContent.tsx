@@ -1,5 +1,6 @@
 import React from 'react';
 import SocialLink from './SocialLink';
+import EmailSocialLink from './EmailSocialLink';
 import CompanyBadge from './CompanyBadge';
 import DEFNFImage from './DEFNFImage';
 import {
@@ -43,11 +44,11 @@ const CardContent: React.FC = () => {
 
       <br></br>
 
-      <SocialLink
-        encoded
+      <EmailSocialLink
         href='mailto:nathanial+website@defnf.com'
         icon={<IconMail stroke={2} width='1em' height='1em' />}
         text='nathanial@defnf.com'
+        email='nathanial@defnf.com'
       />
       <SocialLink
         encoded
