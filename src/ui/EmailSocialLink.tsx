@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link'
-import { IconClipboard } from '@tabler/icons-react';
+import { IconCopy } from '@tabler/icons-react';
 import styles from '../styles/EmailSocialLink.module.css';
 
 interface EmailSocialLinkProps {
@@ -39,7 +39,7 @@ const EmailSocialLink: React.FC<EmailSocialLinkProps> = ({ href, icon, text, ema
             title="Copy email to clipboard"
             type="button"
           >
-            <IconClipboard stroke={2} width='1em' height='1em' />
+            <IconCopy stroke={2} width='1em' height='1em' />
           </button>
         </>
       )}

@@ -1,7 +1,7 @@
 .container {
   display: inline-block;
   font-size: 1em;
-  padding: 0em .5em .1em .5em;
+  padding: 0em .3em .1em .5em;
   margin: .2em .4em .2em 0em;
   border-width: 1px;
   border-radius: 1em;
@@ -35,17 +35,20 @@
   height: 1em;
   background-color: currentColor;
   opacity: 0.3;
-  margin: 0 0.3em;
+  margin: 0 0.2em;
   vertical-align: middle;
 }
 
 .copyButton {
   background: none;
   border: none;
+  padding: 0;
+  margin: 0;
   cursor: pointer;
   color: inherit;
   font-size: inherit;
-  vertical-align: middle;
+  vertical-align: baseline;
+  line-height: 1;
 }
 
 .copyButton:hover {
