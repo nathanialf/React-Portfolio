@@ -1,0 +1,153 @@
+.container {
+  animation: slideIn 0.3s ease-out;
+  width: 100%;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.backButton {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: none;
+  border: none;
+  color: #4b5563;
+  font-size: 0.9rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  margin-bottom: 1.5rem;
+  transition: color 0.2s ease;
+  line-height: 1;
+}
+
+.backButton:hover {
+  color: #9fc2c2;
+}
+
+.backButton svg {
+  display: block;
+  flex-shrink: 0;
+}
+
+.backButton span {
+  transform: translateY(3px);
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem 0;
+  color: #1f2937;
+}
+
+.description {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #4b5563;
+  margin: 0;
+}
+
+.links {
+  margin-top: 1.5rem;
+}
+
+.linksTitle {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 1rem 0;
+  color: #374151;
+}
+
+.linkGrid {
+  display: grid;
+  gap: 0.75rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  text-decoration: none;
+  color: #374151;
+  font-size: 0.9rem;
+  transition: all 0.2s ease;
+}
+
+.link:hover {
+  background: #f3f4f6;
+  border-color: #9fc2c2;
+  color: #1f2937;
+  transform: translateY(-1px);
+}
+
+.link span {
+  font-weight: 500;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .backButton {
+    color: #9ca3af;
+  }
+  
+  .backButton:hover {
+    color: #9fc2c2;
+  }
+  
+  .title {
+    color: #f9fafb;
+  }
+  
+  .description {
+    color: #d1d5db;
+  }
+  
+  .linksTitle {
+    color: #e5e7eb;
+  }
+  
+  .link {
+    background: #374151;
+    border-color: #4b5563;
+    color: #e5e7eb;
+  }
+  
+  .link:hover {
+    background: #4b5563;
+    border-color: #9fc2c2;
+    color: #f9fafb;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .linkGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .title {
+    font-size: 1.3rem;
+  }
+  
+  .description {
+    font-size: 0.9rem;
+  }
+}

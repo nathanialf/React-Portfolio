@@ -3,22 +3,13 @@ import { render, screen } from '@testing-library/react'
 import CardContent from '../src/ui/CardContent'
 
 // Mock child components
-jest.mock('../src/ui/SocialLink', () => {
-  return function MockSocialLink({ href, text }: any) {
-    return React.createElement('a', {
-      href,
-      'data-testid': 'social-link'
-    }, text)
-  }
-})
-
-jest.mock('../src/ui/EmailLink', () => {
-  return function MockEmailLink({ href, text, email }: any) {
+jest.mock('../src/ui/LinkBadge', () => {
+  return function MockLinkBadge({ href, text, copyText }: any) {
     return React.createElement('div', {
-      'data-testid': 'email-link'
+      'data-testid': 'link-badge'
     }, [
       React.createElement('a', { href, key: 'link' }, text),
-      React.createElement('span', { 'data-testid': 'email-copy', key: 'email' }, email)
+      copyText && React.createElement('span', { 'data-testid': 'copy-text', key: 'copy' }, copyText)
     ])
   }
 })
@@ -28,6 +19,14 @@ jest.mock('../src/ui/CompanyBadge', () => {
     return React.createElement('div', {
       'data-testid': 'company-badge'
     }, `${companyName} (${startDate} - ${endDate})`)
+  }
+})
+
+jest.mock('../src/ui/ProjectsSection', () => {
+  return function MockProjectsSection({ onProjectSelect }: any) {
+    return React.createElement('div', {
+      'data-testid': 'projects-section'
+    }, 'Projects Section')
   }
 })
 
@@ -55,19 +54,20 @@ describe('CardContent', () => {
     expect(screen.getByText('Husband')).toBeInTheDocument()
   })
 
-  it('renders the email link', () => {
+  it('renders the contact links', () => {
     render(React.createElement(CardContent))
     
-    const emailLink = screen.getByTestId('email-link')
-    expect(emailLink).toBeInTheDocument()
-    expect(screen.getByTestId('email-copy')).toHaveTextContent('nathanial@defnf.com')
+    const linkBadges = screen.getAllByTestId('link-badge')
+    expect(linkBadges.length).toBeGreaterThan(0) // Should have contact links
+    
+    // Check for email copy functionality
+    expect(screen.getByTestId('copy-text')).toHaveTextContent('nathanial@defnf.com')
   })
 
-  it('renders all social links', () => {
+  it('renders the Contact section', () => {
     render(React.createElement(CardContent))
     
-    const socialLinks = screen.getAllByTestId('social-link')
-    expect(socialLinks.length).toBeGreaterThan(5) // Should have multiple social links
+    expect(screen.getByText('Contact')).toBeInTheDocument()
   })
 
   it('renders the Previously section', () => {
@@ -85,5 +85,18 @@ describe('CardContent', () => {
     expect(screen.getByText('Amazon.com (2023 - 2025)')).toBeInTheDocument()
     expect(screen.getByText('AWS (2020 - 2023)')).toBeInTheDocument()
     expect(screen.getByText('Infosys (2017 - 2020)')).toBeInTheDocument()
+  })
+
+  it('renders projects section when onProjectSelect is provided', () => {
+    const mockOnProjectSelect = jest.fn()
+    render(React.createElement(CardContent, { onProjectSelect: mockOnProjectSelect }))
+    
+    expect(screen.getByTestId('projects-section')).toBeInTheDocument()
+  })
+
+  it('does not render projects section when onProjectSelect is not provided', () => {
+    render(React.createElement(CardContent))
+    
+    expect(screen.queryByTestId('projects-section')).not.toBeInTheDocument()
   })
 })

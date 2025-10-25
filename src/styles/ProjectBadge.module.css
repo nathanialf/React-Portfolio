@@ -1,0 +1,98 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0.4em 0.75em;
+  background-color: rgba(107, 114, 128, 0.3);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  border-radius: 0.5em;
+  cursor: pointer;
+  margin: 0.2em 0.4em 0.2em 0em;
+  box-sizing: border-box;
+}
+
+.badge:hover {
+  background-color: rgba(107, 114, 128, 0.4);
+  border-color: rgba(107, 114, 128, 0.5);
+  -webkit-transition: all 100ms linear;
+  -ms-transition: all 100ms linear;
+  transition: all 100ms linear;
+}
+
+.badge:focus {
+  outline: 2px solid rgba(159, 194, 194, 0.5);
+  outline-offset: 2px;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: black;
+  line-height: 0;
+}
+
+.name {
+  color: black;
+  font-weight: 500;
+  font-size: 0.9rem;
+  white-space: nowrap;
+}
+
+.placeholderText {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.svgIcon {
+  filter: brightness(0);
+  transform: scale(1.4);
+}
+
+.tablerIcon {
+  display: block;
+  margin: 0;
+  vertical-align: top;
+  transform: translateY(-3px);
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .badge {
+    background-color: rgba(107, 114, 128, 0.15);
+    border-color: rgba(107, 114, 128, 0.25);
+  }
+  
+  .badge:hover {
+    background-color: rgba(107, 114, 128, 0.25);
+    border-color: rgba(107, 114, 128, 0.4);
+  }
+  
+  .icon {
+    color: white;
+  }
+  
+  .name {
+    color: white;
+  }
+  
+  .svgIcon {
+    filter: brightness(0) invert(1);
+    transform: scale(1.4);
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .badge {
+    padding: 0.6em 0.8em;
+    gap: 0.6em;
+  }
+  
+  .name {
+    font-size: 0.85em;
+  }
+}

@@ -6,8 +6,10 @@ A modern Next.js portfolio website featuring responsive design, dark/light mode 
 
 - **Responsive Design** - Mobile-first approach with CSS modules
 - **Dark/Light Mode** - Adaptive images based on user's color scheme preference
-- **Interactive Components** - Social links with copy-to-clipboard functionality
-- **Company Badges** - Hover tooltips with employment details
+- **Interactive Project Showcase** - Dynamic project details with smooth animations
+- **Privacy Policy System** - Dynamic markdown-based privacy policies with routing
+- **Contact Links** - Unified link badges with copy-to-clipboard functionality
+- **Company Badges** - Previous employment showcase
 - **Comprehensive Testing** - 85+ unit tests with Jest and React Testing Library
 - **Performance Optimized** - Next.js Image optimization and static generation
 
@@ -20,6 +22,7 @@ A modern Next.js portfolio website featuring responsive design, dark/light mode 
 - **Testing**: Jest + React Testing Library
 - **Linting**: ESLint with Next.js configuration
 - **Icons**: Tabler Icons React
+- **Markdown**: Remark + Remark HTML for privacy policies
 - **Deployment**: AWS Amplify
 
 ## Development Commands
@@ -39,13 +42,18 @@ src/
 ├── app/           # Next.js app router pages
 │   ├── layout.tsx # Global layout with Google Fonts
 │   ├── page.tsx   # Homepage with floating card
-│   └── embed/     # Embeddable version
+│   ├── embed/     # Embeddable version
+│   └── privacy-policy/  # Privacy policy system
 ├── ui/            # Reusable UI components
-│   ├── CardContent.tsx    # Main content component
-│   ├── SocialLink.tsx     # Social media links
-│   ├── EmailLink.tsx      # Email with copy functionality
-│   ├── CompanyBadge.tsx   # Employment badges
-│   └── DEFNFImage.tsx     # Responsive logo
+│   ├── CardContent.tsx     # Main content component
+│   ├── LinkBadge.tsx       # Unified contact links
+│   ├── ProjectsSection.tsx # Project showcase
+│   ├── ProjectDetail.tsx   # Individual project views
+│   ├── CompanyBadge.tsx    # Employment badges
+│   └── DEFNFImage.tsx      # Responsive logo
+├── data/          # Data and content
+│   ├── projects.ts         # Project definitions
+│   └── privacy-policies/   # Markdown privacy policies
 ├── styles/        # CSS modules
 └── ...
 tst/              # Test files
@@ -55,9 +63,10 @@ public/           # Static assets
 ## Key Components
 
 - **CardContent** - Main portfolio content shared between card variants
-- **EmailLink** - Email contact with clipboard copy functionality  
-- **SocialLink** - Social media links with consistent styling
-- **CompanyBadge** - Previous employment with tooltip details
+- **ProjectsSection** - Interactive project showcase with dynamic details
+- **ProjectDetail** - Individual project views with links and descriptions
+- **LinkBadge** - Unified contact links with clipboard copy functionality
+- **CompanyBadge** - Previous employment showcase
 - **DEFNFImage** - Logo that adapts to dark/light mode
 
 ## Deployment

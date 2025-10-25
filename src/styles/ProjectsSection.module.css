@@ -1,0 +1,19 @@
+.section {
+  margin: 1.5rem 0;
+}
+
+.title {
+  display: block;
+  font-size: 1.1em;
+  font-weight: 500;
+  margin-top: 1.5em;
+  margin-bottom: 0.5em;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+/* Dark mode support - title inherits default color */

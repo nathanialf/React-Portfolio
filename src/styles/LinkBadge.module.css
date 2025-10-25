@@ -1,0 +1,88 @@
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5em;
+  font-size: 1em;
+  padding: 0.4em 0.75em;
+  margin: 0.2em 0.4em 0.2em 0em;
+  
+  background-color: rgba(107, 114, 128, 0.3);
+  border: 1px solid rgba(107, 114, 128, 0.3);
+  border-radius: 0.5em;
+  box-sizing: border-box;
+  cursor: pointer;
+  color: black;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.badge:hover {
+  background-color: rgba(107, 114, 128, 0.4);
+  border-color: rgba(107, 114, 128, 0.5);
+  
+  -webkit-transition: all 100ms linear;
+  -ms-transition: all 100ms linear;
+  transition: all 100ms linear;
+}
+
+.link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.link:hover {
+  text-decoration: none;
+}
+
+.divider {
+  display: inline-block;
+  width: 1px;
+  height: 1em;
+  background-color: currentColor;
+  opacity: 0.3;
+  margin: 0 0.2em;
+  vertical-align: middle;
+}
+
+.copyButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+  color: inherit;
+  font-size: inherit;
+  vertical-align: baseline;
+  line-height: 1;
+}
+
+.copyButton:hover {
+  opacity: 0.7;
+}
+
+.badge svg {
+  width: 1.2em;
+  height: 1.2em;
+  transform: translateY(-2px);
+}
+
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+  .badge {
+    /* No specific mobile styles needed */
+  }
+}
+
+/* Media query for if system preference is dark mode */
+@media (prefers-color-scheme: dark) {
+  .badge {
+    background-color: rgba(107, 114, 128, 0.15);
+    border-color: rgba(107, 114, 128, 0.25);
+    color: white;
+  }
+  
+  .badge:hover {
+    background-color: rgba(107, 114, 128, 0.25);
+    border-color: rgba(107, 114, 128, 0.4);
+  }
+}

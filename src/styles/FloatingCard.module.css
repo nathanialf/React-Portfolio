@@ -13,19 +13,44 @@
   box-shadow: 0 0.2rem 0.2rem #9d9d9d;
 }
 
+.content {
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.projectView {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.mainView {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .card::after {
   /*Source: https://codepen.io/ruben-fernandes/pen/gOKxKGa*/
   content: '';
   background-image: url(../../public/images/noise.jpg);
   background-size: contain;
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  opacity:0.05;
-  z-index: 999;
-  pointer-events:none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  z-index: 1;
+  pointer-events: none;
+  border-radius: 1em;
 
   color: black;
 }
@@ -37,6 +62,10 @@
     max-width: 95%; /* Remove max-width restriction */
     border-radius: 0em;
     box-shadow: none;
+  }
+
+  .card::after {
+    border-radius: 0em;
   }
 }
 

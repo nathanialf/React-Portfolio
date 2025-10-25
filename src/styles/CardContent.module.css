@@ -18,10 +18,26 @@
   margin-bottom: .5em;
 }
 
+.bio {
+  font-size: 0.85em;
+  line-height: 1.4;
+  color: #6b7280;
+  margin: 1.2em 0;
+  padding: 0;
+  font-style: italic;
+}
+
 .previously {
   display: block;
-  font-size: 1.2em;
+  font-size: 1.1em;
   font-weight: 500;
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .bio {
+    color: #d1d5db;
+  }
 }

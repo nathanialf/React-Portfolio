@@ -7,10 +7,10 @@
   margin: 0.2em 0.4em 0.2em 0em;
   
   border-radius: 0.5em;
-  background-color: rgba(159, 194, 194, 0.2);
+  background-color: rgba(107, 114, 128, 0.3);
   
-  /* Subtle styling - informational only */
-  cursor: default;
+  /* Clickable styling */
+  cursor: pointer;
   box-sizing: border-box;
   
   /* Ensure perfect centering */
@@ -37,7 +37,7 @@
 }
 
 .badge:hover {
-  background-color: rgba(159, 194, 194, 0.3);
+  background-color: rgba(107, 114, 128, 0.4);
 
   -webkit-transition: background-color 100ms linear;
   -ms-transition: background-color 100ms linear;
@@ -47,7 +47,7 @@
 /* Media query for if system preference is dark mode */
 @media (prefers-color-scheme: dark) {
   .badge {
-    background-color: rgba(159, 194, 194, 0.15);
+    background-color: rgba(107, 114, 128, 0.15);
     color: white;
   }
   
@@ -61,6 +61,6 @@
   }
   
   .badge:hover {
-    background-color: rgba(159, 194, 194, 0.25);
+    background-color: rgba(107, 114, 128, 0.25);
   }
 }
