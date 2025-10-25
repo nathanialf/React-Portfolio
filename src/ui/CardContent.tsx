@@ -74,7 +74,6 @@ const CardContent: React.FC<CardContentProps> = ({ onProjectSelect }) => {
         href='mailto:nathanial+website@defnf.com'
         icon={<IconMail stroke={2} width='1em' height='1em' />}
         text='nathanial@defnf.com'
-        copyText='nathanial@defnf.com'
       />
       <LinkBadge
         href='https://www.linkedin.com/in/nathanial-fine/'
