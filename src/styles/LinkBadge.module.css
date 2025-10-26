@@ -28,6 +28,7 @@
 .link {
   text-decoration: none;
   color: inherit;
+  transform: translateY(-1px);
 }
 
 .link:hover {
@@ -63,7 +64,7 @@
 .badge svg {
   width: 1.2em;
   height: 1.2em;
-  transform: translateY(-2px);
+  transform: translateY(-3px);
 }
 
 /* Media query for smaller devices */
