@@ -102,6 +102,10 @@
   font-weight: 500;
 }
 
+.link svg {
+  transform: translateY(-3px);
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .backButton {
