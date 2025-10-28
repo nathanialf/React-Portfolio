@@ -4,13 +4,12 @@ import CardContent from '../src/ui/CardContent'
 
 // Mock child components
 jest.mock('../src/ui/LinkBadge', () => {
-  return function MockLinkBadge({ href, text, copyText }: any) {
+  return function MockLinkBadge({ href, text }: any) {
     return React.createElement('div', {
       'data-testid': 'link-badge'
-    }, [
-      React.createElement('a', { href, key: 'link' }, text),
-      copyText && React.createElement('span', { 'data-testid': 'copy-text', key: 'copy' }, copyText)
-    ])
+    }, 
+      React.createElement('a', { href }, text)
+    )
   }
 })
 
@@ -60,8 +59,8 @@ describe('CardContent', () => {
     const linkBadges = screen.getAllByTestId('link-badge')
     expect(linkBadges.length).toBeGreaterThan(0) // Should have contact links
     
-    // Check for email copy functionality
-    expect(screen.getByTestId('copy-text')).toHaveTextContent('nathanial@defnf.com')
+    // Check for email link
+    expect(screen.getByText('nathanial@defnf.com')).toBeInTheDocument()
   })
 
   it('renders the Contact section', () => {

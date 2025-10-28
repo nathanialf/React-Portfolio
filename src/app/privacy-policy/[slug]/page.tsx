@@ -3,6 +3,10 @@ import { join } from 'path';
 import { notFound } from 'next/navigation';
 import { remark } from 'remark';
 import html from 'remark-html';
+import remarkGfm from 'remark-gfm';
+import { rehype } from 'rehype';
+import rehypeSlug from 'rehype-slug';
+import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import styles from '../../../styles/PrivacyPolicy.module.css';
 
 interface PrivacyPolicyPageProps {
@@ -16,9 +20,17 @@ async function getPrivacyPolicy(slug: string) {
     const filePath = join(process.cwd(), 'src', 'data', 'privacy-policies', `${slug}.md`);
     const fileContent = await readFile(filePath, 'utf8');
     
-    const processedContent = await remark()
+    // First convert markdown to HTML
+    const htmlContent = await remark()
+      .use(remarkGfm)
       .use(html)
       .process(fileContent);
+    
+    // Then process HTML to add anchor links
+    const processedContent = await rehype()
+      .use(rehypeSlug)
+      .use(rehypeAutolinkHeadings)
+      .process(htmlContent);
     
     return processedContent.toString();
   } catch {

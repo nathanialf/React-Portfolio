@@ -2,6 +2,7 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "clean": "rm -rf .next",
     "dev": "next dev",
     "start": "next start",
     "lint": "next lint",
@@ -15,7 +16,11 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-tooltip": "^5.27.0",
+    "rehype": "^13.0.2",
+    "rehype-autolink-headings": "^7.1.0",
+    "rehype-slug": "^6.0.0",
     "remark": "^15.0.1",
+    "remark-gfm": "^4.0.1",
     "remark-html": "^16.0.1"
   },
   "engines": {

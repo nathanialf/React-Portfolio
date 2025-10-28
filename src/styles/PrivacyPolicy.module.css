@@ -88,6 +88,53 @@
   margin: 2rem 0;
 }
 
+.markdown table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  border: 1px solid #e5e7eb;
+}
+
+.markdown th,
+.markdown td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e5e7eb;
+  border-right: 1px solid #e5e7eb;
+}
+
+.markdown th:last-child,
+.markdown td:last-child {
+  border-right: none;
+}
+
+.markdown th {
+  background-color: #f9fafb;
+  font-weight: 600;
+  color: #374151;
+  border-bottom: 2px solid #d1d5db;
+}
+
+.markdown tbody tr:hover {
+  background-color: #f9fafb;
+}
+
+.markdown a {
+  color: #2563eb;
+  text-decoration: underline;
+  font-weight: 500;
+  transition: color 0.2s ease;
+}
+
+.markdown a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+.markdown a:visited {
+  color: #7c3aed;
+}
+
 .footer {
   background: #f9fafb;
   padding: 1.5rem 2rem;
@@ -173,6 +220,38 @@
   
   .markdown hr {
     background: #374151;
+  }
+  
+  .markdown table {
+    border-color: #4b5563;
+  }
+  
+  .markdown th,
+  .markdown td {
+    border-bottom-color: #4b5563;
+    border-right-color: #4b5563;
+  }
+  
+  .markdown th {
+    background-color: #374151;
+    color: #f9fafb;
+    border-bottom-color: #6b7280;
+  }
+  
+  .markdown tbody tr:hover {
+    background-color: #374151;
+  }
+  
+  .markdown a {
+    color: #60a5fa;
+  }
+  
+  .markdown a:hover {
+    color: #93c5fd;
+  }
+  
+  .markdown a:visited {
+    color: #c4b5fd;
   }
   
   .footer {
