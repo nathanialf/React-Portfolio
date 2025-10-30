@@ -7,7 +7,7 @@ A modern Next.js portfolio website featuring responsive design, dark/light mode 
 - **Responsive Design** - Mobile-first approach with CSS modules
 - **Dark/Light Mode** - Adaptive images based on user's color scheme preference
 - **Interactive Project Showcase** - Dynamic project details with smooth animations
-- **Privacy Policy System** - Dynamic markdown-based privacy policies with routing
+- **Privacy Policy System** - Comprehensive markdown-based privacy policies with table support, anchor links, and legal compliance
 - **Contact Links** - Unified link badges with copy-to-clipboard functionality
 - **Company Badges** - Previous employment showcase
 - **Comprehensive Testing** - 85+ unit tests with Jest and React Testing Library
@@ -22,7 +22,7 @@ A modern Next.js portfolio website featuring responsive design, dark/light mode 
 - **Testing**: Jest + React Testing Library
 - **Linting**: ESLint with Next.js configuration
 - **Icons**: Tabler Icons React
-- **Markdown**: Remark + Remark HTML for privacy policies
+- **Markdown**: Remark + GitHub Flavored Markdown with rehype plugins for enhanced privacy policies
 - **Deployment**: AWS Amplify
 
 ## Development Commands
@@ -31,6 +31,7 @@ A modern Next.js portfolio website featuring responsive design, dark/light mode 
 npm run dev      # Start development server (localhost:3000)
 npm run build    # Build for production
 npm run start    # Start production server
+npm run clean    # Clean Next.js build cache
 npm run test     # Run test suite
 npm run lint     # Run ESLint
 ```
@@ -64,7 +65,7 @@ public/           # Static assets
 
 - **CardContent** - Main portfolio content shared between card variants
 - **ProjectsSection** - Interactive project showcase with dynamic details
-- **ProjectDetail** - Individual project views with links and descriptions
+- **ProjectDetail** - Individual project views with GitHub, Play Store, privacy policy, and external links
 - **LinkBadge** - Unified contact links with clipboard copy functionality
 - **CompanyBadge** - Previous employment showcase
 - **DEFNFImage** - Logo that adapts to dark/light mode

@@ -43,6 +43,7 @@ export const projects: Project[] = [
       content: '/images/grid-icon.svg',
     },
     links: [
+      { label: 'Google Play Store', url: 'https://play.google.com/store/apps/details?id=com.defnf.grid', type: 'playstore' },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/grid', type: 'github' },
       { label: 'Privacy Policy', url: '/privacy-policy/grid', type: 'privacy' },
     ],

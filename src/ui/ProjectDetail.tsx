@@ -1,6 +1,6 @@
 import React from 'react';
 import { Project } from '../data/projects';
-import { IconArrowLeft, IconExternalLink, IconBrandGithub } from '@tabler/icons-react';
+import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield } from '@tabler/icons-react';
 import styles from '../styles/ProjectDetail.module.css';
 
 interface ProjectDetailProps {
@@ -13,6 +13,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
     switch (type) {
       case 'github':
         return <IconBrandGithub stroke={2} width="1em" height="1em" />;
+      case 'playstore':
+        return <IconBrandGooglePlay stroke={2} width="1em" height="1em" />;
+      case 'privacy':
+        return <IconShield stroke={2} width="1em" height="1em" />;
       default:
         return <IconExternalLink stroke={2} width="1em" height="1em" />;
     }
