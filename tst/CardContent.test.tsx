@@ -79,10 +79,11 @@ describe('CardContent', () => {
     render(React.createElement(CardContent))
     
     const companyBadges = screen.getAllByTestId('company-badge')
-    expect(companyBadges).toHaveLength(3)
+    expect(companyBadges).toHaveLength(4)
     
     expect(screen.getByText('Amazon.com (2023 - 2025)')).toBeInTheDocument()
     expect(screen.getByText('AWS (2020 - 2023)')).toBeInTheDocument()
+    expect(screen.getByText('Apple (2018 - 2020)')).toBeInTheDocument()
     expect(screen.getByText('Infosys (2017 - 2020)')).toBeInTheDocument()
   })
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { IconHexagon } from '@tabler/icons-react';
+import { IconHexagon, IconPlane } from '@tabler/icons-react';
 import { Project } from '../data/projects';
 import styles from '../styles/ProjectBadge.module.css';
 
@@ -15,6 +15,9 @@ const ProjectBadge: React.FC<ProjectBadgeProps> = ({ project, onClick }) => {
       case 'tabler':
         if (project.icon.content === 'hexagon') {
           return <IconHexagon stroke={2.5} size={24} className={styles.tablerIcon} />;
+        }
+        if (project.icon.content === 'plane') {
+          return <IconPlane stroke={1.8} size={24} className={styles.tablerIcon} />;
         }
         return null;
       case 'svg':

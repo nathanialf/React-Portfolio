@@ -37,7 +37,7 @@ export const projects: Project[] = [
   {
     id: 'grid',
     name: 'GRID',
-    description: 'Privacy-focused Android file management app for securely browsing and managing files on remote servers. Built with Jetpack Compose and Material 3, supporting FTP, SFTP, and SMB connections.',
+    description: 'Privacy-focused Android file management app for securely browsing and managing files on remote servers. Built with Jetpack Compose and Material 3, supporting FTP, SFTP, and SMB connections. Currently in closed testing - send me your email to join the test and access the Play Store link.',
     icon: {
       type: 'svg',
       content: '/images/grid-icon.svg',
@@ -50,11 +50,11 @@ export const projects: Project[] = [
   },
   {
     id: 'seatmap',
-    name: 'SEATMAP',
+    name: 'MYSEATMAP',
     description: 'Serverless REST API aggregating flight seat availability data from Amadeus and Sabre APIs. Designed for airline employees using free flight benefits, featuring OAuth authentication and advanced search capabilities.',
     icon: {
-      type: 'placeholder',
-      content: 'SM',
+      type: 'tabler',
+      content: 'plane',
     },
     links: [
       { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github' },

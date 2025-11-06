@@ -35,6 +35,19 @@
   margin-bottom: 0.5em;
 }
 
+.badgeContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.3rem;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+
+.badgeContainer > * {
+  flex: 1 1 auto;
+  margin: 0;
+}
+
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
   .bio {

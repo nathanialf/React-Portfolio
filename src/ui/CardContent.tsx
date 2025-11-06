@@ -61,6 +61,13 @@ const CardContent: React.FC<CardContentProps> = ({ onProjectSelect }) => {
         tooltipId="aws-tooltip"
       />
       <CompanyBadge
+        companyName="Apple"
+        startDate="2018"
+        endDate="2020"
+        icon={<Image src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" width={20} height={20} style={{objectFit: 'contain'}} />}
+        tooltipId="apple-tooltip"
+      />
+      <CompanyBadge
         companyName="Infosys"
         startDate="2017"
         endDate="2020"
@@ -70,16 +77,18 @@ const CardContent: React.FC<CardContentProps> = ({ onProjectSelect }) => {
 
       <div className={styles.previously}>Contact</div>
 
-      <LinkBadge
-        href='mailto:nathanial+website@defnf.com'
-        icon={<IconMail stroke={2} width='1em' height='1em' />}
-        text='nathanial@defnf.com'
-      />
-      <LinkBadge
-        href='https://www.linkedin.com/in/nathanial-fine/'
-        icon={<IconBrandLinkedin stroke={2.25} width='1em' height='1em' />}
-        text='nathanial-fine'
-      />
+      <div className={styles.badgeContainer}>
+        <LinkBadge
+          href='mailto:nathanial+website@defnf.com'
+          icon={<IconMail stroke={2} width='1em' height='1em' />}
+          text='nathanial@defnf.com'
+        />
+        <LinkBadge
+          href='https://www.linkedin.com/in/nathanial-fine/'
+          icon={<IconBrandLinkedin stroke={2.25} width='1em' height='1em' />}
+          text='nathanial-fine'
+        />
+      </div>
     </>
   );
 };

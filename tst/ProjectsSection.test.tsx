@@ -22,7 +22,7 @@ describe('ProjectsSection', () => {
     // Check for the main projects
     expect(screen.getByText('ENCOM')).toBeInTheDocument()
     expect(screen.getByText('GRID')).toBeInTheDocument()
-    expect(screen.getByText('SEATMAP')).toBeInTheDocument()
+    expect(screen.getByText('MYSEATMAP')).toBeInTheDocument()
   })
 
   it('calls onProjectSelect when a project badge is clicked', () => {
@@ -60,7 +60,7 @@ describe('ProjectsSection', () => {
       expect(mockOnProjectSelect).toHaveBeenCalledWith('grid')
     }
 
-    const seatmapBadge = screen.getByText('SEATMAP').closest('[role="button"]')
+    const seatmapBadge = screen.getByText('MYSEATMAP').closest('[role="button"]')
     if (seatmapBadge) {
       fireEvent.click(seatmapBadge)
       expect(mockOnProjectSelect).toHaveBeenCalledWith('seatmap')
