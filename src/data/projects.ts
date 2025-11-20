@@ -51,13 +51,14 @@ export const projects: Project[] = [
   {
     id: 'seatmap',
     name: 'MYSEATMAP',
-    description: 'Serverless REST API aggregating flight seat availability data from Amadeus and Sabre APIs. Designed for airline employees using free flight benefits, featuring OAuth authentication and advanced search capabilities.',
+    description: 'Full-stack application for flight seat availability tracking. Serverless REST API aggregating data from Amadeus API (expanding to Sabre and Travelport soon), paired with a React frontend. Designed for airline employees using free flight benefits, featuring OAuth authentication and advanced search capabilities.',
     icon: {
       type: 'tabler',
       content: 'plane',
     },
     links: [
       { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github' },
+      { label: 'Frontend Repository', url: 'https://github.com/nathanialf/seatmap-frontend', type: 'github' },
     ],
   },
 ];
