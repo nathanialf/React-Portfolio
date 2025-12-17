@@ -1,6 +1,6 @@
 import React from 'react';
 import { Project } from '../data/projects';
-import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield } from '@tabler/icons-react';
+import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall } from '@tabler/icons-react';
 import styles from '../styles/ProjectDetail.module.css';
 
 interface ProjectDetailProps {
@@ -17,6 +17,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack }) => {
         return <IconBrandGooglePlay stroke={2} width="1em" height="1em" />;
       case 'privacy':
         return <IconShield stroke={2} width="1em" height="1em" />;
+      case 'dungeon':
+        return <IconWall stroke={2} width="1em" height="1em" />;
+      case 'hexagon-site':
+        return <IconHexagon stroke={2} width="1em" height="1em" />;
       default:
         return <IconExternalLink stroke={2} width="1em" height="1em" />;
     }
