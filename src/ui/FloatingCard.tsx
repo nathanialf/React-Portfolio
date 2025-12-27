@@ -6,7 +6,12 @@ import ProjectDetail from './ProjectDetail';
 import { projects } from '../data/projects';
 import styles from '../styles/FloatingCard.module.css';
 
-const FloatingCard: React.FC = () => {
+interface FloatingCardProps {
+  onProjectChange?: (projectId: string | null) => void;
+  forceDarkMode?: boolean;
+}
+
+const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkMode }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [isReturningFromProject, setIsReturningFromProject] = useState(false);
   const contentRef = useRef<HTMLDivElement>(null);
@@ -23,6 +28,10 @@ const FloatingCard: React.FC = () => {
     }
   }, [selectedProjectId, selectedProject]);
 
+  useEffect(() => {
+    onProjectChange?.(selectedProjectId);
+  }, [selectedProjectId, onProjectChange]);
+
   const handleProjectSelect = (projectId: string) => {
     setSelectedProjectId(projectId);
     setIsReturningFromProject(false);
@@ -35,15 +44,16 @@ const FloatingCard: React.FC = () => {
 
   return (
     <div className={styles.card}>
-      <div 
+      <div
         className={`${styles.content} ${selectedProjectId ? styles.projectView : ''}`}
         style={{ height: contentHeight ? `${contentHeight}px` : 'auto' }}
       >
         <div ref={contentRef}>
           {selectedProject ? (
-            <ProjectDetail 
-              project={selectedProject} 
+            <ProjectDetail
+              project={selectedProject}
               onBack={handleBackToMain}
+              forceDarkMode={forceDarkMode}
             />
           ) : (
             <div className={isReturningFromProject ? styles.mainView : ''}>

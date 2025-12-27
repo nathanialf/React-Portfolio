@@ -1,7 +1,8 @@
 export interface ProjectLink {
   label: string;
   url: string;
-  type: 'github' | 'website' | 'playstore' | 'privacy' | 'release' | 'dungeon' | 'hexagon-site';
+  type: 'github' | 'website' | 'playstore' | 'privacy' | 'release' | 'dungeon' | 'hexagon-site' | 'plane';
+  disabled?: boolean;
 }
 
 export interface Project {
@@ -13,17 +14,21 @@ export interface Project {
     content?: string; // Icon name for tabler, SVG path for svg, or placeholder text
   };
   links: ProjectLink[];
+  backgroundImage?: string; // Optional background image shown when project is selected
+  darkBackground?: boolean; // If true, force dark mode styling when this project is shown
 }
 
 export const projects: Project[] = [
   {
     id: 'encom',
     name: 'ENCOM',
-    description: 'Multi-platform development ecosystem showcasing how a single Lambda-based API can power diverse applications - from React web interfaces to WebGL dungeon crawlers to Nintendo 64 homebrew games.',
+    description: 'A unified platform powering multiple experiences—a browser-based dungeon crawler, a web dashboard, and a Nintendo 64 homebrew game—all connected through a single shared backend.',
     icon: {
       type: 'tabler',
       content: 'hexagon',
     },
+    backgroundImage: '/images/projects/encom-background.png',
+    darkBackground: true,
     links: [
       { label: 'Dungeon Site', url: 'https://dungeon.riperoni.com/', type: 'dungeon' },
       { label: 'Frontend Site', url: 'https://encom.riperoni.com/', type: 'hexagon-site' },
@@ -37,7 +42,7 @@ export const projects: Project[] = [
   {
     id: 'grid',
     name: 'GRID',
-    description: 'Privacy-focused Android file management app for securely browsing and managing files on remote servers. Built with Jetpack Compose and Material 3, supporting FTP, SFTP, and SMB connections. Now available on the Google Play Store.',
+    description: 'Now Available on the Google Play Store!\n\nPrivacy-focused Android file management app for securely browsing and managing files on remote servers. Built with Jetpack Compose and Material 3, supporting SFTP and SMB connections.',
     icon: {
       type: 'svg',
       content: '/images/grid-icon.svg',
@@ -51,14 +56,13 @@ export const projects: Project[] = [
   {
     id: 'seatmap',
     name: 'MYSEATMAP',
-    description: 'Full-stack application for flight seat availability tracking. Serverless REST API aggregating data from Amadeus API (expanding to Sabre and Travelport soon), paired with a React frontend. Designed for airline employees using free flight benefits, featuring OAuth authentication and advanced search capabilities.',
+    description: 'Launching January 2026!\n\nA real-time flight seat availability intelligence platform designed for airline employees using free flight benefits. Aggregates live data from multiple airline sources to provide interactive seat maps, intelligent flight search, bookmarks, and personalized alerts—helping users make informed decisions before traveling standby.',
     icon: {
-      type: 'tabler',
-      content: 'plane',
+      type: 'svg',
+      content: '/images/myseatmap-icon.svg',
     },
     links: [
-      { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github' },
-      { label: 'Frontend Repository', url: 'https://github.com/nathanialf/seatmap-frontend', type: 'github' },
+      { label: 'Coming Soon', url: 'https://myseatmap.com', type: 'plane', disabled: true },
     ],
   },
 ];

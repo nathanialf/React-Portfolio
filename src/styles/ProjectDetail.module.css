@@ -58,6 +58,7 @@
   line-height: 1.6;
   color: #4b5563;
   margin: 0;
+  white-space: pre-line;
 }
 
 .links {
@@ -102,43 +103,97 @@
   font-weight: 500;
 }
 
+.link.disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.link.disabled:hover {
+  transform: none;
+  background: #f9fafb;
+  border-color: #e5e7eb;
+}
+
 .link svg {
   transform: translateY(-3px);
 }
 
-/* Dark mode support */
+/* Dark mode support - both system preference and forced via data-theme */
 @media (prefers-color-scheme: dark) {
   .backButton {
     color: #9ca3af;
   }
-  
+
   .backButton:hover {
     color: #9fc2c2;
   }
-  
+
   .title {
     color: #f9fafb;
   }
-  
+
   .description {
     color: #d1d5db;
   }
-  
+
   .linksTitle {
     color: #e5e7eb;
   }
-  
+
   .link {
     background: #374151;
     border-color: #4b5563;
     color: #e5e7eb;
   }
-  
+
   .link:hover {
     background: #4b5563;
     border-color: #9fc2c2;
     color: #f9fafb;
   }
+
+  .link.disabled:hover {
+    background: #374151;
+    border-color: #4b5563;
+  }
+}
+
+/* Force dark mode via data attribute */
+.container:global([data-theme="dark"]) .backButton {
+  color: #9ca3af;
+}
+
+.container:global([data-theme="dark"]) .backButton:hover {
+  color: #9fc2c2;
+}
+
+.container:global([data-theme="dark"]) .title {
+  color: #f9fafb;
+}
+
+.container:global([data-theme="dark"]) .description {
+  color: #d1d5db;
+}
+
+.container:global([data-theme="dark"]) .linksTitle {
+  color: #e5e7eb;
+}
+
+.container:global([data-theme="dark"]) .link {
+  background: #374151;
+  border-color: #4b5563;
+  color: #e5e7eb;
+}
+
+.container:global([data-theme="dark"]) .link:hover {
+  background: #4b5563;
+  border-color: #9fc2c2;
+  color: #f9fafb;
+}
+
+.container:global([data-theme="dark"]) .link.disabled:hover {
+  background: #374151;
+  border-color: #4b5563;
 }
 
 /* Mobile responsiveness */

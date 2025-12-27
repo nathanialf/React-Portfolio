@@ -69,6 +69,22 @@
   }
 }
 
+/* Force dark mode styling (for dark project backgrounds) */
+.card:global([data-theme="dark"]) {
+  box-shadow: 0 0.2rem 0.2rem #161c24;
+  color: white;
+}
+
+.card:global([data-theme="dark"]) a {
+  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .card:global([data-theme="dark"]) {
+    box-shadow: none;
+  }
+}
+
 /* Media query for if system preference is dark mode */
 @media (prefers-color-scheme: dark) {
   .card {

@@ -1,5 +1,18 @@
-/* No non-card-specific styles were found in 1f6fbfe:src/styles/Homepage.module.css. */
-/* This file should ideally contain only page-specific layout styles like .container, */
-/* but those were not present in the historical version of this file. */
-/* The .container rule was added in a later step during previous refactoring attempts. */
-/* For this task, we ensure this file only contains what was non-card-specific in 1f6fbfe, which is nothing. */
+.projectBackground {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  transition: opacity 0.6s ease-in-out;
+}
+
+.visible {
+  opacity: 1;
+}
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}
