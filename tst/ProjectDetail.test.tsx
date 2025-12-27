@@ -53,11 +53,12 @@ describe('ProjectDetail', () => {
 
   it('renders different projects correctly', () => {
     const gridProject = projects.find(p => p.id === 'grid')!
-    
+
     render(<ProjectDetail project={gridProject} onBack={mockOnBack} />)
-    
+
     expect(screen.getByText(gridProject.name)).toBeInTheDocument()
-    expect(screen.getByText(gridProject.description)).toBeInTheDocument()
+    // Use partial match for descriptions with newlines
+    expect(screen.getByText(/Privacy-focused Android file management app/)).toBeInTheDocument()
   })
 
   it('has correct animation container', () => {
