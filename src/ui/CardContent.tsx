@@ -4,6 +4,7 @@ import LinkBadge from './LinkBadge';
 import CompanyBadge from './CompanyBadge';
 import ProjectsSection from './ProjectsSection';
 import DEFNFImage from './DEFNFImage';
+import ContributionGraph from './ContributionGraph';
 import {
   IconBrandLinkedin,
   IconDeviceLaptop,
@@ -89,6 +90,8 @@ const CardContent: React.FC<CardContentProps> = ({ onProjectSelect }) => {
           text='nathanial-fine'
         />
       </div>
+
+      {process.env.SHOW_CONTRIBUTIONS && <ContributionGraph />}
     </>
   );
 };
