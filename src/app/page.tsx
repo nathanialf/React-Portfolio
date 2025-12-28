@@ -22,7 +22,7 @@ export default function Homepage() {
   return (
     <>
       {/* Default background */}
-      <picture className={activeBackground ? styles.hidden : undefined}>
+      <picture className={`${styles.defaultBackground} ${activeBackground ? styles.hidden : ''}`}>
         <source
           srcSet='/images/darkmode/background.jpg'
           media='(prefers-color-scheme: dark)'
@@ -42,9 +42,8 @@ export default function Homepage() {
       {projectsWithBackgrounds.map(project => (
         <div
           key={project.id}
-          className={`${styles.projectBackground} ${
-            activeBackground === project.backgroundImage ? styles.visible : styles.hidden
-          }`}
+          className={`${styles.projectBackground} ${activeBackground === project.backgroundImage ? styles.visible : styles.hidden
+            }`}
         >
           <Image
             src={project.backgroundImage!}

@@ -6,7 +6,7 @@
   font-size: 1em;
   padding: 0.4em 0.75em;
   margin: 0;
-  
+
   background-color: rgba(107, 114, 128, 0.3);
   border: 1px solid rgba(107, 114, 128, 0.3);
   border-radius: 0.5em;
@@ -20,7 +20,7 @@
 .badge:hover {
   background-color: rgba(107, 114, 128, 0.4);
   border-color: rgba(107, 114, 128, 0.5);
-  
+
   -webkit-transition: all 100ms linear;
   -ms-transition: all 100ms linear;
   transition: all 100ms linear;
@@ -82,7 +82,7 @@
     border: 1.5px solid rgba(159, 194, 194, 0.3);
     color: white;
   }
-  
+
   .badge:hover {
     background-color: rgba(107, 114, 128, 0.35);
     border-color: rgba(159, 194, 194, 0.5);

@@ -74,7 +74,7 @@ const ContributionGraph: React.FC = () => {
   return (
     <div
       ref={containerRef}
-      style={{ display: 'flex', gap: `${gap}px`, width: '100%', marginTop: '2em', justifyContent: 'center' }}
+      style={{ display: 'flex', gap: `${gap}px`, width: '100%', marginTop: '2em', justifyContent: 'flex-end', overflow: 'hidden' }}
     >
       {weeks.map((week, wi) => (
         <div key={wi} style={{ display: 'flex', gap: `${gap}px` }}>

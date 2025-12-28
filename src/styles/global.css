@@ -1,29 +1,29 @@
 body {
-  margin: 0;
-  background-color: white;
+    margin: 0;
+    background-color: white;
 }
 
 a {
-  text-decoration: none;
-  color: black;
+    text-decoration: none;
+    color: black;
 }
 
 p {
-  margin-top: 2em;
+    margin-top: 2em;
 }
 
 svg {
-  position: relative;
-  top: 0.2em;
-  margin-right: 0.2em;
+    position: relative;
+    top: 0.2em;
+    margin-right: 0.2em;
 }
 
 @media (prefers-color-scheme: dark) {
-  body {
-    background-color: black;
-  }
+    body {
+        background-color: black;
+    }
 
-  a {
-    color: white;
-  }
+    a {
+        color: white;
+    }
 }
