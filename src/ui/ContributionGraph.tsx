@@ -8,17 +8,27 @@ interface ContributionDay {
   level: number;
 }
 
+// Module-level cache to persist across re-mounts
+let cachedContributions: ContributionDay[] | null = null;
+
 const ContributionGraph: React.FC = () => {
-  const [contributions, setContributions] = useState<ContributionDay[]>([]);
+  const [contributions, setContributions] = useState<ContributionDay[]>(cachedContributions || []);
   const [isDark, setIsDark] = useState(false);
   const [dotSize, setDotSize] = useState(4);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    fetch('/api/contributions?username=nathanialf')
-      .then(res => res.json())
-      .then(data => setContributions(data.contributions || []))
-      .catch(() => setContributions([]));
+    // Only fetch if not already cached
+    if (!cachedContributions) {
+      fetch('/api/contributions?username=nathanialf')
+        .then(res => res.json())
+        .then(data => {
+          const contributions = data.contributions || [];
+          cachedContributions = contributions;
+          setContributions(contributions);
+        })
+        .catch(() => setContributions([]));
+    }
 
     const mq = window.matchMedia('(prefers-color-scheme: dark)');
     setIsDark(mq.matches);
