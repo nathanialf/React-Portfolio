@@ -22,7 +22,9 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
     : null;
 
   useEffect(() => {
-    if (contentRef.current) {
+    // Only measure height when a project is selected (for smooth transitions)
+    // Let main view use auto height so async content (like contribution graph) isn't cut off
+    if (selectedProjectId && contentRef.current) {
       const height = contentRef.current.scrollHeight;
       setContentHeight(height);
     }
@@ -40,6 +42,8 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
   const handleBackToMain = () => {
     setSelectedProjectId(null);
     setIsReturningFromProject(true);
+    // Reset to auto height after transition completes
+    setTimeout(() => setContentHeight(undefined), 400);
   };
 
   return (
