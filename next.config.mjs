@@ -5,8 +5,9 @@ const nextConfig = {
     'dev.internal.defnf.com'
   ],
   env: {
+    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
     SHOW_CONTRIBUTIONS: process.env.GITHUB_TOKEN ? 'true' : ''
   }
-};
+}
 
-module.exports = nextConfig;
+export default nextConfig
