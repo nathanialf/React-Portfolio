@@ -14,6 +14,7 @@ interface FloatingCardProps {
 const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkMode }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [isReturningFromProject, setIsReturningFromProject] = useState(false);
+  const [animationKey, setAnimationKey] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const mainViewRef = useRef<HTMLDivElement>(null);
   const [contentHeight, setContentHeight] = useState<number | undefined>(undefined);
@@ -50,6 +51,7 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
     }
     setSelectedProjectId(null);
     setIsReturningFromProject(true);
+    setAnimationKey(k => k + 1); // Force fresh DOM element for animation
     setTimeout(() => setContentHeight(undefined), 400);
   };
 
@@ -67,7 +69,7 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
               forceDarkMode={forceDarkMode}
             />
           ) : (
-            <div ref={mainViewRef} className={isReturningFromProject ? styles.mainView : ''}>
+            <div ref={mainViewRef} key={animationKey} className={isReturningFromProject ? styles.mainView : ''}>
               <CardContent onProjectSelect={handleProjectSelect} />
             </div>
           )}

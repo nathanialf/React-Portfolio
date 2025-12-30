@@ -32,14 +32,13 @@
 @media (prefers-color-scheme: dark) {
   .card {
     box-shadow: 0 0.2rem 0.2rem #161c24;
-
     color: white;
   }
+}
 
-  /* Media query for smaller devices */
-  @media screen and (max-width: 768px) {
-    .card {
-      box-shadow: none;
-    }
+/* Dark mode on smaller devices - remove box shadow */
+@media (prefers-color-scheme: dark) and (max-width: 768px) {
+  .card {
+    box-shadow: none;
   }
 }

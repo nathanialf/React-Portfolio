@@ -41,7 +41,7 @@ const ContributionGraph: React.FC = () => {
     const calculateDotSize = () => {
       if (!containerRef.current) return;
       const containerWidth = containerRef.current.offsetWidth;
-      const numWeeks = 53;
+      const numWeeks = 53; // Calculate size as if full year for smaller dots
       const columnsPerWeek = 2;
       const totalColumns = numWeeks * columnsPerWeek;
       const gapSize = 2;
@@ -56,7 +56,7 @@ const ContributionGraph: React.FC = () => {
     return () => window.removeEventListener('resize', calculateDotSize);
   }, [contributions]);
 
-  const days = contributions.slice(-365);
+  const days = contributions.slice(-182); // ~6 months
   const firstDate = new Date(days[0]?.date || new Date());
   const padDays = firstDate.getDay();
 
