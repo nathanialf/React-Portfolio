@@ -20,6 +20,7 @@
 
 .badges > * {
   flex: 1 1 auto;
+  max-width: calc(50% - 0.15rem);
   margin: 0;
 }
 

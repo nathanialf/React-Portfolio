@@ -65,4 +65,16 @@ export const projects: Project[] = [
       { label: 'Coming Soon', url: 'https://myseatmap.com', type: 'plane', disabled: true },
     ],
   },
+  // {
+  //   id: 'cartograph',
+  //   name: 'CARTOGRAPH',
+  //   description: 'Working Title\n\nA hosted service that connects to your git repositories and automatically generates living documentation from your codebase. Powered by LLM analysis, documentation stays synchronized through webhooks—ensuring your docs always reflect the current state of your code.',
+  //   icon: {
+  //     type: 'tabler',
+  //     content: 'file-ai',
+  //   },
+  //   links: [
+  //     { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
+  //   ],
+  // },
 ];
