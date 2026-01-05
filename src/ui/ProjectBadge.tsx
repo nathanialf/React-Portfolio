@@ -55,6 +55,7 @@ const ProjectBadge: React.FC<ProjectBadgeProps> = ({ project, onClick }) => {
       title={project.name}
       role="button"
       tabIndex={0}
+      style={{ '--hover-color': project.hoverColor } as React.CSSProperties}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
@@ -65,7 +66,6 @@ const ProjectBadge: React.FC<ProjectBadgeProps> = ({ project, onClick }) => {
       <div className={styles.icon}>
         {renderIcon()}
       </div>
-      <span className={styles.name}>{project.name}</span>
     </div>
   );
 };

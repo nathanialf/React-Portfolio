@@ -27,9 +27,9 @@ describe('ProjectBadge', () => {
       />
     )
 
-    expect(screen.getByText('Test Project')).toBeInTheDocument()
-
     const button = screen.getByRole('button')
+    expect(button).toHaveAttribute('title', 'Test Project')
+
     fireEvent.click(button)
     expect(mockOnClick).toHaveBeenCalledTimes(1)
   })
@@ -52,7 +52,8 @@ describe('ProjectBadge', () => {
       />
     )
 
-    expect(screen.getByText('GRID')).toBeInTheDocument()
+    const button = screen.getByRole('button')
+    expect(button).toHaveAttribute('title', 'GRID')
   })
 
   it('has correct button styling classes', () => {
@@ -96,7 +97,8 @@ describe('ProjectBadge', () => {
       />
     )
 
-    expect(screen.getByText('Test Project')).toBeInTheDocument()
+    let button = screen.getByRole('button')
+    expect(button).toHaveAttribute('title', 'Test Project')
 
     const svgProject = {
       ...testProject,
@@ -110,6 +112,7 @@ describe('ProjectBadge', () => {
       />
     )
 
-    expect(screen.getByText('Test Project')).toBeInTheDocument()
+    button = screen.getByRole('button')
+    expect(button).toHaveAttribute('title', 'Test Project')
   })
 })

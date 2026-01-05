@@ -18,24 +18,21 @@ describe('ProjectsSection', () => {
 
   it('renders project badges', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-    
-    // Check for the main projects
-    expect(screen.getByText('ENCOM')).toBeInTheDocument()
-    expect(screen.getByText('GRID')).toBeInTheDocument()
-    expect(screen.getByText('MYSEATMAP')).toBeInTheDocument()
+
+    // Check for the main projects via title attribute
+    expect(screen.getByTitle('ENCOM')).toBeInTheDocument()
+    expect(screen.getByTitle('GRID')).toBeInTheDocument()
+    expect(screen.getByTitle('MYSEATMAP')).toBeInTheDocument()
   })
 
   it('calls onProjectSelect when a project badge is clicked', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-    
-    // ProjectBadge renders as a div with button role, not an actual button element
-    const encomBadge = screen.getByText('ENCOM').closest('[role="button"]')
+
+    const encomBadge = screen.getByTitle('ENCOM')
     expect(encomBadge).toBeInTheDocument()
-    
-    if (encomBadge) {
-      fireEvent.click(encomBadge)
-      expect(mockOnProjectSelect).toHaveBeenCalledWith('encom')
-    }
+
+    fireEvent.click(encomBadge)
+    expect(mockOnProjectSelect).toHaveBeenCalledWith('encom')
   })
 
   it('renders project badges as clickable elements', () => {
@@ -52,18 +49,14 @@ describe('ProjectsSection', () => {
 
   it('has correct project IDs for selection', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-    
-    // Click each project and verify the correct ID is passed
-    const gridBadge = screen.getByText('GRID').closest('[role="button"]')
-    if (gridBadge) {
-      fireEvent.click(gridBadge)
-      expect(mockOnProjectSelect).toHaveBeenCalledWith('grid')
-    }
 
-    const seatmapBadge = screen.getByText('MYSEATMAP').closest('[role="button"]')
-    if (seatmapBadge) {
-      fireEvent.click(seatmapBadge)
-      expect(mockOnProjectSelect).toHaveBeenCalledWith('seatmap')
-    }
+    // Click each project and verify the correct ID is passed
+    const gridBadge = screen.getByTitle('GRID')
+    fireEvent.click(gridBadge)
+    expect(mockOnProjectSelect).toHaveBeenCalledWith('grid')
+
+    const seatmapBadge = screen.getByTitle('MYSEATMAP')
+    fireEvent.click(seatmapBadge)
+    expect(mockOnProjectSelect).toHaveBeenCalledWith('seatmap')
   })
 })

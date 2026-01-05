@@ -14,14 +14,6 @@
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.3rem;
-  justify-content: space-between;
-}
-
-.badges > * {
-  flex: 1 1 auto;
-  max-width: calc(50% - 0.15rem);
-  margin: 0;
 }
 
 /* Dark mode support - title inherits default color */

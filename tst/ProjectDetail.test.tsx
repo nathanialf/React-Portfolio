@@ -58,7 +58,7 @@ describe('ProjectDetail', () => {
 
     expect(screen.getByText(gridProject.name)).toBeInTheDocument()
     // Use partial match for descriptions with newlines
-    expect(screen.getByText(/Privacy-focused Android file management app/)).toBeInTheDocument()
+    expect(screen.getByText(/I wanted a simple way to manage files/)).toBeInTheDocument()
   })
 
   it('has correct animation container', () => {
