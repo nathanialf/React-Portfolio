@@ -12,6 +12,8 @@
   },
   "dependencies": {
     "@tabler/icons-react": "^3.36.0",
+    "feed": "^5.1.0",
+    "gray-matter": "^4.0.3",
     "next": "^16.1.1",
     "qr-code-styling": "^1.9.2",
     "react": "^19.1.0",

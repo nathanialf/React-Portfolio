@@ -1,0 +1,25 @@
+---
+title: My Post Title
+date: 2026-01-06
+description: A short description for SEO and previews.
+coverImage: /blog/my-image.jpg
+tags: [tag1, tag2]
+---
+
+Your content here...
+
+## Subheading
+
+Paragraphs, lists, code blocks, images - all standard markdown works.
+
+![Alt text](/blog/images/example.jpg)
+
+### Notes
+
+- `title` (required) - The post title
+- `date` (required) - Publication date in YYYY-MM-DD format
+- `description` (required) - Used for SEO meta description and post previews
+- `coverImage` (optional) - Path to cover image in /public/blog/
+- `tags` (optional) - Array of tags for categorization
+
+Images should be placed in `/public/blog/` and referenced with absolute paths.

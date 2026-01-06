@@ -1,28 +1,7 @@
-import { readdir } from 'fs/promises';
-import { join } from 'path';
 import Link from 'next/link';
 import VerticalSidebar from '../../ui/VerticalSidebar';
+import { getAllPosts, formatDate } from '../../lib/blog';
 import styles from '../../styles/Blog.module.css';
-
-async function getAllPosts() {
-  try {
-    const postsDir = join(process.cwd(), 'src', 'data', 'blog-posts');
-    const files = await readdir(postsDir);
-
-    return files
-      .filter(file => file.endsWith('.md'))
-      .map(file => {
-        const slug = file.replace('.md', '');
-        const title = slug
-          .split('-')
-          .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-          .join(' ');
-        return { slug, title };
-      });
-  } catch {
-    return [];
-  }
-}
 
 export const metadata = {
   title: 'Blog',
@@ -37,6 +16,9 @@ export default async function BlogPage() {
       <div className={styles.sidebar}>
         <VerticalSidebar />
       </div>
+      <a href="/feed.xml" className={styles.rssSidebar} title="RSS Feed">
+        <span className={styles.rssLink}>RSS FEED</span>
+      </a>
       <div className={styles.container}>
         <div className={styles.content}>
           <header className={styles.header}>
@@ -49,13 +31,33 @@ export default async function BlogPage() {
               <p className={styles.empty}>No posts yet.</p>
             ) : (
               <div className={styles.postList}>
-                {posts.map(({ slug, title }) => (
+                {posts.map(post => (
                   <Link
-                    key={slug}
-                    href={`/blog/${slug}`}
+                    key={post.slug}
+                    href={`/blog/${post.slug}`}
                     className={styles.postCard}
                   >
-                    <h2 className={styles.postTitle}>{title}</h2>
+                    {post.coverImage && (
+                      <div className={styles.postCoverImage}>
+                        <img src={post.coverImage} alt="" />
+                      </div>
+                    )}
+                    <div className={styles.postInfo}>
+                      <h2 className={styles.postTitle}>{post.title}</h2>
+                      <time className={styles.postDate} dateTime={post.date}>
+                        {formatDate(post.date)}
+                      </time>
+                      {post.description && (
+                        <p className={styles.postDescription}>{post.description}</p>
+                      )}
+                      {post.tags && post.tags.length > 0 && (
+                        <div className={styles.postTags}>
+                          {post.tags.map(tag => (
+                            <span key={tag} className={styles.tag}>{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
                   </Link>
                 ))}
               </div>

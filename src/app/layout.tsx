@@ -14,7 +14,14 @@ export const metadata: Metadata = {
     default: 'Nathanial Fine'
   },
   description: 'Freelance software developer creating bespoke software solutions',
-  icons: '/favicon.ico',
+  icons: {
+    icon: '/favicon.svg',
+  },
+  alternates: {
+    types: {
+      'application/rss+xml': '/feed.xml',
+    },
+  },
   openGraph: {
     title: 'Nathanial Fine',
     description: 'Freelance software developer creating bespoke software solutions',
