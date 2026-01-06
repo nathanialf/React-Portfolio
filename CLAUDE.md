@@ -23,8 +23,8 @@ This is a Next.js 14+ React portfolio website using the App Router architecture.
 **Component Architecture:**
 - Reusable UI components in `src/ui/` directory
 - CSS modules for component-specific styling in `src/styles/`
-- Two main card variants: `FloatingCard` (homepage) and `FullCard` (embed page)
-- Both card variants use shared `CardContent` component for consistency
+- `FloatingCard` component displays the main portfolio card on homepage
+- `CardContent` component contains the shared content (name, tagline, projects, links)
 
 **Responsive Design:**
 - Uses CSS media queries for dark/light mode background images via `<picture>` element
@@ -41,7 +41,6 @@ This is a Next.js 14+ React portfolio website using the App Router architecture.
 
 1. **Homepage (`/`)** - Main portfolio with floating card design
 2. **Photography (`/photography`)** - Photo gallery with EXIF-style metadata
-3. **Embed (`/embed`)** - Embeddable version using full-width card
 
 ### Styling System
 

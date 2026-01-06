@@ -43,7 +43,6 @@ src/
 ├── app/           # Next.js app router pages
 │   ├── layout.tsx # Global layout with Google Fonts
 │   ├── page.tsx   # Homepage with floating card
-│   ├── embed/     # Embeddable version
 │   └── privacy-policy/  # Privacy policy system
 ├── ui/            # Reusable UI components
 │   ├── CardContent.tsx     # Main content component

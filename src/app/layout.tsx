@@ -8,12 +8,26 @@ import '../styles/global.css'
 import React from 'react'
  
 export const metadata: Metadata = {
+  metadataBase: new URL('https://defnf.com'),
   title: {
     template: '%s | DEFNF',
     default: 'Nathanial Fine'
   },
-  description: 'Personal Website',
-  icons: '/favicon.ico'
+  description: 'Freelance software developer creating bespoke software solutions',
+  icons: '/favicon.ico',
+  openGraph: {
+    title: 'Nathanial Fine',
+    description: 'Freelance software developer creating bespoke software solutions',
+    url: 'https://defnf.com',
+    siteName: 'DEFNF',
+    locale: 'en_US',
+    type: 'website',
+  },
+  twitter: {
+    card: 'summary',
+    title: 'Nathanial Fine',
+    description: 'Freelance software developer creating bespoke software solutions',
+  },
 }
 
 export const viewport: Viewport = {
@@ -38,9 +52,24 @@ const jetbrains = JetBrains_Mono({
   variable: '--font-mono',
 })
  
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Nathanial Fine',
+  url: 'https://defnf.com',
+  jobTitle: 'Freelance Software Developer',
+  description: 'Freelance software developer creating bespoke software solutions',
+}
+
 const MyApp = ({ children }: {children: React.ReactNode}) => {
   return (
     <html className={`${outfit.variable} ${playfair.variable} ${jetbrains.variable}`}>
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body className={outfit.className}>
         {children}
       </body>

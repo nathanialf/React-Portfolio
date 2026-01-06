@@ -1,0 +1,8 @@
+# robots.txt for defnf.com
+
+User-agent: *
+Allow: /
+Disallow: /qr
+Disallow: /blog
+
+Sitemap: https://defnf.com/sitemap.xml
