@@ -8,6 +8,7 @@
     width: 2.5rem;
     flex-shrink: 0;
     text-decoration: none;
+    overflow: visible;
 }
 
 .clickable {
@@ -33,26 +34,11 @@
 }
 
 .graph {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.week {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.column {
-    display: flex;
-    gap: 2px;
-}
-
-.dot {
-    width: 3px;
-    height: 3px;
-    border-radius: 50%;
+    flex-shrink: 0;
+    overflow: visible;
+    position: static;
+    top: unset;
+    margin: 0;
 }
 
 @media (max-width: 768px) {
@@ -68,10 +54,5 @@
 
     .brandText {
         font-size: 0.5rem;
-    }
-
-    .dot {
-        width: 2px;
-        height: 2px;
     }
 }

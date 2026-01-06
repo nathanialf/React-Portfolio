@@ -55,9 +55,15 @@ const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
     return `rgba(255,255,255,${opacity})`;
   };
 
-  const gap = 2;
+  const gap = 3;
   const dotSize = 3;
   const offset = (dotSize + gap) / 2;
+
+  // Calculate actual content width (rightmost circle edge)
+  const contentWidth = 3 * (dotSize + gap) + dotSize; // 4 circles in column 1
+  const svgWidth = contentWidth + offset; // add space for honeycomb offset
+  const svgHeight = weeks.length * (dotSize + gap);
+  const padX = offset / 2; // center the honeycomb pattern
 
   const content = (
     <>
@@ -69,32 +75,32 @@ const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
         className={styles.logo}
       />
       <div className={styles.brandText}>DEFNF COMPUTING</div>
-      <div className={styles.graph}>
+      <svg className={styles.graph} width={svgWidth} height={svgHeight}>
         {weeks.map((week, wi) => (
-          <div key={wi} className={styles.week}>
-            {/* Row 1: Sun, Tue, Thu, Sat (indices 0, 2, 4, 6) */}
-            <div className={styles.column}>
-              {[0, 2, 4, 6].map((di) => (
-                <div
-                  key={di}
-                  className={styles.dot}
-                  style={{ backgroundColor: getColor(week[di]?.level) }}
-                />
-              ))}
-            </div>
-            {/* Row 2: Mon, Wed, Fri (indices 1, 3, 5) - offset */}
-            <div className={styles.column} style={{ marginLeft: `${offset}px` }}>
-              {[1, 3, 5].map((di) => (
-                <div
-                  key={di}
-                  className={styles.dot}
-                  style={{ backgroundColor: getColor(week[di]?.level) }}
-                />
-              ))}
-            </div>
-          </div>
+          <g key={wi}>
+            {/* Column 1: Sun, Tue, Thu, Sat (indices 0, 2, 4, 6) */}
+            {[0, 2, 4, 6].map((di, i) => (
+              <circle
+                key={`a-${di}`}
+                cx={padX + i * (dotSize + gap) + dotSize / 2}
+                cy={wi * (dotSize + gap) + dotSize / 2}
+                r={dotSize / 2}
+                fill={getColor(week[di]?.level)}
+              />
+            ))}
+            {/* Column 2: Mon, Wed, Fri (indices 1, 3, 5) - offset */}
+            {[1, 3, 5].map((di, i) => (
+              <circle
+                key={`b-${di}`}
+                cx={padX + i * (dotSize + gap) + dotSize / 2 + offset}
+                cy={wi * (dotSize + gap) + dotSize / 2 + offset}
+                r={dotSize / 2}
+                fill={getColor(week[di]?.level)}
+              />
+            ))}
+          </g>
         ))}
-      </div>
+      </svg>
     </>
   );
 
