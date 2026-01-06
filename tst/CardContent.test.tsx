@@ -50,21 +50,26 @@ describe('CardContent', () => {
     const mockOnAboutSelect = jest.fn()
     render(React.createElement(CardContent, { onAboutSelect: mockOnAboutSelect }))
 
-    expect(screen.getByTestId('about-button')).toBeInTheDocument()
     expect(screen.getByText('About & Contact')).toBeInTheDocument()
   })
 
   it('does not render about button when onAboutSelect is not provided', () => {
     render(React.createElement(CardContent))
 
-    expect(screen.queryByTestId('about-button')).not.toBeInTheDocument()
+    expect(screen.queryByText('About & Contact')).not.toBeInTheDocument()
   })
 
   it('calls onAboutSelect when about button is clicked', () => {
     const mockOnAboutSelect = jest.fn()
     render(React.createElement(CardContent, { onAboutSelect: mockOnAboutSelect }))
 
-    fireEvent.click(screen.getByTestId('about-button'))
+    fireEvent.click(screen.getByText('About & Contact'))
     expect(mockOnAboutSelect).toHaveBeenCalled()
+  })
+
+  it('renders blog button', () => {
+    render(React.createElement(CardContent))
+
+    expect(screen.getByText('Blog')).toBeInTheDocument()
   })
 })

@@ -13,6 +13,8 @@
   border: 1px solid #262626;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
   color: white;
+
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .main {
@@ -45,6 +47,22 @@
   }
 }
 
+/* Navigation transition states */
+.cardNavigating {
+  position: fixed;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100vw;
+  transform: none !important;
+  border-radius: 0;
+  border: none;
+  z-index: 10;
+}
+
+.contentFading {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
 
 /* Media query for smaller devices */
 @media screen and (max-width: 768px) {

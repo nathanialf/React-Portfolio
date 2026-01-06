@@ -7,9 +7,10 @@ interface ProjectDetailProps {
   project: Project;
   onBack: () => void;
   forceDarkMode?: boolean;
+  onNavigate?: (url: string) => void;
 }
 
-const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDarkMode }) => {
+const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDarkMode, onNavigate }) => {
   const getLinkIcon = (type: string) => {
     switch (type) {
       case 'github':
@@ -58,6 +59,20 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDar
                 {getLinkIcon(link.type)}
                 <span>{link.label}</span>
               </span>
+            ) : link.type === 'privacy' && onNavigate ? (
+              <a
+                key={index}
+                href={link.url}
+                className={styles.link}
+                style={forceDarkMode ? darkLink : undefined}
+                onClick={(e) => {
+                  e.preventDefault();
+                  onNavigate(link.url);
+                }}
+              >
+                {getLinkIcon(link.type)}
+                <span>{link.label}</span>
+              </a>
             ) : (
               <a
                 key={index}

@@ -9,9 +9,10 @@ const SHOW_BLOG = true;
 interface CardContentProps {
   onProjectSelect?: (projectId: string) => void;
   onAboutSelect?: () => void;
+  onNavigate?: (url: string) => void;
 }
 
-const CardContent: React.FC<CardContentProps> = ({ onProjectSelect, onAboutSelect }) => {
+const CardContent: React.FC<CardContentProps> = ({ onProjectSelect, onAboutSelect, onNavigate }) => {
   return (
     <>
       <h1 className={styles.name}>Nathanial Fine</h1>
@@ -21,7 +22,7 @@ const CardContent: React.FC<CardContentProps> = ({ onProjectSelect, onAboutSelec
 
       <div className={styles.bottomButtons}>
         {onAboutSelect && <AboutButton onClick={onAboutSelect} label="About & Contact" />}
-        {SHOW_BLOG && <AboutButton onClick={() => window.open('/blog', '_self')} label="Blog" />}
+        {SHOW_BLOG && <AboutButton onClick={() => onNavigate?.('/blog')} label="Blog" />}
       </div>
     </>
   );
