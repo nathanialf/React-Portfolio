@@ -1,6 +1,6 @@
 ---
 title: Hi!
-date: 2026-01-06
+date: 2026-01-06T11:00:00-08:00
 description: An introduction to who I am, what I've been up to, and what to expect from this blog.
 tags: [introduction, career, personal, myseatmap]
 ---
