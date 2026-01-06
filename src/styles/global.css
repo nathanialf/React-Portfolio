@@ -1,15 +1,23 @@
+:root {
+    /* Project colors */
+    --color-encom: #8b5cf6;
+    --color-grid: #22c55e;
+    --color-seatmap: #14b8a6;
+    --color-cartograph: #1e3a5f;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
     overflow: hidden;
     overscroll-behavior: none;
-    background-color: white;
+    background-color: black;
 }
 
 a {
     text-decoration: none;
-    color: black;
+    color: white;
 }
 
 p {
@@ -20,14 +28,4 @@ svg {
     position: relative;
     top: 0.2em;
     margin-right: 0.2em;
-}
-
-@media (prefers-color-scheme: dark) {
-    body {
-        background-color: black;
-    }
-
-    a {
-        color: white;
-    }
 }

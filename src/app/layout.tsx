@@ -3,7 +3,7 @@ import {
   Viewport
 } from 'next'
 // This uses just the google fonts name
-import { Outfit } from 'next/font/google'
+import { Outfit, Playfair_Display, JetBrains_Mono } from 'next/font/google'
 import '../styles/global.css'
 import React from 'react'
  
@@ -22,12 +22,25 @@ export const viewport: Viewport = {
 
 const outfit = Outfit({
   weight: '400',
-  subsets: ['latin']
+  subsets: ['latin'],
+  variable: '--font-body',
+})
+
+const playfair = Playfair_Display({
+  weight: ['700', '900'],
+  subsets: ['latin'],
+  variable: '--font-serif',
+})
+
+const jetbrains = JetBrains_Mono({
+  weight: ['400', '500'],
+  subsets: ['latin'],
+  variable: '--font-mono',
 })
  
 const MyApp = ({ children }: {children: React.ReactNode}) => {
   return (
-    <html>
+    <html className={`${outfit.variable} ${playfair.variable} ${jetbrains.variable}`}>
       <body className={outfit.className}>
         {children}
       </body>

@@ -7,6 +7,9 @@ import remarkGfm from 'remark-gfm';
 import { rehype } from 'rehype';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
+import Link from 'next/link';
+import { IconArrowLeft } from '@tabler/icons-react';
+import VerticalSidebar from '../../../ui/VerticalSidebar';
 import styles from '../../../styles/PrivacyPolicy.module.css';
 
 interface PrivacyPolicyPageProps {
@@ -78,17 +81,26 @@ export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPagePro
   const appName = slug.charAt(0).toUpperCase() + slug.slice(1);
   
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>Privacy Policy</h1>
-          <p className={styles.subtitle}>{appName}</p>
-        </header>
-        
-        <main 
-          className={styles.markdown}
-          dangerouslySetInnerHTML={{ __html: content }}
-        />
+    <div className={styles.wrapper}>
+      <div className={styles.sidebar}>
+        <VerticalSidebar />
+      </div>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <header className={styles.header}>
+            <Link href="/privacy-policy" className={styles.backLink}>
+              <IconArrowLeft stroke={2} width="1em" height="1em" />
+              <span>All Policies</span>
+            </Link>
+            <h1 className={styles.title}>Privacy Policy</h1>
+            <p className={styles.subtitle}>{appName}</p>
+          </header>
+
+          <main
+            className={styles.markdown}
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        </div>
       </div>
     </div>
   );

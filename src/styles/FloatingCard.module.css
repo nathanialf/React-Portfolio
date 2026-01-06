@@ -5,12 +5,20 @@
   -webkit-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
 
-  width: 400px;
-  padding: 2em;
-  border-radius: 1em;
+  display: flex;
+  width: 600px;
+  border-radius: 0;
 
-  backdrop-filter: blur(.75rem);
-  box-shadow: 0 0.2rem 0.2rem #9d9d9d;
+  background-color: #0a0a0a;
+  border: 1px solid #262626;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+  color: white;
+}
+
+.main {
+  flex: 1;
+  padding: 2em;
+  min-width: 0;
 }
 
 .content {
@@ -37,65 +45,20 @@
   }
 }
 
-.card::after {
-  /*Source: https://codepen.io/ruben-fernandes/pen/gOKxKGa*/
-  content: '';
-  background-image: url(../../public/images/noise.jpg);
-  background-size: contain;
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  opacity: 0.05;
-  z-index: 1;
-  pointer-events: none;
-  border-radius: 1em;
-
-  color: black;
-}
 
 /* Media query for smaller devices */
 @media screen and (max-width: 768px) {
   .card {
-    width: 90%; /* Adjust width for smaller screens */
-    max-width: 95%; /* Remove max-width restriction */
-    border-radius: 0em;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0;
     box-shadow: none;
+    border-left: none;
+    border-right: none;
   }
 
-  .card::after {
-    border-radius: 0em;
-  }
-}
-
-/* Force dark mode styling (for dark project backgrounds) */
-.card:global([data-theme="dark"]) {
-  box-shadow: 0 0.2rem 0.2rem #161c24;
-  color: white;
-}
-
-.card:global([data-theme="dark"]) a {
-  color: white;
-}
-
-@media screen and (max-width: 768px) {
-  .card:global([data-theme="dark"]) {
-    box-shadow: none;
+  .main {
+    padding: 1.5rem;
   }
 }
 
-/* Media query for if system preference is dark mode */
-@media (prefers-color-scheme: dark) {
-  .card {
-    box-shadow: 0 0.2rem 0.2rem #161c24;
-    color: white;
-  }
-
-  /* Media query for smaller devices */
-  @media screen and (max-width: 768px) {
-    .card {
-      box-shadow: none;
-    }
-  }
-}

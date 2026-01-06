@@ -1,26 +1,8 @@
 import React from 'react'
-import { render, screen } from '@testing-library/react'
+import { render, screen, fireEvent } from '@testing-library/react'
 import CardContent from '../src/ui/CardContent'
 
 // Mock child components
-jest.mock('../src/ui/LinkBadge', () => {
-  return function MockLinkBadge({ href, text }: any) {
-    return React.createElement('div', {
-      'data-testid': 'link-badge'
-    }, 
-      React.createElement('a', { href }, text)
-    )
-  }
-})
-
-jest.mock('../src/ui/CompanyBadge', () => {
-  return function MockCompanyBadge({ companyName, startDate, endDate }: any) {
-    return React.createElement('div', {
-      'data-testid': 'company-badge'
-    }, `${companyName} (${startDate} - ${endDate})`)
-  }
-})
-
 jest.mock('../src/ui/ProjectsSection', () => {
   return function MockProjectsSection({ onProjectSelect }: any) {
     return React.createElement('div', {
@@ -29,74 +11,60 @@ jest.mock('../src/ui/ProjectsSection', () => {
   }
 })
 
-jest.mock('../src/ui/DEFNFImage', () => {
-  return function MockDEFNFImage() {
-    return React.createElement('div', {
-      'data-testid': 'defnf-image'
-    }, 'DEFNF Image')
+jest.mock('../src/ui/AboutButton', () => {
+  return function MockAboutButton({ onClick, label }: any) {
+    return React.createElement('button', {
+      'data-testid': 'about-button',
+      onClick
+    }, label)
   }
 })
 
 describe('CardContent', () => {
-  it('renders the main name section', () => {
+  it('renders the name', () => {
     render(React.createElement(CardContent))
-    
+
     expect(screen.getByText('Nathanial Fine')).toBeInTheDocument()
-    expect(screen.getByTestId('defnf-image')).toBeInTheDocument()
   })
 
-  it('renders all title sections', () => {
+  it('renders the tagline', () => {
     render(React.createElement(CardContent))
-    
-    expect(screen.getByText('San Francisco Bay Area')).toBeInTheDocument()
-    expect(screen.getByText('DevOps | TPM')).toBeInTheDocument()
-    expect(screen.getByText('Husband')).toBeInTheDocument()
-  })
 
-  it('renders the contact links', () => {
-    render(React.createElement(CardContent))
-    
-    const linkBadges = screen.getAllByTestId('link-badge')
-    expect(linkBadges.length).toBeGreaterThan(0) // Should have contact links
-    
-    // Check for email link
-    expect(screen.getByText('nathanial@defnf.com')).toBeInTheDocument()
-  })
-
-  it('renders the Contact section', () => {
-    render(React.createElement(CardContent))
-    
-    expect(screen.getByText('Contact')).toBeInTheDocument()
-  })
-
-  it('renders the Previously section', () => {
-    render(React.createElement(CardContent))
-    
-    expect(screen.getByText('Previously')).toBeInTheDocument()
-  })
-
-  it('renders all company badges', () => {
-    render(React.createElement(CardContent))
-    
-    const companyBadges = screen.getAllByTestId('company-badge')
-    expect(companyBadges).toHaveLength(4)
-    
-    expect(screen.getByText('Amazon.com (2023 - 2025)')).toBeInTheDocument()
-    expect(screen.getByText('AWS (2020 - 2023)')).toBeInTheDocument()
-    expect(screen.getByText('Apple (2018 - 2020)')).toBeInTheDocument()
-    expect(screen.getByText('Infosys (2017 - 2020)')).toBeInTheDocument()
+    expect(screen.getByText('Bespoke Software')).toBeInTheDocument()
   })
 
   it('renders projects section when onProjectSelect is provided', () => {
     const mockOnProjectSelect = jest.fn()
     render(React.createElement(CardContent, { onProjectSelect: mockOnProjectSelect }))
-    
+
     expect(screen.getByTestId('projects-section')).toBeInTheDocument()
   })
 
   it('does not render projects section when onProjectSelect is not provided', () => {
     render(React.createElement(CardContent))
-    
+
     expect(screen.queryByTestId('projects-section')).not.toBeInTheDocument()
+  })
+
+  it('renders about button when onAboutSelect is provided', () => {
+    const mockOnAboutSelect = jest.fn()
+    render(React.createElement(CardContent, { onAboutSelect: mockOnAboutSelect }))
+
+    expect(screen.getByTestId('about-button')).toBeInTheDocument()
+    expect(screen.getByText('About & Contact')).toBeInTheDocument()
+  })
+
+  it('does not render about button when onAboutSelect is not provided', () => {
+    render(React.createElement(CardContent))
+
+    expect(screen.queryByTestId('about-button')).not.toBeInTheDocument()
+  })
+
+  it('calls onAboutSelect when about button is clicked', () => {
+    const mockOnAboutSelect = jest.fn()
+    render(React.createElement(CardContent, { onAboutSelect: mockOnAboutSelect }))
+
+    fireEvent.click(screen.getByTestId('about-button'))
+    expect(mockOnAboutSelect).toHaveBeenCalled()
   })
 })

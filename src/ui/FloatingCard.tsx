@@ -3,6 +3,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import CardContent from './CardContent';
 import ProjectDetail from './ProjectDetail';
+import AboutDetail from './AboutDetail';
+import VerticalSidebar from './VerticalSidebar';
 import { projects } from '../data/projects';
 import styles from '../styles/FloatingCard.module.css';
 
@@ -13,7 +15,8 @@ interface FloatingCardProps {
 
 const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkMode }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
-  const [isReturningFromProject, setIsReturningFromProject] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
+  const [isReturningFromDetail, setIsReturningFromDetail] = useState(false);
   const [animationKey, setAnimationKey] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
   const mainViewRef = useRef<HTMLDivElement>(null);
@@ -24,55 +27,75 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
     ? projects.find(p => p.id === selectedProjectId)
     : null;
 
+  const isDetailView = selectedProjectId || showAbout;
+
   useEffect(() => {
-    if (selectedProjectId && contentRef.current) {
+    if (isDetailView && contentRef.current) {
       const height = contentRef.current.scrollHeight;
       setContentHeight(height);
     }
-  }, [selectedProjectId, selectedProject]);
+  }, [selectedProjectId, selectedProject, showAbout, isDetailView]);
 
   useEffect(() => {
     onProjectChange?.(selectedProjectId);
   }, [selectedProjectId, onProjectChange]);
 
   const handleProjectSelect = (projectId: string) => {
-    // Capture main view height before leaving
     if (mainViewRef.current) {
-      setMainViewHeight(mainViewRef.current.scrollHeight);
+      const currentHeight = mainViewRef.current.scrollHeight;
+      setMainViewHeight(currentHeight);
+      setContentHeight(currentHeight);
     }
     setSelectedProjectId(projectId);
-    setIsReturningFromProject(false);
+    setShowAbout(false);
+    setIsReturningFromDetail(false);
+  };
+
+  const handleAboutSelect = () => {
+    if (mainViewRef.current) {
+      const currentHeight = mainViewRef.current.scrollHeight;
+      setMainViewHeight(currentHeight);
+      setContentHeight(currentHeight);
+    }
+    setShowAbout(true);
+    setSelectedProjectId(null);
+    setIsReturningFromDetail(false);
   };
 
   const handleBackToMain = () => {
-    // Transition to main view height, then to auto
     if (mainViewHeight) {
       setContentHeight(mainViewHeight);
     }
     setSelectedProjectId(null);
-    setIsReturningFromProject(true);
-    setAnimationKey(k => k + 1); // Force fresh DOM element for animation
+    setShowAbout(false);
+    setIsReturningFromDetail(true);
+    setAnimationKey(k => k + 1);
     setTimeout(() => setContentHeight(undefined), 400);
   };
 
   return (
     <div className={styles.card}>
-      <div
-        className={`${styles.content} ${selectedProjectId ? styles.projectView : ''}`}
-        style={{ height: contentHeight ? `${contentHeight}px` : 'auto' }}
-      >
-        <div ref={contentRef}>
-          {selectedProject ? (
-            <ProjectDetail
-              project={selectedProject}
-              onBack={handleBackToMain}
-              forceDarkMode={forceDarkMode}
-            />
-          ) : (
-            <div ref={mainViewRef} key={animationKey} className={isReturningFromProject ? styles.mainView : ''}>
-              <CardContent onProjectSelect={handleProjectSelect} />
-            </div>
-          )}
+      <VerticalSidebar disableLink />
+      <div className={styles.main}>
+        <div
+          className={`${styles.content} ${isDetailView ? styles.projectView : ''}`}
+          style={{ height: contentHeight ? `${contentHeight}px` : 'auto' }}
+        >
+          <div ref={contentRef}>
+            {selectedProject ? (
+              <ProjectDetail
+                project={selectedProject}
+                onBack={handleBackToMain}
+                forceDarkMode={forceDarkMode}
+              />
+            ) : showAbout ? (
+              <AboutDetail onBack={handleBackToMain} />
+            ) : (
+              <div ref={mainViewRef} key={animationKey} className={isReturningFromDetail ? styles.mainView : ''}>
+                <CardContent onProjectSelect={handleProjectSelect} onAboutSelect={handleAboutSelect} />
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

@@ -10,40 +10,33 @@ describe('ProjectsSection', () => {
     jest.clearAllMocks()
   })
 
-  it('renders the Projects section title', () => {
+  it('renders project cards', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-    
-    expect(screen.getByText('Projects')).toBeInTheDocument()
+
+    // Check for the main projects via aria-label
+    expect(screen.getByLabelText('View ENCOM project')).toBeInTheDocument()
+    expect(screen.getByLabelText('View GRID project')).toBeInTheDocument()
+    expect(screen.getByLabelText('View MYSEATMAP project')).toBeInTheDocument()
+    expect(screen.getByLabelText('View CARTOGRAPH project')).toBeInTheDocument()
   })
 
-  it('renders project badges', () => {
+  it('calls onProjectSelect when a project card is clicked', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
 
-    // Check for the main projects via title attribute
-    expect(screen.getByTitle('ENCOM')).toBeInTheDocument()
-    expect(screen.getByTitle('GRID')).toBeInTheDocument()
-    expect(screen.getByTitle('MYSEATMAP')).toBeInTheDocument()
-  })
-
-  it('calls onProjectSelect when a project badge is clicked', () => {
-    render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-
-    const encomBadge = screen.getByTitle('ENCOM')
-    expect(encomBadge).toBeInTheDocument()
-
-    fireEvent.click(encomBadge)
+    const encomCard = screen.getByLabelText('View ENCOM project')
+    fireEvent.click(encomCard)
     expect(mockOnProjectSelect).toHaveBeenCalledWith('encom')
   })
 
-  it('renders project badges as clickable elements', () => {
+  it('renders project cards as clickable buttons', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
-    
-    const projectBadges = screen.getAllByRole('button')
-    expect(projectBadges.length).toBeGreaterThan(0)
-    
-    // Check that each badge has the correct structure
-    projectBadges.forEach(badge => {
-      expect(badge).toHaveClass('badge')
+
+    const projectCards = screen.getAllByRole('button')
+    expect(projectCards.length).toBe(4)
+
+    // Check that each card has the correct structure
+    projectCards.forEach(card => {
+      expect(card).toHaveClass('card')
     })
   })
 
@@ -51,12 +44,13 @@ describe('ProjectsSection', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
 
     // Click each project and verify the correct ID is passed
-    const gridBadge = screen.getByTitle('GRID')
-    fireEvent.click(gridBadge)
+    fireEvent.click(screen.getByLabelText('View GRID project'))
     expect(mockOnProjectSelect).toHaveBeenCalledWith('grid')
 
-    const seatmapBadge = screen.getByTitle('MYSEATMAP')
-    fireEvent.click(seatmapBadge)
+    fireEvent.click(screen.getByLabelText('View MYSEATMAP project'))
     expect(mockOnProjectSelect).toHaveBeenCalledWith('seatmap')
+
+    fireEvent.click(screen.getByLabelText('View CARTOGRAPH project'))
+    expect(mockOnProjectSelect).toHaveBeenCalledWith('cartograph')
   })
 })

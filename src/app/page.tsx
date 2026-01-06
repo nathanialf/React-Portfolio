@@ -22,13 +22,9 @@ export default function Homepage() {
   return (
     <>
       {/* Default background */}
-      <picture className={`${styles.defaultBackground} ${activeBackground ? styles.hidden : ''}`}>
-        <source
-          srcSet='/images/darkmode/background.jpg'
-          media='(prefers-color-scheme: dark)'
-        />
+      <div className={`${styles.defaultBackground} ${activeBackground ? styles.hidden : ''}`}>
         <Image
-          src='/images/lightmode/background.jpg'
+          src='/images/darkmode/background.jpg'
           alt='Background Photograph'
           quality={100}
           fill
@@ -36,7 +32,7 @@ export default function Homepage() {
           style={{ objectFit: 'cover' }}
           priority
         />
-      </picture>
+      </div>
 
       {/* Preload all project backgrounds */}
       {projectsWithBackgrounds.map(project => (

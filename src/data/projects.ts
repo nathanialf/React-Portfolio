@@ -8,6 +8,7 @@ export interface ProjectLink {
 export interface Project {
   id: string;
   name: string;
+  tagline: string; // Short tagline for gallery card
   description: string;
   icon: {
     type: 'tabler' | 'svg' | 'placeholder';
@@ -23,13 +24,13 @@ export const projects: Project[] = [
   {
     id: 'encom',
     name: 'ENCOM',
+    tagline: 'Hexagon map service.',
     description: 'One backend, three very different frontends. I built a browser-based dungeon crawler, a web dashboard, and even a Nintendo 64 homebrew game that all talk to the same server.',
     icon: {
       type: 'tabler',
       content: 'hexagon',
     },
     backgroundImage: '/images/projects/encom-background.png',
-    darkBackground: true,
     hoverColor: '#8b5cf6',
     links: [
       { label: 'Dungeon Crawler', url: 'https://dungeon.riperoni.com/', type: 'dungeon' },
@@ -44,6 +45,7 @@ export const projects: Project[] = [
   {
     id: 'grid',
     name: 'GRID',
+    tagline: 'Privacy-first file management.',
     description: 'Now Available on the Google Play Store!\n\nI wanted a simple way to manage files on my servers from my phone without giving up my privacy. So I built one. It connects over SFTP and SMB, and I put it together using Jetpack Compose and Material 3.',
     icon: {
       type: 'svg',
@@ -59,7 +61,8 @@ export const projects: Project[] = [
   {
     id: 'seatmap',
     name: 'MYSEATMAP',
-    description: 'Launching January 2026!\n\nFlying standby can be stressful when you don\'t know if there\'s a seat for you. MySeatMap pulls real-time availability from multiple airlines into one place, with interactive seat maps, smart search, bookmarks, and alerts so you can make better decisions before heading to the airport.',
+    tagline: 'Real-time flight intelligence.',
+    description: 'Launching January 2026!\n\nFlying standby can be stressful when you don\'t know if there\'s a seat for you. MySeatMap pulls real-time availability from multiple airlines into one place, with interactive seat maps, smart search, bookmarks, and alerts so you can make better decisions before heading to the airport.\n\nBuilt as 1/2 of Ody-Software.',
     icon: {
       type: 'svg',
       content: '/images/myseatmap-icon.svg',
@@ -67,12 +70,14 @@ export const projects: Project[] = [
     hoverColor: '#14b8a6',
     links: [
       { label: 'Coming Soon', url: 'https://myseatmap.com', type: 'plane', disabled: true },
+      { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
     ],
   },
   {
     id: 'cartograph',
     name: 'CARTOGRAPH',
-    description: 'Working Title\n\nDocumentation that writes itself and never goes stale. Connect your git repos and let an LLM analyze your code to generate docs automatically. Webhooks keep everything in sync whenever you push changes.',
+    tagline: 'Docs that write themselves.',
+    description: 'Working Title\n\nHand-written docs are excellent, but engineers never keep them up to date. Cartograph generates purposeful documentation based on the code itself. Connect your git repos, and webhooks keep everything in sync whenever you push changes.',
     icon: {
       type: 'tabler',
       content: 'file-ai',
