@@ -12,7 +12,6 @@ type ErrorCorrectionLevel = 'L' | 'M' | 'Q' | 'H';
 interface QRCodeInstance {
   append: (element: HTMLElement) => void;
   update: (options: object) => void;
-  download: (options: { name: string; extension: string }) => void;
 }
 
 const dotStyles: { value: DotType; label: string }[] = [
