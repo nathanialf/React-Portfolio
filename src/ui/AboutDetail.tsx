@@ -17,16 +17,19 @@ const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
       <div className={styles.section}>
         <h2 className={styles.heading}>Who I Am</h2>
         <p className={styles.text}>
-          I&apos;m a software engineer. I&apos;ve spent years building infrastructure at
-          Apple, AWS, and Amazon. I know what makes systems reliable and actually useful.
+          I&apos;m Nathan. I spent 5 years at Amazon, 3 of them in AWS GameTech working on
+          backend infrastructure for games. Before that I was at Apple. I&apos;ve built
+          systems that scale and stay up.
         </p>
       </div>
 
       <div className={styles.section}>
         <h2 className={styles.heading}>How I Help</h2>
         <p className={styles.text}>
-          I build software for people who need something that doesn&apos;t exist yet.
-          If you have a problem and need a tool to solve it, I can help you make it real.
+          If you have a problem that needs custom software to solve, let&apos;s figure out
+          what you actually need and build it together. Backend APIs, full-stack apps,
+          infrastructure. You&apos;ll get production-ready code and I&apos;ll make sure you
+          understand how it all works.
         </p>
       </div>
 
