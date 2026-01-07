@@ -15,22 +15,59 @@ interface VerticalSidebarProps {
   disableLink?: boolean;
 }
 
-let cachedContributions: ContributionDay[] | null = null;
+interface CachedData {
+  contributions: ContributionDay[];
+  fetchedDate: string;
+}
+
+const CACHE_KEY = 'github-contributions';
+
+function getTodayString(): string {
+  return new Date().toISOString().split('T')[0];
+}
+
+function getCachedContributions(): ContributionDay[] | null {
+  if (typeof window === 'undefined') return null;
+  try {
+    const cached = localStorage.getItem(CACHE_KEY);
+    if (!cached) return null;
+    const data: CachedData = JSON.parse(cached);
+    if (data.fetchedDate === getTodayString()) {
+      return data.contributions;
+    }
+    return null;
+  } catch {
+    return null;
+  }
+}
+
+function setCachedContributions(contributions: ContributionDay[]): void {
+  if (typeof window === 'undefined') return;
+  const data: CachedData = {
+    contributions,
+    fetchedDate: getTodayString(),
+  };
+  localStorage.setItem(CACHE_KEY, JSON.stringify(data));
+}
 
 const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
-  const [contributions, setContributions] = useState<ContributionDay[]>(cachedContributions || []);
+  const [contributions, setContributions] = useState<ContributionDay[]>([]);
 
   useEffect(() => {
-    if (!cachedContributions) {
-      fetch('/api/contributions?username=nathanialf')
-        .then(res => res.json())
-        .then(data => {
-          const contributions = data.contributions || [];
-          cachedContributions = contributions;
-          setContributions(contributions);
-        })
-        .catch(() => setContributions([]));
+    const cached = getCachedContributions();
+    if (cached) {
+      setContributions(cached);
+      return;
     }
+
+    fetch('/api/contributions?username=nathanialf')
+      .then(res => res.json())
+      .then(data => {
+        const contributions = data.contributions || [];
+        setCachedContributions(contributions);
+        setContributions(contributions);
+      })
+      .catch(() => setContributions([]));
   }, []);
 
   const days = contributions.slice(-182); // ~6 months
