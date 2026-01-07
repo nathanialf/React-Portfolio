@@ -27,9 +27,8 @@ This is a Next.js 14+ React portfolio website using the App Router architecture.
 - `CardContent` component contains the shared content (name, tagline, projects, links)
 
 **Responsive Design:**
-- Uses CSS media queries for dark/light mode background images via `<picture>` element
 - Theme color defined as `#9fc2c2` in viewport metadata
-- Background images stored in `/public/images/darkmode/` and `/public/images/lightmode/`
+- Background image stored in `/public/images/darkmode/background.jpg`
 
 **Photography Section:**
 - Dynamic photo gallery using JSON data (`src/app/photography/photos.json`)
