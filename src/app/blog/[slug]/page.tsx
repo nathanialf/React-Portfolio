@@ -3,6 +3,7 @@ import { remark } from 'remark';
 import html from 'remark-html';
 import remarkGfm from 'remark-gfm';
 import Link from 'next/link';
+import Image from 'next/image';
 import { IconArrowLeft } from '@tabler/icons-react';
 import VerticalSidebar from '../../../ui/VerticalSidebar';
 import { getPostBySlug, getAllPostSlugs, formatDate } from '../../../lib/blog';
@@ -132,7 +133,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
 
           {post.coverImage && (
             <div className={styles.coverImage}>
-              <img src={post.coverImage} alt="" />
+              <Image src={post.coverImage} alt="" fill sizes="(max-width: 768px) 100vw, 700px" />
             </div>
           )}
 

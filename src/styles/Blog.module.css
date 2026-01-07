@@ -238,15 +238,14 @@
 }
 
 .postCoverImage {
+  position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;
   margin-bottom: 0.75rem;
   overflow: hidden;
 }
 
 .postCoverImage img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
   object-fit: cover;
   filter: grayscale(100%);
   opacity: 0.7;
@@ -301,15 +300,14 @@
 }
 
 .coverImage {
+  position: relative;
   width: 100%;
+  aspect-ratio: 16 / 9;
   margin-bottom: 2rem;
   overflow: hidden;
 }
 
 .coverImage img {
-  width: 100%;
-  height: auto;
-  aspect-ratio: 16 / 9;
   object-fit: cover;
 }
 

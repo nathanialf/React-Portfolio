@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import { getAllPosts, formatDate } from '../../lib/blog';
 import styles from '../../styles/Blog.module.css';
@@ -39,7 +40,7 @@ export default async function BlogPage() {
                   >
                     {post.coverImage && (
                       <div className={styles.postCoverImage}>
-                        <img src={post.coverImage} alt="" />
+                        <Image src={post.coverImage} alt="" fill sizes="(max-width: 768px) 100vw, 300px" />
                       </div>
                     )}
                     <div className={styles.postInfo}>

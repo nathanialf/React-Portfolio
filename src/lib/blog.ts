@@ -48,6 +48,7 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
           const post = await getPostBySlug(slug);
           if (!post) return null;
 
+          // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { content, ...metadata } = post;
           return metadata;
         })
