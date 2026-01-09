@@ -62,14 +62,14 @@ export const projects: Project[] = [
     id: 'seatmap',
     name: 'MYSEATMAP',
     tagline: 'Real-time flight intelligence.',
-    description: 'Launching January 2026!\n\nFlying standby can be stressful when you don\'t know if there\'s a seat for you. MySeatMap pulls real-time availability from multiple airlines into one place, with interactive seat maps, smart search, bookmarks, and alerts so you can make better decisions before heading to the airport.\n\nBuilt as 1/2 of Ody-Software.',
+    description: 'Flying standby can be stressful when you don\'t know if there\'s a seat for you. MySeatMap pulls real-time availability from multiple airlines into one place, with interactive seat maps, smart search, bookmarks, and alerts so you can make better decisions before heading to the airport.\n\nBuilt as 1/2 of Ody-Software.',
     icon: {
       type: 'svg',
       content: '/images/myseatmap-icon.svg',
     },
     hoverColor: '#14b8a6',
     links: [
-      { label: 'Coming Soon', url: 'https://myseatmap.com', type: 'plane', disabled: true },
+      { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
       { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
     ],
   },
