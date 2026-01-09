@@ -117,17 +117,49 @@
   letter-spacing: 0.05em;
 }
 
+.markdown h4 {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.8rem;
+  font-weight: 500;
+  margin: 1.5rem 0 0.5rem 0;
+  color: #737373;
+}
+
+.markdown h5 {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.75rem;
+  font-weight: 500;
+  margin: 1.25rem 0 0.5rem 0;
+  color: #525252;
+}
+
+.markdown h6 {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.7rem;
+  font-weight: 500;
+  margin: 1rem 0 0.5rem 0;
+  color: #525252;
+}
+
 .markdown p {
   margin: 1.25rem 0;
 }
 
-.markdown ul, .markdown ol {
+.markdown ul {
   margin: 1.25rem 0;
   padding-left: 1.25rem;
+  list-style-type: disc;
+}
+
+.markdown ol {
+  margin: 1.25rem 0;
+  padding-left: 1.25rem;
+  list-style-type: decimal;
 }
 
 .markdown li {
   margin: 0.75rem 0;
+  display: list-item;
 }
 
 .markdown li::marker {
