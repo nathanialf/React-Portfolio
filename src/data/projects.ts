@@ -70,6 +70,7 @@ export const projects: Project[] = [
     hoverColor: '#14b8a6',
     links: [
       { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
+      { label: 'Ody-Software', url: 'https://ody-software.com/', type: 'website' },
       { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
     ],
   },
