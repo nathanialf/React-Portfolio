@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import { IconRss } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import { getAllPosts, formatDate } from '../../lib/blog';
 import styles from '../../styles/Blog.module.css';
@@ -18,6 +19,7 @@ export default async function BlogPage() {
         <VerticalSidebar />
       </div>
       <a href="/feed.xml" className={styles.rssSidebar} title="RSS Feed">
+        <IconRss className={styles.rssIcon} stroke={1.5} size={18} />
         <span className={styles.rssLink}>RSS FEED</span>
       </a>
       <div className={styles.container}>
