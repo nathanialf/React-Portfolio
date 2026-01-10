@@ -1,6 +1,18 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
+
+// VirtualKeyboard API types (Chrome only)
+interface VirtualKeyboard extends EventTarget {
+  boundingRect: DOMRect;
+  overlaysContent: boolean;
+}
+
+declare global {
+  interface Navigator {
+    virtualKeyboard?: VirtualKeyboard;
+  }
+}
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
@@ -69,20 +81,29 @@ export default function MarkdownPage() {
 
   // Calculate padding based on visible viewport height
   useEffect(() => {
-    const updatePadding = () => {
+    // Enable VirtualKeyboard API for Chrome (keyboard overlays content instead of resizing viewport)
+    if (navigator.virtualKeyboard) {
+      navigator.virtualKeyboard.overlaysContent = true;
+    }
+
+    const updatePadding = (keyboardRect?: DOMRect) => {
       const textarea = textareaRef.current;
       if (!textarea) return;
 
-      // Use visualViewport height when available (accounts for keyboard)
-      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
       const fullHeight = window.innerHeight;
       const headerHeight = 80;
-      const visibleEditorHeight = Math.max(200, viewportHeight - headerHeight);
-      const fullEditorHeight = Math.max(200, fullHeight - headerHeight);
 
-      // Detect keyboard presence
-      const keyboardHeight = fullHeight - viewportHeight;
+      // Get keyboard height from VirtualKeyboard API or visualViewport
+      let keyboardHeight = 0;
+      if (keyboardRect) {
+        keyboardHeight = keyboardRect.height;
+      } else if (window.visualViewport) {
+        keyboardHeight = fullHeight - window.visualViewport.height;
+      }
+
       const isKeyboardOpen = keyboardHeight > 100;
+      const visibleEditorHeight = Math.max(200, fullHeight - headerHeight - keyboardHeight);
+      const fullEditorHeight = Math.max(200, fullHeight - headerHeight);
 
       // Top padding: position cursor line in visible area
       // When keyboard is open, position higher (40%) to avoid being covered
@@ -93,12 +114,34 @@ export default function MarkdownPage() {
       setPaddingBottom((fullEditorHeight / 2) + keyboardHeight);
 
       // Adjust fade height based on visible area
-      const fadePercent = Math.min(40, (visibleEditorHeight / window.innerHeight) * 40);
+      const fadePercent = Math.min(40, (visibleEditorHeight / fullHeight) * 40);
       document.documentElement.style.setProperty('--fade-height', `${fadePercent}%`);
     };
 
     updatePadding();
-    window.addEventListener('resize', updatePadding);
+    window.addEventListener('resize', () => updatePadding());
+
+    // Handle virtual keyboard changes
+    const handleKeyboardChange = () => {
+      if (navigator.virtualKeyboard) {
+        updatePadding(navigator.virtualKeyboard.boundingRect);
+      } else {
+        updatePadding();
+      }
+
+      // Re-center cursor after keyboard change
+      setTimeout(() => {
+        const textarea = textareaRef.current;
+        if (textarea) {
+          const cursorPos = textarea.selectionStart;
+          const textBeforeCursor = textarea.value.substring(0, cursorPos);
+          const lineNumber = textBeforeCursor.split('\n').length - 1;
+          const lineHeight = parseFloat(getComputedStyle(textarea).lineHeight);
+          const targetScroll = lineNumber * lineHeight + (lineHeight / 2);
+          textarea.scrollTo({ top: Math.max(0, targetScroll), behavior: 'instant' });
+        }
+      }, 100);
+    };
 
     // Handle iOS virtual keyboard - reset page scroll when viewport changes
     const resetPageScroll = () => {
@@ -124,13 +167,18 @@ export default function MarkdownPage() {
       }, 500);
     };
 
-    if (window.visualViewport) {
+    // Use VirtualKeyboard API for Chrome, visualViewport for others
+    if (navigator.virtualKeyboard) {
+      navigator.virtualKeyboard.addEventListener('geometrychange', handleKeyboardChange);
+    } else if (window.visualViewport) {
       window.visualViewport.addEventListener('resize', handleViewportChange);
     }
 
     return () => {
-      window.removeEventListener('resize', updatePadding);
-      if (window.visualViewport) {
+      window.removeEventListener('resize', () => updatePadding());
+      if (navigator.virtualKeyboard) {
+        navigator.virtualKeyboard.removeEventListener('geometrychange', handleKeyboardChange);
+      } else if (window.visualViewport) {
         window.visualViewport.removeEventListener('resize', handleViewportChange);
       }
     };
