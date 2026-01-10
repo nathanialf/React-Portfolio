@@ -84,11 +84,13 @@
   color: #525252;
   background: none;
   border: 1px solid #262626;
-  padding: 0.5rem 0.75rem;
+  padding: 0 0.75rem;
+  height: 1.75rem;
   cursor: pointer;
   transition: color 0.15s ease, border-color 0.15s ease;
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 0.4rem;
 }
 

@@ -13,6 +13,8 @@ html, body {
     overflow: hidden;
     overscroll-behavior: none;
     background-color: black;
+    position: fixed;
+    width: 100%;
 }
 
 a {
