@@ -15,7 +15,11 @@ export const metadata: Metadata = {
   },
   description: 'Freelance software developer creating bespoke software solutions',
   icons: {
-    icon: '/favicon2.svg',
+    icon: [
+      { url: '/favicon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/favicon.png?v=2', type: 'image/png', sizes: '64x64' },
+    ],
+    apple: '/favicon.png?v=2',
   },
   alternates: {
     types: {
