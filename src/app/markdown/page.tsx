@@ -43,8 +43,8 @@ This is a [link to my homepage](https://defnf.com).
 | Left     | Center   | Right    |
 | Aligned  | Aligned  | Aligned  |
 
-\`\`\`javascript
-// Code block with syntax
+\`\`\`
+// Code block
 const greeting = "Hello, world!";
 console.log(greeting);
 \`\`\`

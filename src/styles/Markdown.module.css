@@ -150,7 +150,7 @@
   font-family: var(--font-mono), 'Courier New', monospace;
   font-size: 0.9rem;
   line-height: 1.8;
-  color: #a3a3a3;
+  color: #737373;
   padding: 0;
   box-sizing: border-box;
   scrollbar-width: none;
@@ -342,7 +342,6 @@
 .markdown td {
   border: 1px solid #262626;
   padding: 0.5rem 0.75rem;
-  text-align: left;
 }
 
 .markdown th {
