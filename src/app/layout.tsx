@@ -15,7 +15,7 @@ export const metadata: Metadata = {
   },
   description: 'Freelance software developer creating bespoke software solutions',
   icons: {
-    icon: '/favicon.svg',
+    icon: '/favicon2.svg',
   },
   alternates: {
     types: {

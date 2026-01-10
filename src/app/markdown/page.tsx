@@ -11,7 +11,9 @@ import styles from '../../styles/Markdown.module.css';
 const STORAGE_KEY = 'markdown-writer-content';
 const SAVE_DELAY = 500;
 
-const DEFAULT_CONTENT = `I made this for me but you are welcome to use this too. Nothing stored on server, just localstorage. Minimal web based markdown editor.
+const DEFAULT_CONTENT = `Think of this like a typewriter. The current line stays centered as you write.
+
+I made this for me but you are welcome to use this too. Nothing stored on server, just localstorage. Minimal web based markdown editor.
 
 # Header 1
 ## Header 2
@@ -39,7 +41,7 @@ This is a [link to my homepage](https://defnf.com).
 - [x] Completed task
 
 | Column 1 | Column 2 | Column 3 |
-|----------|:--------:|---------:|
+|:---------|:--------:|---------:|
 | Left     | Center   | Right    |
 | Aligned  | Aligned  | Aligned  |
 
