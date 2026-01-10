@@ -189,48 +189,53 @@ export default function MarkdownPage() {
         <VerticalSidebar />
       </div>
       <div className={styles.container}>
-        <header className={styles.header}>
-          <h1 className={styles.title}>Markdown</h1>
-          <div className={styles.controls}>
-            <button
-              className={styles.controlButton}
-              onClick={handleDownload}
-              title="Download"
-            >
-              <IconDownload size={14} stroke={1.5} />
-            </button>
-            <button
-              className={`${styles.controlButton} ${preview ? styles.active : ''}`}
-              onClick={togglePreview}
-            >
-              {preview ? 'Edit' : 'Preview'}
-            </button>
+        <div className={styles.inner}>
+          <header className={styles.header}>
+            <div>
+              <h1 className={styles.title}>Markdown</h1>
+              <p className={styles.subtitle}>Local Editor</p>
+            </div>
+            <div className={styles.controls}>
+              <button
+                className={styles.controlButton}
+                onClick={handleDownload}
+                title="Download"
+              >
+                <IconDownload size={14} stroke={1.5} />
+              </button>
+              <button
+                className={`${styles.controlButton} ${preview ? styles.active : ''}`}
+                onClick={togglePreview}
+              >
+                {preview ? 'Edit' : 'Preview'}
+              </button>
+            </div>
+          </header>
+          <div className={styles.editorContainer}>
+            {preview ? (
+              <div className={styles.preview}>
+                <div
+                  className={styles.markdown}
+                  dangerouslySetInnerHTML={{ __html: htmlContent }}
+                />
+              </div>
+            ) : (
+              <div className={styles.editorWrapper}>
+                <textarea
+                  ref={textareaRef}
+                  className={styles.textarea}
+                  style={{ paddingTop: paddingSize, paddingBottom: paddingSize }}
+                  value={content}
+                  onChange={handleChange}
+                  onSelect={handleSelect}
+                  onKeyUp={handleKeyUp}
+                  onClick={handleSelect}
+                  placeholder="Start writing..."
+                  spellCheck={false}
+                />
+              </div>
+            )}
           </div>
-        </header>
-        <div className={styles.editorContainer}>
-          {preview ? (
-            <div className={styles.preview}>
-              <div
-                className={styles.markdown}
-                dangerouslySetInnerHTML={{ __html: htmlContent }}
-              />
-            </div>
-          ) : (
-            <div className={styles.editorWrapper}>
-              <textarea
-                ref={textareaRef}
-                className={styles.textarea}
-                style={{ paddingTop: paddingSize, paddingBottom: paddingSize }}
-                value={content}
-                onChange={handleChange}
-                onSelect={handleSelect}
-                onKeyUp={handleKeyUp}
-                onClick={handleSelect}
-                placeholder="Start writing..."
-                spellCheck={false}
-              />
-            </div>
-          )}
         </div>
       </div>
     </div>
