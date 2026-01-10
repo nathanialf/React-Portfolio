@@ -4,7 +4,7 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
-import { IconDownload } from '@tabler/icons-react';
+import { IconDownload, IconColumns, IconColumns1 } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import styles from '../../styles/Markdown.module.css';
 
@@ -57,26 +57,77 @@ Footnote reference[^1].
 export default function MarkdownPage() {
   const [content, setContent] = useState('');
   const [preview, setPreview] = useState(false);
+  const [sideBySide, setSideBySide] = useState(false);
   const [htmlContent, setHtmlContent] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [paddingSize, setPaddingSize] = useState(0);
+  const [paddingTop, setPaddingTop] = useState(0);
+  const [paddingBottom, setPaddingBottom] = useState(0);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
-  // Calculate padding based on container height
+  // Calculate padding based on visible viewport height
   useEffect(() => {
     const updatePadding = () => {
       const textarea = textareaRef.current;
-      if (textarea) {
-        const height = textarea.clientHeight;
-        setPaddingSize(height / 2);
-      }
+      if (!textarea) return;
+
+      // Use visualViewport height when available (accounts for keyboard)
+      const viewportHeight = window.visualViewport?.height ?? window.innerHeight;
+      const fullHeight = window.innerHeight;
+      const headerHeight = 80;
+      const visibleEditorHeight = Math.max(200, viewportHeight - headerHeight);
+      const fullEditorHeight = Math.max(200, fullHeight - headerHeight);
+
+      // Top padding: centers first line in visible area
+      setPaddingTop(visibleEditorHeight / 2);
+      // Bottom padding: must allow scrolling to center last line in visible area
+      // When keyboard is open, need extra padding to scroll content higher
+      const keyboardHeight = fullHeight - viewportHeight;
+      setPaddingBottom((fullEditorHeight / 2) + keyboardHeight);
+
+      // Adjust fade height based on visible area
+      const fadePercent = Math.min(40, (visibleEditorHeight / window.innerHeight) * 40);
+      document.documentElement.style.setProperty('--fade-height', `${fadePercent}%`);
     };
 
     updatePadding();
     window.addEventListener('resize', updatePadding);
-    return () => window.removeEventListener('resize', updatePadding);
-  }, [preview]);
+
+    // Handle iOS virtual keyboard - reset page scroll when viewport changes
+    const resetPageScroll = () => {
+      window.scrollTo(0, 0);
+      document.documentElement.scrollTop = 0;
+      document.body.scrollTop = 0;
+      if (window.visualViewport) {
+        window.scrollTo(0, window.visualViewport.offsetTop * -1);
+      }
+    };
+
+    let scrollResetInterval: NodeJS.Timeout | null = null;
+
+    const handleViewportChange = () => {
+      updatePadding();
+      resetPageScroll();
+
+      // Keep resetting for 500ms to fight browser behavior
+      if (scrollResetInterval) clearInterval(scrollResetInterval);
+      scrollResetInterval = setInterval(resetPageScroll, 16);
+      setTimeout(() => {
+        if (scrollResetInterval) clearInterval(scrollResetInterval);
+      }, 500);
+    };
+
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener('resize', handleViewportChange);
+    }
+
+    return () => {
+      window.removeEventListener('resize', updatePadding);
+      if (window.visualViewport) {
+        window.visualViewport.removeEventListener('resize', handleViewportChange);
+      }
+    };
+  }, [preview, sideBySide]);
 
   // Load from localStorage on mount
   useEffect(() => {
@@ -106,7 +157,7 @@ export default function MarkdownPage() {
 
   // Parse markdown for preview
   useEffect(() => {
-    if (preview) {
+    if (preview || sideBySide) {
       remark()
         .use(remarkGfm)
         .use(html)
@@ -115,42 +166,46 @@ export default function MarkdownPage() {
           setHtmlContent(result.toString());
         });
     }
-  }, [content, preview]);
+  }, [content, preview, sideBySide]);
 
   // Center cursor line in viewport
   const centerCursor = useCallback((smooth = true) => {
     const textarea = textareaRef.current;
-    if (!textarea || paddingSize === 0) return;
+    if (!textarea || paddingTop === 0) return;
 
     const cursorPos = textarea.selectionStart;
-    const textBeforeCursor = content.substring(0, cursorPos);
+    // Read directly from textarea to get current value (not stale state)
+    const textBeforeCursor = textarea.value.substring(0, cursorPos);
     const lineNumber = textBeforeCursor.split('\n').length - 1;
 
     const lineHeight = parseFloat(getComputedStyle(textarea).lineHeight);
 
     // Calculate scroll position: line position + padding offset
-    const cursorY = lineNumber * lineHeight + paddingSize;
-    const targetScroll = cursorY - paddingSize + (lineHeight / 2);
+    const cursorY = lineNumber * lineHeight + paddingTop;
+    const targetScroll = cursorY - paddingTop + (lineHeight / 2);
 
     textarea.scrollTo({
       top: Math.max(0, targetScroll),
       behavior: smooth ? 'smooth' : 'instant'
     });
-  }, [content, paddingSize]);
+  }, [paddingTop]);
 
-  // Center on initial load
+  // Center cursor when padding changes (initial load, keyboard show/hide, resize)
   useEffect(() => {
-    if (isLoaded && paddingSize > 0) {
+    if (isLoaded && paddingTop > 0) {
       // Small delay to ensure textarea is fully rendered
       requestAnimationFrame(() => centerCursor(false));
     }
-  }, [isLoaded, paddingSize, centerCursor]);
+  }, [isLoaded, paddingTop, centerCursor]);
 
   // Handle text changes
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setContent(e.target.value);
-    // Defer centering to next frame to get updated cursor position
-    requestAnimationFrame(() => centerCursor(true));
+    // Use instant scroll for typing to avoid cursor/content mismatch
+    // Multiple calls to ensure we catch the final cursor position
+    requestAnimationFrame(() => centerCursor(false));
+    setTimeout(() => centerCursor(false), 0);
+    setTimeout(() => centerCursor(false), 16);
   };
 
   // Handle cursor movement
@@ -158,10 +213,10 @@ export default function MarkdownPage() {
     centerCursor(true);
   };
 
-  // Handle keyboard navigation
+  // Handle keyboard navigation (not content changes - those use onChange)
   const handleKeyUp = (e: React.KeyboardEvent) => {
     if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(e.key)) {
-      centerCursor(true);
+      centerCursor(false);
     }
   };
 
@@ -181,6 +236,14 @@ export default function MarkdownPage() {
   // Toggle preview mode
   const togglePreview = () => {
     setPreview(!preview);
+  };
+
+  // Toggle side-by-side mode
+  const toggleSideBySide = () => {
+    setSideBySide(!sideBySide);
+    if (!sideBySide) {
+      setPreview(false);
+    }
   };
 
   return (
@@ -204,15 +267,51 @@ export default function MarkdownPage() {
                 <IconDownload size={14} stroke={1.5} />
               </button>
               <button
-                className={`${styles.controlButton} ${preview ? styles.active : ''}`}
-                onClick={togglePreview}
+                className={`${styles.controlButton} ${styles.sideBySideButton} ${sideBySide ? styles.active : ''}`}
+                onClick={toggleSideBySide}
+                title={sideBySide ? 'Single Pane' : 'Side by Side'}
               >
-                {preview ? 'Edit' : 'Preview'}
+                {sideBySide ? <IconColumns1 size={14} stroke={1.5} /> : <IconColumns size={14} stroke={1.5} />}
               </button>
+              {!sideBySide && (
+                <button
+                  className={`${styles.controlButton} ${preview ? styles.active : ''}`}
+                  onClick={togglePreview}
+                >
+                  {preview ? 'Edit' : 'Preview'}
+                </button>
+              )}
             </div>
           </header>
-          <div className={styles.editorContainer}>
-            {preview ? (
+          <div className={`${styles.editorContainer} ${sideBySide ? styles.splitContainer : ''}`}>
+            {sideBySide ? (
+              <>
+                <div className={styles.editorPane}>
+                  <div className={styles.editorWrapper}>
+                    <textarea
+                      ref={textareaRef}
+                      className={styles.textarea}
+                      style={{ paddingTop, paddingBottom }}
+                      value={content}
+                      onChange={handleChange}
+                      onSelect={handleSelect}
+                      onKeyUp={handleKeyUp}
+                      onClick={handleSelect}
+                      placeholder="Start writing..."
+                      spellCheck={false}
+                    />
+                  </div>
+                </div>
+                <div className={styles.previewPane}>
+                  <div className={styles.preview}>
+                    <div
+                      className={styles.markdown}
+                      dangerouslySetInnerHTML={{ __html: htmlContent }}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : preview ? (
               <div className={styles.preview}>
                 <div
                   className={styles.markdown}
@@ -224,7 +323,7 @@ export default function MarkdownPage() {
                 <textarea
                   ref={textareaRef}
                   className={styles.textarea}
-                  style={{ paddingTop: paddingSize, paddingBottom: paddingSize }}
+                  style={{ paddingTop, paddingBottom }}
                   value={content}
                   onChange={handleChange}
                   onSelect={handleSelect}

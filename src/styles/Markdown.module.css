@@ -7,6 +7,8 @@
   display: flex;
   background: #0a0a0a;
   overscroll-behavior: none;
+  overflow: hidden;
+  touch-action: none;
 }
 
 .sidebar {
@@ -92,6 +94,21 @@
   align-items: center;
   justify-content: center;
   gap: 0.4rem;
+  line-height: 1;
+}
+
+.controlButton svg {
+  display: block;
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin: auto;
+  position: relative;
+  top: -1px;
+}
+
+.sideBySideButton svg {
+  top: 0;
 }
 
 .controlButton:hover {
@@ -127,7 +144,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  height: 40%;
+  height: var(--fade-height, 40%);
   pointer-events: none;
   z-index: 1;
 }
@@ -277,6 +294,11 @@
   color: #404040;
 }
 
+.markdown li:has(> input[type="checkbox"]) {
+  list-style: none;
+  margin-left: -1.25rem;
+}
+
 .markdown strong {
   font-weight: 500;
   color: #a3a3a3;
@@ -400,6 +422,47 @@
   padding-top: 1rem;
   border-top: 1px solid #262626;
   font-size: 0.75rem;
+}
+
+/* Side-by-side mode */
+.splitContainer {
+  display: flex;
+  gap: 2rem;
+  width: calc(100vw - 8rem - 2.5rem);
+  margin-left: calc((640px - 100vw + 8rem + 2.5rem) / 2);
+}
+
+.editorPane,
+.previewPane {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.editorPane .editorWrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.previewPane .preview {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-left: 1px solid #262626;
+  padding-left: 1rem;
+}
+
+/* Hide side-by-side on screens too small for two columns */
+@media (max-width: 1200px) {
+  .sideBySideButton {
+    display: none;
+  }
 }
 
 /* Mobile responsiveness */
