@@ -314,14 +314,14 @@ export default function MarkdownPage() {
                 </div>
               </>
             ) : preview ? (
-              <div className={styles.preview}>
+              <div key="preview" className={styles.preview}>
                 <div
                   className={styles.markdown}
                   dangerouslySetInnerHTML={{ __html: htmlContent }}
                 />
               </div>
             ) : (
-              <div className={styles.editorWrapper}>
+              <div key="editor" className={styles.editorWrapper}>
                 <textarea
                   ref={textareaRef}
                   className={styles.textarea}
