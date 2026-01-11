@@ -1,18 +1,10 @@
 'use client';
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
-
-// VirtualKeyboard API types (Chrome only)
-interface VirtualKeyboard extends EventTarget {
-  boundingRect: DOMRect;
-  overlaysContent: boolean;
-}
-
-declare global {
-  interface Navigator {
-    virtualKeyboard?: VirtualKeyboard;
-  }
-}
+import { EditorState } from '@codemirror/state';
+import { EditorView, keymap, placeholder } from '@codemirror/view';
+import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
+import { markdown } from '@codemirror/lang-markdown';
 import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
@@ -68,127 +60,164 @@ Footnote reference[^1].
 [^1]: This is the footnote.
 `;
 
+// Dark minimal theme for CodeMirror
+const darkMinimalTheme = EditorView.theme({
+  '&': {
+    backgroundColor: 'transparent',
+    color: '#737373',
+    height: '100%',
+  },
+  '.cm-content': {
+    fontFamily: 'var(--font-mono), "Courier New", monospace',
+    fontSize: '0.9rem',
+    lineHeight: '1.8',
+    caretColor: '#737373',
+  },
+  '.cm-line': {
+    padding: '0',
+  },
+  '.cm-cursor': {
+    borderLeftColor: '#737373',
+    borderLeftWidth: '1px',
+  },
+  '.cm-selectionBackground': {
+    backgroundColor: '#333 !important',
+  },
+  '&.cm-focused .cm-selectionBackground': {
+    backgroundColor: '#333 !important',
+  },
+  '.cm-activeLine': {
+    backgroundColor: 'transparent',
+  },
+  '.cm-activeLineGutter': {
+    backgroundColor: 'transparent',
+  },
+  '.cm-gutters': {
+    display: 'none',
+  },
+  '.cm-scroller': {
+    overflow: 'auto',
+    scrollbarWidth: 'none',
+  },
+  '.cm-scroller::-webkit-scrollbar': {
+    display: 'none',
+  },
+  '.cm-placeholder': {
+    color: '#404040',
+  },
+}, { dark: true });
+
 export default function MarkdownPage() {
   const [content, setContent] = useState('');
   const [preview, setPreview] = useState(false);
   const [sideBySide, setSideBySide] = useState(false);
   const [htmlContent, setHtmlContent] = useState('');
   const [isLoaded, setIsLoaded] = useState(false);
-  const [paddingTop, setPaddingTop] = useState(0);
-  const [paddingBottom, setPaddingBottom] = useState(0);
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [centerOffset, setCenterOffset] = useState(0);
+
+  const editorContainerRef = useRef<HTMLDivElement>(null);
+  const editorViewRef = useRef<EditorView | null>(null);
   const saveTimeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const contentRef = useRef<string>('');
 
-  // Calculate padding based on visible viewport height
-  useEffect(() => {
-    // Enable VirtualKeyboard API for Chrome (keyboard overlays content instead of resizing viewport)
-    if (navigator.virtualKeyboard) {
-      navigator.virtualKeyboard.overlaysContent = true;
-    }
+  // Calculate center offset based on viewport
+  const updateCenterOffset = useCallback(() => {
+    const fullHeight = window.innerHeight;
+    const headerHeight = 80;
+    const visibleHeight = Math.max(200, fullHeight - headerHeight);
+    setCenterOffset(Math.floor(visibleHeight * 0.5));
 
-    const updatePadding = (keyboardRect?: DOMRect) => {
-      const textarea = textareaRef.current;
-      if (!textarea) return;
+    // Update fade height CSS variable
+    const fadePercent = Math.min(40, (visibleHeight / fullHeight) * 40);
+    document.documentElement.style.setProperty('--fade-height', `${fadePercent}%`);
+  }, []);
 
-      const fullHeight = window.innerHeight;
-      const headerHeight = 80;
+  // Center the cursor in the viewport
+  const centerCursor = useCallback(() => {
+    const view = editorViewRef.current;
+    if (!view || centerOffset === 0) return;
 
-      // Get keyboard height from VirtualKeyboard API or visualViewport
-      let keyboardHeight = 0;
-      if (keyboardRect) {
-        keyboardHeight = keyboardRect.height;
-      } else if (window.visualViewport) {
-        keyboardHeight = fullHeight - window.visualViewport.height;
-      }
+    const cursorPos = view.state.selection.main.head;
+    const coords = view.coordsAtPos(cursorPos);
+    if (!coords) return;
 
-      const isKeyboardOpen = keyboardHeight > 100;
-      const visibleEditorHeight = Math.max(200, fullHeight - headerHeight - keyboardHeight);
+    const scroller = view.scrollDOM;
+    const scrollerRect = scroller.getBoundingClientRect();
+    const cursorY = coords.top - scrollerRect.top + scroller.scrollTop;
+    const targetScroll = cursorY - centerOffset;
 
-      // Top padding: position cursor line in visible area
-      // When keyboard is open, position higher (40%) to avoid being covered
-      const centerRatio = isKeyboardOpen ? 0.4 : 0.5;
-      const centerPad = visibleEditorHeight * centerRatio;
-      setPaddingTop(centerPad);
-      // Bottom padding: match top padding so last line can scroll to center
-      setPaddingBottom(centerPad);
-
-      // Adjust fade height based on visible area
-      const fadePercent = Math.min(40, (visibleEditorHeight / fullHeight) * 40);
-      document.documentElement.style.setProperty('--fade-height', `${fadePercent}%`);
-    };
-
-    updatePadding();
-    window.addEventListener('resize', () => updatePadding());
-
-    // Handle virtual keyboard changes
-    const handleKeyboardChange = () => {
-      if (navigator.virtualKeyboard) {
-        updatePadding(navigator.virtualKeyboard.boundingRect);
-      } else {
-        updatePadding();
-      }
-
-      // Re-center cursor after keyboard change
-      setTimeout(() => {
-        const textarea = textareaRef.current;
-        if (textarea) {
-          const cursorPos = textarea.selectionStart;
-          const textBeforeCursor = textarea.value.substring(0, cursorPos);
-          const lineNumber = textBeforeCursor.split('\n').length - 1;
-          const lineHeight = parseFloat(getComputedStyle(textarea).lineHeight);
-          const targetScroll = lineNumber * lineHeight + (lineHeight / 2);
-          textarea.scrollTo({ top: Math.max(0, targetScroll), behavior: 'instant' });
-        }
-      }, 100);
-    };
-
-    // Handle iOS virtual keyboard - reset page scroll when viewport changes
-    const resetPageScroll = () => {
-      window.scrollTo(0, 0);
-      document.documentElement.scrollTop = 0;
-      document.body.scrollTop = 0;
-      if (window.visualViewport) {
-        window.scrollTo(0, window.visualViewport.offsetTop * -1);
-      }
-    };
-
-    let scrollResetInterval: NodeJS.Timeout | null = null;
-
-    const handleViewportChange = () => {
-      updatePadding();
-      resetPageScroll();
-
-      // Keep resetting for 500ms to fight browser behavior
-      if (scrollResetInterval) clearInterval(scrollResetInterval);
-      scrollResetInterval = setInterval(resetPageScroll, 16);
-      setTimeout(() => {
-        if (scrollResetInterval) clearInterval(scrollResetInterval);
-      }, 500);
-    };
-
-    // Use VirtualKeyboard API for Chrome, visualViewport for others
-    if (navigator.virtualKeyboard) {
-      navigator.virtualKeyboard.addEventListener('geometrychange', handleKeyboardChange);
-    } else if (window.visualViewport) {
-      window.visualViewport.addEventListener('resize', handleViewportChange);
-    }
-
-    return () => {
-      window.removeEventListener('resize', () => updatePadding());
-      if (navigator.virtualKeyboard) {
-        navigator.virtualKeyboard.removeEventListener('geometrychange', handleKeyboardChange);
-      } else if (window.visualViewport) {
-        window.visualViewport.removeEventListener('resize', handleViewportChange);
-      }
-    };
-  }, [preview, sideBySide]);
+    scroller.scrollTo({
+      top: Math.max(0, targetScroll),
+      behavior: 'smooth',
+    });
+  }, [centerOffset]);
 
   // Load from localStorage on mount
   useEffect(() => {
     const saved = localStorage.getItem(STORAGE_KEY);
-    setContent(saved ?? DEFAULT_CONTENT);
+    const initialContent = saved ?? DEFAULT_CONTENT;
+    setContent(initialContent);
+    contentRef.current = initialContent;
     setIsLoaded(true);
   }, []);
+
+  // Initialize center offset
+  useEffect(() => {
+    updateCenterOffset();
+    window.addEventListener('resize', updateCenterOffset);
+    return () => window.removeEventListener('resize', updateCenterOffset);
+  }, [updateCenterOffset]);
+
+  // Initialize CodeMirror
+  useEffect(() => {
+    if (!isLoaded || !editorContainerRef.current || preview) return;
+    if (editorViewRef.current) return;
+
+    const updateListener = EditorView.updateListener.of((update) => {
+      if (update.docChanged) {
+        const newContent = update.state.doc.toString();
+        contentRef.current = newContent;
+        setContent(newContent);
+      }
+      if (update.selectionSet || update.docChanged) {
+        requestAnimationFrame(() => centerCursor());
+      }
+    });
+
+    const state = EditorState.create({
+      doc: contentRef.current,
+      extensions: [
+        darkMinimalTheme,
+        history(),
+        keymap.of([...defaultKeymap, ...historyKeymap]),
+        markdown(),
+        placeholder('Start writing...'),
+        updateListener,
+        EditorView.lineWrapping,
+      ],
+    });
+
+    const view = new EditorView({
+      state,
+      parent: editorContainerRef.current,
+    });
+
+    editorViewRef.current = view;
+
+    // Apply padding
+    if (centerOffset > 0) {
+      view.contentDOM.style.paddingTop = `${centerOffset}px`;
+      view.contentDOM.style.paddingBottom = `${centerOffset}px`;
+    }
+
+    // Initial centering
+    requestAnimationFrame(() => centerCursor());
+
+    return () => {
+      view.destroy();
+      editorViewRef.current = null;
+    };
+  }, [isLoaded, preview, sideBySide, centerCursor, centerOffset]);
 
   // Debounced save to localStorage
   useEffect(() => {
@@ -221,58 +250,6 @@ export default function MarkdownPage() {
         });
     }
   }, [content, preview, sideBySide]);
-
-  // Center cursor line in viewport
-  const centerCursor = useCallback((smooth = true) => {
-    const textarea = textareaRef.current;
-    if (!textarea || paddingTop === 0) return;
-
-    const cursorPos = textarea.selectionStart;
-    // Read directly from textarea to get current value (not stale state)
-    const textBeforeCursor = textarea.value.substring(0, cursorPos);
-    const lineNumber = textBeforeCursor.split('\n').length - 1;
-
-    const lineHeight = parseFloat(getComputedStyle(textarea).lineHeight);
-
-    // Calculate scroll position: line position + padding offset
-    const cursorY = lineNumber * lineHeight + paddingTop;
-    const targetScroll = cursorY - paddingTop + (lineHeight / 2);
-
-    textarea.scrollTo({
-      top: Math.max(0, targetScroll),
-      behavior: smooth ? 'smooth' : 'instant'
-    });
-  }, [paddingTop]);
-
-  // Center cursor when padding changes (initial load, keyboard show/hide, resize)
-  useEffect(() => {
-    if (isLoaded && paddingTop > 0) {
-      // Small delay to ensure textarea is fully rendered
-      requestAnimationFrame(() => centerCursor(false));
-    }
-  }, [isLoaded, paddingTop, centerCursor]);
-
-  // Handle text changes
-  const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setContent(e.target.value);
-    // Use instant scroll for typing to avoid cursor/content mismatch
-    // Multiple calls to ensure we catch the final cursor position
-    requestAnimationFrame(() => centerCursor(false));
-    setTimeout(() => centerCursor(false), 0);
-    setTimeout(() => centerCursor(false), 16);
-  };
-
-  // Handle cursor movement
-  const handleSelect = () => {
-    centerCursor(true);
-  };
-
-  // Handle keyboard navigation (not content changes - those use onChange)
-  const handleKeyUp = (e: React.KeyboardEvent) => {
-    if (['ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight', 'Home', 'End', 'PageUp', 'PageDown'].includes(e.key)) {
-      centerCursor(false);
-    }
-  };
 
   // Download as markdown file
   const handleDownload = () => {
@@ -342,18 +319,7 @@ export default function MarkdownPage() {
               <>
                 <div className={styles.editorPane}>
                   <div className={styles.editorWrapper}>
-                    <textarea
-                      ref={textareaRef}
-                      className={styles.textarea}
-                      style={{ paddingTop, paddingBottom }}
-                      value={content}
-                      onChange={handleChange}
-                      onSelect={handleSelect}
-                      onKeyUp={handleKeyUp}
-                      onClick={handleSelect}
-                      placeholder="Start writing..."
-                      spellCheck={false}
-                    />
+                    <div ref={editorContainerRef} className={styles.codemirror} />
                   </div>
                 </div>
                 <div className={styles.previewPane}>
@@ -374,18 +340,7 @@ export default function MarkdownPage() {
               </div>
             ) : (
               <div key="editor" className={styles.editorWrapper}>
-                <textarea
-                  ref={textareaRef}
-                  className={styles.textarea}
-                  style={{ paddingTop, paddingBottom }}
-                  value={content}
-                  onChange={handleChange}
-                  onSelect={handleSelect}
-                  onKeyUp={handleKeyUp}
-                  onClick={handleSelect}
-                  placeholder="Start writing..."
-                  spellCheck={false}
-                />
+                <div ref={editorContainerRef} className={styles.codemirror} />
               </div>
             )}
           </div>
