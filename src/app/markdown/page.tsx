@@ -103,15 +103,14 @@ export default function MarkdownPage() {
 
       const isKeyboardOpen = keyboardHeight > 100;
       const visibleEditorHeight = Math.max(200, fullHeight - headerHeight - keyboardHeight);
-      const fullEditorHeight = Math.max(200, fullHeight - headerHeight);
 
       // Top padding: position cursor line in visible area
       // When keyboard is open, position higher (40%) to avoid being covered
       const centerRatio = isKeyboardOpen ? 0.4 : 0.5;
-      setPaddingTop(visibleEditorHeight * centerRatio);
-      // Bottom padding: must allow scrolling to center last line in visible area
-      // When keyboard is open, need extra padding to scroll content higher
-      setPaddingBottom((fullEditorHeight / 2) + keyboardHeight);
+      const centerPad = visibleEditorHeight * centerRatio;
+      setPaddingTop(centerPad);
+      // Bottom padding: match top padding so last line can scroll to center
+      setPaddingBottom(centerPad);
 
       // Adjust fade height based on visible area
       const fadePercent = Math.min(40, (visibleEditorHeight / fullHeight) * 40);
