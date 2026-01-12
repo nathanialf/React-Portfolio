@@ -2,6 +2,7 @@ import { readdir } from 'fs/promises';
 import { join } from 'path';
 import Link from 'next/link';
 import VerticalSidebar from '../../ui/VerticalSidebar';
+import Copyright from '../../ui/Copyright';
 import styles from '../../styles/PrivacyPolicy.module.css';
 
 // Custom display names for policies (slug -> display name)
@@ -66,6 +67,7 @@ export default async function PrivacyPoliciesPage() {
               </div>
             )}
           </main>
+          <Copyright />
         </div>
       </div>
     </div>

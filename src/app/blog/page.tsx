@@ -2,6 +2,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IconRss } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
+import Copyright from '../../ui/Copyright';
 import { getAllPosts, formatDate } from '../../lib/blog';
 import styles from '../../styles/Blog.module.css';
 
@@ -66,6 +67,7 @@ export default async function BlogPage() {
               </div>
             )}
           </main>
+          <Copyright />
         </div>
       </div>
     </div>

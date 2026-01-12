@@ -1,11 +1,13 @@
 import styles from '../styles/Copyright.module.css';
 
-export default function Copyright() {
+interface CopyrightProps {
+  fixed?: boolean;
+}
+
+export default function Copyright({ fixed }: CopyrightProps) {
   return (
-    <div>
-      <span className={styles.copyright}>
-        &copy; {new Date().getFullYear()} Nathanial Fine
-      </span>
+    <div className={fixed ? styles.fixed : styles.copyright}>
+      &copy; {new Date().getFullYear()} Nathanial Fine
     </div>
   )
 }

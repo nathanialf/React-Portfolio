@@ -54,7 +54,7 @@ export default function Homepage() {
       ))}
 
       <FloatingCard onProjectChange={setSelectedProjectId} forceDarkMode={selectedProject?.darkBackground} />
-      <Copyright />
+      <Copyright fixed />
     </>
   );
 }

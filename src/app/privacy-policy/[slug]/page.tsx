@@ -10,6 +10,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import Link from 'next/link';
 import { IconArrowLeft } from '@tabler/icons-react';
 import VerticalSidebar from '../../../ui/VerticalSidebar';
+import Copyright from '../../../ui/Copyright';
 import styles from '../../../styles/PrivacyPolicy.module.css';
 
 interface PrivacyPolicyPageProps {
@@ -100,6 +101,7 @@ export default async function PrivacyPolicyPage({ params }: PrivacyPolicyPagePro
             className={styles.markdown}
             dangerouslySetInnerHTML={{ __html: content }}
           />
+          <Copyright />
         </div>
       </div>
     </div>

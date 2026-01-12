@@ -1,9 +1,20 @@
+@font-face {
+    font-family: 'Zu';
+    src: url('/fonts/Zu-Regular.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
 :root {
     /* Project colors */
     --color-encom: #8b5cf6;
     --color-grid: #22c55e;
     --color-seatmap: #14b8a6;
     --color-cartograph: #1e3a5f;
+
+    /* Fonts */
+    --font-zu: 'Zu', sans-serif;
 }
 
 html, body {

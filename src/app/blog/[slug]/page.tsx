@@ -6,6 +6,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { IconArrowLeft, IconRss } from '@tabler/icons-react';
 import VerticalSidebar from '../../../ui/VerticalSidebar';
+import Copyright from '../../../ui/Copyright';
 import { getPostBySlug, getAllPostSlugs, formatDate } from '../../../lib/blog';
 import styles from '../../../styles/Blog.module.css';
 
@@ -142,6 +143,7 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
             className={styles.markdown}
             dangerouslySetInnerHTML={{ __html: htmlContent.toString() }}
           />
+          <Copyright />
         </div>
       </div>
     </div>

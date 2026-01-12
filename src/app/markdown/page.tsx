@@ -10,6 +10,7 @@ import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
 import { IconDownload, IconColumns, IconColumns1 } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
+import Copyright from '../../ui/Copyright';
 import styles from '../../styles/Markdown.module.css';
 
 const STORAGE_KEY = 'markdown-writer-content';
@@ -307,6 +308,7 @@ export default function MarkdownPage() {
           </div>
         </div>
       </div>
+      <Copyright fixed />
     </div>
   );
 }

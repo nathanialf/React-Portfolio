@@ -2,6 +2,7 @@
 
 import { useState, useRef, useEffect, useCallback } from 'react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
+import Copyright from '../../ui/Copyright';
 import styles from '../../styles/QR.module.css';
 
 type DotType = 'square' | 'dots' | 'rounded' | 'extra-rounded' | 'classy' | 'classy-rounded';
@@ -376,6 +377,7 @@ export default function QRPage() {
               </div>
             </div>
           </main>
+          <Copyright />
         </div>
       </div>
     </div>
