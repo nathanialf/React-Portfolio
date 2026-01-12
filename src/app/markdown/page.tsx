@@ -1,11 +1,14 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { EditorState } from '@codemirror/state';
 import { EditorView, keymap, placeholder } from '@codemirror/view';
 import { defaultKeymap, history, historyKeymap } from '@codemirror/commands';
 import { markdown } from '@codemirror/lang-markdown';
-import { IconDownload } from '@tabler/icons-react';
+import { remark } from 'remark';
+import remarkGfm from 'remark-gfm';
+import html from 'remark-html';
+import { IconDownload, IconColumns, IconColumns1 } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import styles from '../../styles/Markdown.module.css';
 
@@ -90,8 +93,13 @@ const darkMinimalTheme = EditorView.theme({
 }, { dark: true });
 
 export default function MarkdownPage() {
+  const [preview, setPreview] = useState(false);
+  const [sideBySide, setSideBySide] = useState(false);
+  const [htmlContent, setHtmlContent] = useState('');
+
   const editorContainerRef = useRef<HTMLDivElement>(null);
   const editorViewRef = useRef<EditorView | null>(null);
+  const contentRef = useRef<string>('');
 
   // Prevent iOS Chrome overscroll on non-scrollable areas
   useEffect(() => {
@@ -111,10 +119,12 @@ export default function MarkdownPage() {
 
   // Initialize CodeMirror
   useEffect(() => {
-    if (!editorContainerRef.current || editorViewRef.current) return;
+    if (!editorContainerRef.current || preview) return;
+    if (editorViewRef.current) return;
 
     const saved = localStorage.getItem(STORAGE_KEY);
     const initialContent = saved ?? DEFAULT_CONTENT;
+    contentRef.current = initialContent;
 
     let saveTimeout: NodeJS.Timeout | null = null;
 
@@ -140,12 +150,22 @@ export default function MarkdownPage() {
     const updateListener = EditorView.updateListener.of((update) => {
       if (update.docChanged) {
         const newContent = update.state.doc.toString();
+        contentRef.current = newContent;
         if (saveTimeout) clearTimeout(saveTimeout);
         saveTimeout = setTimeout(() => {
           localStorage.setItem(STORAGE_KEY, newContent);
         }, SAVE_DELAY);
 
         requestAnimationFrame(() => centerCursor(update.view));
+
+        // Update preview if in side-by-side mode
+        if (sideBySide) {
+          remark()
+            .use(remarkGfm)
+            .use(html)
+            .process(newContent)
+            .then((result) => setHtmlContent(result.toString()));
+        }
       }
     });
 
@@ -176,10 +196,10 @@ export default function MarkdownPage() {
       view.destroy();
       editorViewRef.current = null;
     };
-  }, []);
+  }, [preview, sideBySide]);
 
   const handleDownload = () => {
-    const content = editorViewRef.current?.state.doc.toString() ?? '';
+    const content = editorViewRef.current?.state.doc.toString() ?? contentRef.current;
     const blob = new Blob([content], { type: 'text/markdown' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
@@ -189,6 +209,33 @@ export default function MarkdownPage() {
     a.click();
     document.body.removeChild(a);
     URL.revokeObjectURL(url);
+  };
+
+  const togglePreview = () => {
+    if (!preview) {
+      // Entering preview - parse markdown
+      const content = editorViewRef.current?.state.doc.toString() ?? contentRef.current;
+      remark()
+        .use(remarkGfm)
+        .use(html)
+        .process(content)
+        .then((result) => setHtmlContent(result.toString()));
+    }
+    setPreview(!preview);
+  };
+
+  const toggleSideBySide = () => {
+    if (!sideBySide) {
+      // Entering side-by-side - parse markdown
+      const content = editorViewRef.current?.state.doc.toString() ?? contentRef.current;
+      remark()
+        .use(remarkGfm)
+        .use(html)
+        .process(content)
+        .then((result) => setHtmlContent(result.toString()));
+      setPreview(false);
+    }
+    setSideBySide(!sideBySide);
   };
 
   return (
@@ -211,12 +258,52 @@ export default function MarkdownPage() {
               >
                 <IconDownload size={14} stroke={1.5} />
               </button>
+              <button
+                className={`${styles.controlButton} ${styles.sideBySideButton} ${sideBySide ? styles.active : ''}`}
+                onClick={toggleSideBySide}
+                title={sideBySide ? 'Single Pane' : 'Side by Side'}
+              >
+                {sideBySide ? <IconColumns1 size={14} stroke={1.5} /> : <IconColumns size={14} stroke={1.5} />}
+              </button>
+              {!sideBySide && (
+                <button
+                  className={`${styles.controlButton} ${preview ? styles.active : ''}`}
+                  onClick={togglePreview}
+                >
+                  {preview ? 'Edit' : 'Preview'}
+                </button>
+              )}
             </div>
           </header>
-          <div className={styles.editorContainer}>
-            <div className={styles.editorWrapper}>
-              <div ref={editorContainerRef} className={styles.codemirror} />
-            </div>
+          <div className={`${styles.editorContainer} ${sideBySide ? styles.splitContainer : ''}`}>
+            {sideBySide ? (
+              <>
+                <div className={styles.editorPane}>
+                  <div className={styles.editorWrapper}>
+                    <div ref={editorContainerRef} className={styles.codemirror} />
+                  </div>
+                </div>
+                <div className={styles.previewPane}>
+                  <div className={styles.preview}>
+                    <div
+                      className={styles.markdown}
+                      dangerouslySetInnerHTML={{ __html: htmlContent }}
+                    />
+                  </div>
+                </div>
+              </>
+            ) : preview ? (
+              <div className={styles.preview}>
+                <div
+                  className={styles.markdown}
+                  dangerouslySetInnerHTML={{ __html: htmlContent }}
+                />
+              </div>
+            ) : (
+              <div className={styles.editorWrapper}>
+                <div ref={editorContainerRef} className={styles.codemirror} />
+              </div>
+            )}
           </div>
         </div>
       </div>
