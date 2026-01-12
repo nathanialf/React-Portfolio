@@ -9,12 +9,11 @@
 html, body {
     margin: 0;
     padding: 0;
-    height: 100%;
     overflow: hidden;
     overscroll-behavior: none;
     background-color: black;
     position: fixed;
-    width: 100%;
+    inset: 0;
 }
 
 a {

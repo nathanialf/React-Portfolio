@@ -43,6 +43,7 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: '#9fc2c2',
+  interactiveWidget: 'resizes-content',
 }
 
 const outfit = Outfit({
