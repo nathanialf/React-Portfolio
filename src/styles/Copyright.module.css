@@ -19,3 +19,9 @@
   font-size: 0.7rem;
   letter-spacing: 0.05em;
 }
+
+@media (max-width: 768px) {
+  .fixed {
+    display: none;
+  }
+}

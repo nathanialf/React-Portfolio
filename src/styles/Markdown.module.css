@@ -464,8 +464,21 @@
   }
 }
 
+.mobileFooter {
+  display: none;
+  flex-shrink: 0;
+}
+
+.mobileFooter > div {
+  padding: 0.25rem 0;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+  .mobileFooter {
+    display: block;
+  }
+
   .container {
     padding: 1.5rem 3.5rem;
   }

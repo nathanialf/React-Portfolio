@@ -306,6 +306,9 @@ export default function MarkdownPage() {
               </div>
             )}
           </div>
+          <div className={styles.mobileFooter}>
+            <Copyright />
+          </div>
         </div>
       </div>
       <Copyright fixed />

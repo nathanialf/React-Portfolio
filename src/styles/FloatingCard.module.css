@@ -73,6 +73,7 @@
     box-shadow: none;
     border-left: none;
     border-right: none;
+    z-index: 1;
   }
 
   .main {
