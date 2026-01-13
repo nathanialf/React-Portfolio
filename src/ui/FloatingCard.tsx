@@ -35,7 +35,13 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
   useEffect(() => {
     if (isDetailView && contentRef.current) {
       const height = contentRef.current.scrollHeight;
-      setContentHeight(height);
+      // On mobile, cap the content height to allow scrolling instead of growing beyond viewport
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        setContentHeight(Math.min(height, window.innerHeight - 35));
+      } else {
+        setContentHeight(height);
+      }
     }
   }, [selectedProjectId, selectedProject, showAbout, isDetailView]);
 
