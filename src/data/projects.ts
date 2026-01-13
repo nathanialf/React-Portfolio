@@ -5,11 +5,17 @@ export interface ProjectLink {
   disabled?: boolean;
 }
 
+export interface ProjectSection {
+  heading: string;
+  content: string | string[]; // string for paragraph, string[] for list items
+}
+
 export interface Project {
   id: string;
   name: string;
   tagline: string; // Short tagline for gallery card
   description: string;
+  sections?: ProjectSection[]; // Optional structured sections for detailed view
   icon: {
     type: 'tabler' | 'svg' | 'placeholder';
     content?: string; // Icon name for tabler, SVG path for svg, or placeholder text
@@ -22,47 +28,26 @@ export interface Project {
 
 export const projects: Project[] = [
   {
-    id: 'encom',
-    name: 'ENCOM',
-    tagline: 'Hexagon map service.',
-    description: 'One backend, three very different frontends. I built a browser-based dungeon crawler, a web dashboard, and even a Nintendo 64 homebrew game that all talk to the same server.',
-    icon: {
-      type: 'tabler',
-      content: 'hexagon',
-    },
-    backgroundImage: '/images/projects/encom-background.png',
-    hoverColor: '#8b5cf6',
-    links: [
-      { label: 'Dungeon Crawler', url: 'https://dungeon.riperoni.com/', type: 'dungeon' },
-      { label: '2D Explorer', url: 'https://encom.riperoni.com/', type: 'hexagon-site' },
-      { label: 'encom-lambda Repository', url: 'https://github.com/nathanialf/encom-lambda', type: 'github' },
-      { label: 'encom-frontend Repository', url: 'https://github.com/nathanialf/encom-frontend', type: 'github' },
-      { label: 'encom-dungeon Repository', url: 'https://github.com/nathanialf/encom-dungeon', type: 'github' },
-      { label: 'encom-64 Repository', url: 'https://github.com/nathanialf/encom-64', type: 'github' },
-      { label: 'N64 ROM Release', url: 'https://github.com/nathanialf/encom-64/releases/tag/alpha', type: 'release' },
-    ],
-  },
-  {
-    id: 'grid',
-    name: 'GRID',
-    tagline: 'Privacy-first file management.',
-    description: 'Now Available on the Google Play Store!\n\nI wanted a simple way to manage files on my servers from my phone without giving up my privacy. So I built one. It connects over SFTP and SMB, and I put it together using Jetpack Compose and Material 3.',
-    icon: {
-      type: 'svg',
-      content: '/images/grid-icon.svg',
-    },
-    hoverColor: '#22c55e',
-    links: [
-      { label: 'Google Play Store', url: 'https://play.google.com/store/apps/details?id=com.defnf.grid', type: 'playstore' },
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/grid', type: 'github' },
-      { label: 'Privacy Policy', url: '/privacy-policy/grid', type: 'privacy' },
-    ],
-  },
-  {
     id: 'seatmap',
     name: 'MYSEATMAP',
     tagline: 'Real-time flight intelligence.',
-    description: 'Flying standby can be stressful when you don\'t know if there\'s a seat for you. MySeatMap pulls real-time availability from multiple airlines into one place, with interactive seat maps, smart search, bookmarks, and alerts so you can make better decisions before heading to the airport.\n\nBuilt as 1/2 of Ody-Software.',
+    description: 'A full-stack serverless SaaS product helping airline employees make smarter standby and non-rev flight decisions. Built as 1/2 of Ody-Software.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'My business partner, who has connections in the airline industry, saw a gap in how employees with flight benefits have no easy way to assess seat availability across multiple data sources before committing to flights.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Airline API integrations for real-time seat availability',
+          'Serverless backend on AWS Lambda, API Gateway, and DynamoDB',
+          'Modern React frontend with responsive design',
+          'Alerting system based on user preferences',
+          'Auth and payment integrations with Google and Stripe',
+        ],
+      },
+    ],
     icon: {
       type: 'svg',
       content: '/images/myseatmap-icon.svg',
@@ -75,10 +60,91 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'grid',
+    name: 'GRID',
+    tagline: 'Privacy-first file management.',
+    description: 'A privacy-first Android file manager. Now available on the Google Play Store.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'I wanted a simple way to manage files on my servers from my phone without giving up my privacy. So I built one.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'SFTP and SMB protocol support',
+          'Native Android app with Jetpack Compose',
+          'Material 3 design system',
+        ],
+      },
+    ],
+    icon: {
+      type: 'svg',
+      content: '/images/grid-icon.svg',
+    },
+    hoverColor: '#22c55e',
+    links: [
+      { label: 'Google Play Store', url: 'https://play.google.com/store/apps/details?id=com.defnf.grid', type: 'playstore' },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/grid', type: 'github' },
+      { label: 'Privacy Policy', url: '/privacy-policy/grid', type: 'privacy' },
+    ],
+  },
+  {
+    id: 'encom',
+    name: 'ENCOM',
+    tagline: 'Hexagon map service.',
+    description: 'One backend, three very different applications.',
+    sections: [
+      {
+        heading: 'The Concept',
+        content: 'A hexagonal map service that serves the same data to completely different client experiences.',
+      },
+      {
+        heading: 'Applications',
+        content: [
+          'Browser-based dungeon crawler',
+          '2D hex map explorer and dashboard',
+          'Nintendo 64 homebrew game',
+        ],
+      },
+    ],
+    icon: {
+      type: 'tabler',
+      content: 'hexagon',
+    },
+    backgroundImage: '/images/projects/encom-background.png',
+    hoverColor: '#8b5cf6',
+    links: [
+      { label: 'Dungeon Crawler', url: 'https://dungeon.riperoni.com/', type: 'dungeon' },
+      { label: '2D Explorer', url: 'https://encom.riperoni.com/', type: 'hexagon-site' },
+      { label: 'encom-lambda Repository', url: 'https://github.com/nathanialf/encom-lambda', type: 'github' },
+      { label: 'encom-frontend Repository', url: 'https://github.com/nathanialf/encom-frontend', type: 'github' },
+      { label: 'encom-dungeon Repository', url: 'https://github.com/nathanialf/encom-dungeon', type: 'github' },
+      { label: 'N64 ROM Release', url: 'https://github.com/nathanialf/encom-64/releases/tag/alpha', type: 'release' },
+    ],
+  },
+  {
     id: 'cartograph',
     name: 'CARTOGRAPH',
     tagline: 'Docs that write themselves.',
-    description: 'Working Title\n\nHand-written docs are excellent, but engineers never keep them up to date. Cartograph generates purposeful documentation based on the code itself. Connect your git repos, and webhooks keep everything in sync whenever you push changes.',
+    description: 'AI-powered documentation that stays in sync with your code. Working title.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'Hand-written docs are excellent, but engineers never keep them up to date.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Multi-step analysis pipeline with AWS Step Functions',
+          'LLM-powered document generation with configurable sections',
+          'Pre-LLM secret scanning and automatic redaction',
+          'GitHub OAuth and webhook integration',
+          'Serverless backend on Lambda, DynamoDB, and S3',
+          'Next.js dashboard with Mermaid diagram rendering',
+        ],
+      },
+    ],
     icon: {
       type: 'tabler',
       content: 'file-ai',

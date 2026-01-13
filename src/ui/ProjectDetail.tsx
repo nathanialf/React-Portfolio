@@ -1,5 +1,5 @@
 import React from 'react';
-import { Project } from '../data/projects';
+import { Project, ProjectSection } from '../data/projects';
 import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane } from '@tabler/icons-react';
 import styles from '../styles/ProjectDetail.module.css';
 
@@ -34,6 +34,27 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDar
   const darkSubtext = { color: '#d1d5db' };
   const darkLink = { background: '#374151', borderColor: '#4b5563', color: '#e5e7eb' };
 
+  const renderSection = (section: ProjectSection, index: number) => (
+    <div key={index} className={styles.section}>
+      <h3 className={styles.sectionHeading} style={forceDarkMode ? darkText : undefined}>
+        {section.heading}
+      </h3>
+      {Array.isArray(section.content) ? (
+        <ul className={styles.sectionList}>
+          {section.content.map((item, i) => (
+            <li key={i} className={styles.sectionListItem} style={forceDarkMode ? darkSubtext : undefined}>
+              {item}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.sectionText} style={forceDarkMode ? darkSubtext : undefined}>
+          {section.content}
+        </p>
+      )}
+    </div>
+  );
+
   return (
     <div className={styles.container}>
       <button className={styles.backButton} onClick={onBack} style={forceDarkMode ? darkSubtext : undefined}>
@@ -45,6 +66,12 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDar
         <h2 className={styles.title} style={forceDarkMode ? darkText : undefined}>{project.name}</h2>
         <p className={styles.description} style={forceDarkMode ? darkSubtext : undefined}>{project.description}</p>
       </div>
+
+      {project.sections && project.sections.length > 0 && (
+        <div className={styles.sections}>
+          {project.sections.map((section, index) => renderSection(section, index))}
+        </div>
+      )}
 
       <div className={styles.links}>
         <h3 className={styles.linksTitle} style={forceDarkMode ? darkText : undefined}>Links</h3>
