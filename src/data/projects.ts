@@ -62,21 +62,21 @@ export const projects: Project[] = [
   {
     id: 'grid',
     name: 'GRID',
-    tagline: 'Privacy-first file management.',
-    description: 'A privacy-first Android file manager. Now available on the Google Play Store.',
+    tagline: 'Thoughtfully designed file management.',
+    description: 'A beautifully crafted Android file manager. Now available on the Google Play Store.',
     sections: [
       {
         heading: 'The Problem',
-        content: 'I wanted a simple way to manage files on my servers from my phone without giving up my privacy. So I built one.',
+        content: 'I wanted a file manager that felt intuitive and looked great. So I built one.',
       },
       {
         heading: 'What I Built',
         content: [
-          'SFTP and SMB protocol support',
+          'Clean, minimal interface with attention to detail',
           'Built-in viewers for code, images, PDFs, video, audio, and EPUB',
-          'Archive browsing and extraction for ZIP, RAR, and 7-Zip',
+          'Smooth animations and thoughtful micro-interactions',
+          'SFTP and SMB protocol support for remote file access',
           'Biometric authentication for saved connections',
-          'Encrypted credential storage with Android Keystore',
         ],
       },
     ],
