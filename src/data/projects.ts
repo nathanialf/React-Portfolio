@@ -73,8 +73,10 @@ export const projects: Project[] = [
         heading: 'What I Built',
         content: [
           'SFTP and SMB protocol support',
-          'Native Android app with Jetpack Compose',
-          'Material 3 design system',
+          'Built-in viewers for code, images, PDFs, video, audio, and EPUB',
+          'Archive browsing and extraction for ZIP, RAR, and 7-Zip',
+          'Biometric authentication for saved connections',
+          'Encrypted credential storage with Android Keystore',
         ],
       },
     ],
