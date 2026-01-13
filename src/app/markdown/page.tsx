@@ -311,7 +311,9 @@ export default function MarkdownPage() {
           </div>
         </div>
       </div>
-      <Copyright fixed />
+      <div className={styles.desktopFooter}>
+        <Copyright fixed />
+      </div>
     </div>
   );
 }

@@ -469,6 +469,10 @@
   flex-shrink: 0;
 }
 
+.desktopFooter {
+  display: block;
+}
+
 .mobileFooter > div {
   padding: 0.25rem 0;
 }
@@ -477,6 +481,10 @@
 @media (max-width: 768px) {
   .mobileFooter {
     display: block;
+  }
+
+  .desktopFooter {
+    display: none;
   }
 
   .container {
