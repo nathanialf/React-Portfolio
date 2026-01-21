@@ -36,13 +36,19 @@ function getCachedContributions(): ContributionDay[] | null {
     const cached = localStorage.getItem(CACHE_KEY);
     if (!cached) return null;
     const data: CachedData = JSON.parse(cached);
-    if (data.fetchedDate === getTodayString()) {
-      return data.contributions;
-    }
-    return null;
+    return data.contributions;
   } catch {
     return null;
   }
+}
+
+function contributionsChanged(
+  oldData: ContributionDay[] | null,
+  newData: ContributionDay[]
+): boolean {
+  if (!oldData) return true;
+  if (oldData.length !== newData.length) return true;
+  return JSON.stringify(oldData) !== JSON.stringify(newData);
 }
 
 function setCachedContributions(contributions: ContributionDay[]): void {
@@ -58,20 +64,31 @@ const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
   const [contributions, setContributions] = useState<ContributionDay[]>([]);
 
   useEffect(() => {
+    // 1. Load cached data immediately (stale)
     const cached = getCachedContributions();
     if (cached) {
       setContributions(cached);
-      return;
     }
 
+    // 2. Always fetch fresh data (revalidate)
     fetch('/api/contributions?username=nathanialf')
       .then(res => res.json())
       .then(data => {
-        const contributions = data.contributions || [];
-        setCachedContributions(contributions);
-        setContributions(contributions);
+        const freshContributions = data.contributions || [];
+
+        // 3. Only update state and cache if data changed
+        if (contributionsChanged(cached, freshContributions)) {
+          setContributions(freshContributions);
+          setCachedContributions(freshContributions);
+        }
       })
-      .catch(() => setContributions([]));
+      .catch(() => {
+        // On error, keep showing cached data (already set above)
+        // Only set empty if no cache existed
+        if (!cached) {
+          setContributions([]);
+        }
+      });
   }, []);
 
   const days = contributions.slice(-182); // ~6 months
