@@ -38,8 +38,6 @@ export default function SaxophoneViewer({ onLoad }: SaxophoneViewerProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const waveformRef = useRef<HTMLCanvasElement>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [spinnerFrame, setSpinnerFrame] = useState(0);
-  const spinnerFrames = ['|', '/', '-', '\\'];
 
   // Refs for Three.js objects
   const sceneRef = useRef<THREE.Scene | null>(null);
@@ -85,15 +83,6 @@ export default function SaxophoneViewer({ onLoad }: SaxophoneViewerProps) {
   const backMeshByNameRef = useRef<Map<string, THREE.Mesh>>(new Map());
   const midiHighlightedMeshesRef = useRef<Set<string>>(new Set());
   const originalMaterialsRef = useRef<Map<string, THREE.Material>>(new Map());
-
-  // Loading spinner animation
-  useEffect(() => {
-    if (!isLoading) return;
-    const interval = setInterval(() => {
-      setSpinnerFrame((prev) => (prev + 1) % 4);
-    }, 150);
-    return () => clearInterval(interval);
-  }, [isLoading]);
 
   // Initialize MIDI
   const initMidi = async () => {
@@ -444,15 +433,26 @@ export default function SaxophoneViewer({ onLoad }: SaxophoneViewerProps) {
     const loader = new GLTFLoader();
     loader.load(
       '/midi/models/saxophone.glb',
-      (gltf) => {
+      async (gltf) => {
         const model = gltf.scene;
         modelRef.current = model;
 
         const glassBackMeshes: { mesh: THREE.Mesh; parent: THREE.Object3D; originalName: string }[] = [];
 
+        // Collect all meshes first
+        const meshes: THREE.Mesh[] = [];
         model.traverse((child) => {
           if ((child as THREE.Mesh).isMesh) {
-            const mesh = child as THREE.Mesh;
+            meshes.push(child as THREE.Mesh);
+          }
+        });
+
+        // Process meshes in chunks, yielding to main thread between chunks
+        const chunkSize = 10;
+        for (let i = 0; i < meshes.length; i += chunkSize) {
+          const chunk = meshes.slice(i, i + chunkSize);
+
+          for (const mesh of chunk) {
             mesh.geometry = BufferGeometryUtils.mergeVertices(mesh.geometry);
             mesh.geometry.computeVertexNormals();
 
@@ -476,7 +476,12 @@ export default function SaxophoneViewer({ onLoad }: SaxophoneViewerProps) {
               meshByNameRef.current.set(mesh.name, mesh);
             }
           }
-        });
+
+          // Yield to main thread to allow animations to run
+          if (i + chunkSize < meshes.length) {
+            await new Promise(resolve => setTimeout(resolve, 0));
+          }
+        }
 
         for (const { mesh, parent, originalName } of glassBackMeshes) {
           parent.add(mesh);
@@ -842,7 +847,7 @@ export default function SaxophoneViewer({ onLoad }: SaxophoneViewerProps) {
     <div ref={containerRef} className={styles.container}>
       {isLoading && (
         <div className={styles.loading}>
-          LOADING {spinnerFrames[spinnerFrame]}
+          LOADING <span className={styles.spinner} />
         </div>
       )}
       <canvas ref={waveformRef} className={styles.waveform} width={120} height={200} />

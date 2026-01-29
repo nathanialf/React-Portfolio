@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import Copyright from '../../ui/Copyright';
+import ScrambleText from '../../ui/ScrambleText';
 import styles from '../../styles/Midi.module.css';
 
 const SaxophoneViewer = dynamic(() => import('../../ui/SaxophoneViewer'), {
@@ -46,8 +47,12 @@ export default function MidiPage() {
         <div className={styles.inner}>
           <header className={styles.header}>
             <div>
-              <h1 className={styles.title}>MIDI</h1>
-              <p className={styles.subtitle}>Tenor Saxophone</p>
+              <h1 className={styles.title}>
+                <ScrambleText duration={600}>MIDI</ScrambleText>
+              </h1>
+              <p className={styles.subtitle}>
+                <ScrambleText delay={100} duration={500}>Tenor Saxophone</ScrambleText>
+              </p>
             </div>
           </header>
           <div className={styles.viewerContainer}>

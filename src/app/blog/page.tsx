@@ -1,8 +1,8 @@
-import Link from 'next/link';
-import Image from 'next/image';
 import { IconRss } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import Copyright from '../../ui/Copyright';
+import BlogHeader from '../../ui/BlogHeader';
+import BlogPostList from '../../ui/BlogPostList';
 import { getAllPosts, formatDate } from '../../lib/blog';
 import styles from '../../styles/Blog.module.css';
 
@@ -13,6 +13,11 @@ export const metadata = {
 
 export default async function BlogPage() {
   const posts = await getAllPosts();
+  const postsWithFormattedDates = posts.map(post => ({
+    ...post,
+    formattedDate: formatDate(post.date),
+    coverImageDark: post.coverImageDark ?? true,
+  }));
 
   return (
     <div className={styles.wrapper}>
@@ -25,47 +30,10 @@ export default async function BlogPage() {
       </a>
       <div className={styles.container}>
         <div className={styles.content}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>Blog</h1>
-            <p className={styles.subtitle}>Thoughts on software</p>
-          </header>
+          <BlogHeader />
 
           <main className={styles.posts}>
-            {posts.length === 0 ? (
-              <p className={styles.empty}>No posts yet.</p>
-            ) : (
-              <div className={styles.postList}>
-                {posts.map(post => (
-                  <Link
-                    key={post.slug}
-                    href={`/blog/${post.slug}`}
-                    className={styles.postCard}
-                  >
-                    {post.coverImage && (
-                      <div className={styles.postCoverImage}>
-                        <Image src={post.coverImage} alt="" fill sizes="(max-width: 768px) 100vw, 300px" />
-                      </div>
-                    )}
-                    <div className={styles.postInfo}>
-                      <h2 className={styles.postTitle}>{post.title}</h2>
-                      <time className={styles.postDate} dateTime={post.date}>
-                        {formatDate(post.date)}
-                      </time>
-                      {post.description && (
-                        <p className={styles.postDescription}>{post.description}</p>
-                      )}
-                      {post.tags && post.tags.length > 0 && (
-                        <div className={styles.postTags}>
-                          {post.tags.map(tag => (
-                            <span key={tag} className={styles.tag}>{tag}</span>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <BlogPostList posts={postsWithFormattedDates} />
           </main>
           <Copyright />
         </div>

@@ -11,9 +11,11 @@ import html from 'remark-html';
 import { IconDownload, IconColumns, IconColumns1 } from '@tabler/icons-react';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import Copyright from '../../ui/Copyright';
+import ScrambleText from '../../ui/ScrambleText';
 import styles from '../../styles/Markdown.module.css';
 
 const STORAGE_KEY = 'markdown-writer-content';
+const LAYOUT_KEY = 'markdown-writer-layout';
 const SAVE_DELAY = 500;
 const PADDING = 200;
 
@@ -101,6 +103,26 @@ export default function MarkdownPage() {
   const editorContainerRef = useRef<HTMLDivElement>(null);
   const editorViewRef = useRef<EditorView | null>(null);
   const contentRef = useRef<string>('');
+
+  // Load saved layout preference
+  useEffect(() => {
+    const saved = localStorage.getItem(LAYOUT_KEY);
+    if (saved === 'side-by-side') {
+      setSideBySide(true);
+      // Parse content for preview pane
+      const content = localStorage.getItem(STORAGE_KEY) ?? DEFAULT_CONTENT;
+      remark()
+        .use(remarkGfm)
+        .use(html)
+        .process(content)
+        .then((result) => setHtmlContent(result.toString()));
+    }
+  }, []);
+
+  // Save layout preference when it changes
+  useEffect(() => {
+    localStorage.setItem(LAYOUT_KEY, sideBySide ? 'side-by-side' : 'single');
+  }, [sideBySide]);
 
   // Prevent iOS Chrome overscroll on non-scrollable areas
   useEffect(() => {
@@ -248,8 +270,12 @@ export default function MarkdownPage() {
         <div className={styles.inner}>
           <header className={styles.header}>
             <div>
-              <h1 className={styles.title}>Markdown</h1>
-              <p className={styles.subtitle}>Local Editor</p>
+              <h1 className={styles.title}>
+                <ScrambleText duration={600}>Markdown</ScrambleText>
+              </h1>
+              <p className={styles.subtitle}>
+                <ScrambleText delay={100} duration={500}>Local Editor</ScrambleText>
+              </p>
             </div>
             <div className={styles.controls}>
               <button

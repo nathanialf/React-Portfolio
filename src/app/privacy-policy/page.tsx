@@ -1,8 +1,9 @@
 import { readdir } from 'fs/promises';
 import { join } from 'path';
-import Link from 'next/link';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import Copyright from '../../ui/Copyright';
+import PrivacyPolicyHeader from '../../ui/PrivacyPolicyHeader';
+import PrivacyPolicyList from '../../ui/PrivacyPolicyList';
 import styles from '../../styles/PrivacyPolicy.module.css';
 
 // Custom display names for policies (slug -> display name)
@@ -42,30 +43,10 @@ export default async function PrivacyPoliciesPage() {
       </div>
       <div className={styles.container}>
         <div className={styles.content}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>Privacy Policies</h1>
-            <p className={styles.subtitle}>All applications</p>
-          </header>
+          <PrivacyPolicyHeader />
 
           <main className={styles.policyList}>
-            {policies.length === 0 ? (
-              <p className={styles.noPolicies}>No privacy policies available yet.</p>
-            ) : (
-              <div className={styles.policyGrid}>
-                {policies.map(({ slug, name }) => (
-                  <Link
-                    key={slug}
-                    href={`/privacy-policy/${slug}`}
-                    className={styles.policyCard}
-                  >
-                    <h2 className={styles.policyName}>{name}</h2>
-                    <p className={styles.policyDescription}>
-                      View privacy policy for {name}
-                    </p>
-                  </Link>
-                ))}
-              </div>
-            )}
+            <PrivacyPolicyList policies={policies} />
           </main>
           <Copyright />
         </div>
