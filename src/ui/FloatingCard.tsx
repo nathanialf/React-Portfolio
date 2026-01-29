@@ -20,6 +20,8 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
   const [animationKey, setAnimationKey] = useState(0);
   const [isNavigating, setIsNavigating] = useState(false);
   const [cardHeight, setCardHeight] = useState<number | undefined>(undefined);
+  const [cardPosition, setCardPosition] = useState<{ top: number; left: number; width: number } | undefined>(undefined);
+  const [enableTransition, setEnableTransition] = useState(false);
   const cardRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
   const mainViewRef = useRef<HTMLDivElement>(null);
@@ -96,19 +98,27 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
 
   const handleNavigate = (url: string) => {
     if (cardRef.current) {
-      const currentHeight = cardRef.current.offsetHeight;
-      // Set current height first so CSS can transition from it
+      const rect = cardRef.current.getBoundingClientRect();
+      const currentHeight = rect.height;
+      const currentWidth = rect.width;
+      // Set current position and size in pixels first (no transition)
+      setCardPosition({ top: rect.top, left: rect.left, width: currentWidth });
       setCardHeight(currentHeight);
-      // Double rAF to ensure first height is rendered
+      setEnableTransition(false);
+      // Double rAF to ensure first position is rendered without transition
       requestAnimationFrame(() => {
         requestAnimationFrame(() => {
-          // Target is the larger of viewport or current height
-          const targetHeight = Math.max(window.innerHeight, currentHeight);
-          setCardHeight(targetHeight);
-          setIsNavigating(true);
+          // Enable transition, then animate to target
+          setEnableTransition(true);
+          requestAnimationFrame(() => {
+            const targetHeight = Math.max(window.innerHeight, currentHeight);
+            setCardPosition({ top: 0, left: 0, width: window.innerWidth });
+            setCardHeight(targetHeight);
+            setIsNavigating(true);
           setTimeout(() => {
-            window.location.href = url;
-          }, 600);
+              window.location.href = url;
+            }, 600);
+          });
         });
       });
     } else {
@@ -122,8 +132,11 @@ const FloatingCard: React.FC<FloatingCardProps> = ({ onProjectChange, forceDarkM
   return (
     <div
       ref={cardRef}
-      className={`${styles.card} ${isNavigating ? styles.cardNavigating : ''}`}
-      style={cardHeight ? { height: `${cardHeight}px` } : undefined}
+      className={`${styles.card} ${cardPosition !== undefined ? (enableTransition ? styles.cardAnimatingWithTransition : styles.cardAnimating) : ''} ${isNavigating ? styles.cardNavigating : ''}`}
+      style={{
+        ...(cardHeight ? { height: `${cardHeight}px` } : {}),
+        ...(cardPosition !== undefined ? { top: `${cardPosition.top}px`, left: `${cardPosition.left}px`, width: `${cardPosition.width}px` } : {}),
+      }}
     >
       <VerticalSidebar disableLink />
       <div className={styles.main}>
