@@ -4,7 +4,7 @@ import AboutButton from './AboutButton';
 import styles from '../styles/CardContent.module.css';
 
 // Feature flags
-const SHOW_BLOG = true;
+const SHOW_BLOG = false;
 
 interface CardContentProps {
   onProjectSelect?: (projectId: string) => void;

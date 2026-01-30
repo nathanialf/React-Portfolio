@@ -1,12 +1,14 @@
 import { readFile, readdir } from 'fs/promises';
 import { join } from 'path';
 import matter from 'gray-matter';
+import { isImageDark } from './image-brightness';
 
 export interface PostMetadata {
   title: string;
   date: string;
   description: string;
   coverImage?: string;
+  coverImageDark?: boolean;
   tags?: string[];
   slug: string;
 }
@@ -50,6 +52,12 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
 
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { content, ...metadata } = post;
+
+          // Calculate cover image brightness if present
+          if (metadata.coverImage) {
+            metadata.coverImageDark = await isImageDark(metadata.coverImage);
+          }
+
           return metadata;
         })
     );
