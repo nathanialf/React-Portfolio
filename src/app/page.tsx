@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import Image from 'next/image';
 import Copyright from '../ui/Copyright';
-import FloatingCard from '../ui/FloatingCard';
+import MainLayout from '../ui/MainLayout';
 import { projects } from '../data/projects';
 
 import styles from '../styles/Homepage.module.css';
@@ -53,7 +53,7 @@ export default function Homepage() {
         </div>
       ))}
 
-      <FloatingCard onProjectChange={setSelectedProjectId} forceDarkMode={selectedProject?.darkBackground} />
+      <MainLayout onProjectChange={setSelectedProjectId} forceDarkMode={selectedProject?.darkBackground} />
       <Copyright fixed />
     </>
   );

@@ -8,9 +8,10 @@ interface ProjectDetailProps {
   onBack: () => void;
   forceDarkMode?: boolean;
   onNavigate?: (url: string) => void;
+  backButtonClass?: string;
 }
 
-const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDarkMode, onNavigate }) => {
+const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDarkMode, onNavigate, backButtonClass }) => {
   const getLinkIcon = (type: string) => {
     switch (type) {
       case 'github':
@@ -57,7 +58,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, forceDar
 
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={onBack} style={forceDarkMode ? darkSubtext : undefined}>
+      <button
+        className={`${styles.backButton} ${backButtonClass || ''}`}
+        onClick={onBack}
+        style={forceDarkMode ? darkSubtext : undefined}
+      >
         <IconArrowLeft stroke={2} width="1.2em" height="1.2em" />
         <span>Back to Home</span>
       </button>

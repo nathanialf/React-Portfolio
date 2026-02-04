@@ -4,12 +4,13 @@ import styles from '../styles/AboutDetail.module.css';
 
 interface AboutDetailProps {
   onBack: () => void;
+  backButtonClass?: string;
 }
 
-const AboutDetail: React.FC<AboutDetailProps> = ({ onBack }) => {
+const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, backButtonClass }) => {
   return (
     <div className={styles.container}>
-      <button className={styles.backButton} onClick={onBack}>
+      <button className={`${styles.backButton} ${backButtonClass || ''}`} onClick={onBack}>
         <IconArrowLeft size={16} />
         <span>Back to Home</span>
       </button>

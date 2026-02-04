@@ -1,0 +1,246 @@
+.card {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding-left: 2.5rem;
+
+  display: flex;
+  background: linear-gradient(
+    to right,
+    #0a0a0a 0%,
+    #0a0a0a 450px,
+    rgba(10, 10, 10, 0.85) 600px,
+    rgba(10, 10, 10, 0.6) 800px,
+    rgba(10, 10, 10, 0) 1000px
+  );
+  color: white;
+  z-index: 1;
+}
+
+.sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 10;
+  display: flex;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2em 1.5em;
+  gap: 0.5rem;
+  min-width: 200px;
+  max-width: 220px;
+}
+
+.navButton {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  background: transparent;
+  border: 1px solid var(--project-color, #525252);
+  cursor: pointer;
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  text-align: left;
+}
+
+.navButton:hover,
+.navButton.active {
+  background-color: var(--project-color, #525252);
+}
+
+.navButton:hover .navButtonName,
+.navButton.active .navButtonName {
+  color: white;
+}
+
+.navButton:hover .navButtonTagline,
+.navButton.active .navButtonTagline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.navButtonName {
+  font-family: var(--font-serif), 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.05em;
+  color: #f9fafb;
+  margin: 0;
+  line-height: 1.2;
+  transition: color 0.15s ease;
+}
+
+.navButtonTagline {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #737373;
+  margin-top: 0.25rem;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+}
+
+.aboutButton {
+  margin-top: 1rem;
+  padding: 0.75rem 1rem;
+  background: transparent;
+  border: 1px solid #525252;
+  color: #a3a3a3;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  text-align: left;
+}
+
+.aboutButton:hover,
+.aboutButton.active {
+  background-color: #525252;
+  color: white;
+}
+
+.mobileNav {
+  display: none;
+}
+
+.backButton {
+  display: none;
+}
+
+.main {
+  flex: 1;
+  padding: 2em;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px;
+}
+
+.content {
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+.projectView {
+  animation: fadeIn 0.3s ease-out;
+}
+
+.mainView {
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Navigation transition states */
+.contentFading {
+  opacity: 0;
+  transition: opacity 0.3s ease-out;
+}
+
+/* Media query for smaller devices */
+@media screen and (max-width: 768px) {
+  .card {
+    padding-left: 2rem;
+    background: linear-gradient(
+      to right,
+      #0a0a0a 0%,
+      rgba(10, 10, 10, 0.9) 40%,
+      rgba(10, 10, 10, 0.5) 70%,
+      rgba(10, 10, 10, 0.2) 100%
+    );
+  }
+
+  .nav {
+    display: none;
+  }
+
+  .mobileNav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .mobileNavButton {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0.75rem;
+    background: transparent;
+    border: 1px solid var(--project-color, #525252);
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    text-align: left;
+  }
+
+  .mobileNavButton:hover,
+  .mobileNavButton.active {
+    background-color: var(--project-color, #525252);
+  }
+
+  .mobileNavButton .navButtonName {
+    font-size: 1rem;
+  }
+
+  .mobileNavButton .navButtonTagline {
+    font-size: 0.7rem;
+    margin-top: 0.25rem;
+  }
+
+  .mobileNavButton:hover .navButtonTagline,
+  .mobileNavButton.active .navButtonTagline {
+    color: rgba(255, 255, 255, 0.8);
+  }
+
+  .mobileAboutButton {
+    margin-top: 0.5rem;
+    padding: 0.6rem 0.75rem;
+    background: transparent;
+    border: 1px solid #525252;
+    color: #a3a3a3;
+    font-family: var(--font-mono), 'Courier New', monospace;
+    font-size: 0.7rem;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background-color 0.15s ease, color 0.15s ease;
+    text-align: left;
+  }
+
+  .mobileAboutButton:hover,
+  .mobileAboutButton.active {
+    background-color: #525252;
+    color: white;
+  }
+
+  .main {
+    padding: 1.5rem 1rem;
+    max-width: 100%;
+  }
+
+  .content {
+    overflow-y: auto;
+  }
+
+  .backButton {
+    display: flex;
+  }
+}
+

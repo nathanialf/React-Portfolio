@@ -27,6 +27,7 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  // SaaS Products
   {
     id: 'seatmap',
     name: 'MYSEATMAP',
@@ -60,6 +61,39 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'cartograph',
+    name: 'CARTOGRAPH',
+    tagline: 'Docs that write themselves.',
+    description: 'AI-powered documentation that stays in sync with your code. Working title.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'Hand-written docs are excellent, but engineers never keep them up to date.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Multi-step analysis pipeline with AWS Step Functions',
+          'LLM-powered document generation with configurable sections',
+          'Pre-LLM secret scanning and automatic redaction',
+          'GitHub OAuth and webhook integration',
+          'Serverless backend on Lambda, DynamoDB, and S3',
+          'Next.js dashboard with Mermaid diagram rendering',
+        ],
+      },
+    ],
+    icon: {
+      type: 'tabler',
+      content: 'file-ai',
+    },
+    hoverColor: '#1e3a5f',
+    links: [
+      { label: 'Prototype Site', url: 'https://cartograph.riperoni.com', type: 'website' },
+      { label: 'Shareable Documentation Example', url: 'https://cartograph.riperoni.com/share?token=3NRZJT9A9HMtgE7T8hG1OA', type: 'website' },
+    ],
+  },
+  // Apps
+  {
     id: 'grid',
     name: 'GRID',
     tagline: 'Thoughtfully designed file management.',
@@ -91,6 +125,7 @@ export const projects: Project[] = [
       { label: 'Privacy Policy', url: '/privacy-policy/grid', type: 'privacy' },
     ],
   },
+  // Games
   {
     id: 'encom',
     name: 'ENCOM',
@@ -126,35 +161,27 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'cartograph',
-    name: 'CARTOGRAPH',
-    tagline: 'Docs that write themselves.',
-    description: 'AI-powered documentation that stays in sync with your code. Working title.',
+    id: 'groovy-picture-book',
+    name: 'GROOVY PICTURE BOOK',
+    tagline: 'Global Game Jam 2026.',
+    description: 'A platformer where you jump through a picture book made of cardboard cutouts, collecting pushpins as you punch into and out of different pages.',
     sections: [
       {
-        heading: 'The Problem',
-        content: 'Hand-written docs are excellent, but engineers never keep them up to date.',
-      },
-      {
-        heading: 'What I Built',
-        content: [
-          'Multi-step analysis pipeline with AWS Step Functions',
-          'LLM-powered document generation with configurable sections',
-          'Pre-LLM secret scanning and automatic redaction',
-          'GitHub OAuth and webhook integration',
-          'Serverless backend on Lambda, DynamoDB, and S3',
-          'Next.js dashboard with Mermaid diagram rendering',
-        ],
+        heading: 'The Project',
+        content: 'Created in 48 hours for Global Game Jam 2026 at the MADE (Museum of Art and Digital Entertainment) with the theme "Mask." I served as project manager, coordinating a team to bring together art, music, and gameplay into a layered picture book experience.',
       },
     ],
     icon: {
       type: 'tabler',
-      content: 'file-ai',
+      content: 'book',
     },
-    hoverColor: '#1e3a5f',
+    backgroundImage: '/images/projects/groovy-picture-book-background.png',
+    hoverColor: '#ec4899',
     links: [
-      { label: 'Shareable Documentation Example', url: 'https://cartograph.riperoni.com/share?token=3NRZJT9A9HMtgE7T8hG1OA', type: 'website' },
-      { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
+      { label: 'Play in Browser', url: 'https://nathanialf.github.io/GroovyPictureBook/GroovyPictureBook.html', type: 'website' },
+      { label: 'itch.io', url: 'https://wiley-fox-productions.itch.io/groovy-picture-book', type: 'website' },
+      { label: 'Global Game Jam', url: 'https://globalgamejam.org/games/2026/groovypicturebook-9', type: 'website' },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/GroovyPictureBook', type: 'github' },
     ],
   },
 ];
