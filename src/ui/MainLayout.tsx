@@ -4,9 +4,11 @@ import React, { useState, useEffect } from 'react';
 import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
-import { projects } from '../data/projects';
+import { projects, categoryLabels, ProjectCategory } from '../data/projects';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
+
+const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;
@@ -70,19 +72,33 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, forceDarkMode 
 
       {/* Navigation - always visible */}
       <nav className={styles.nav}>
-        {projects.map((project) => (
-          <button
-            key={project.id}
-            className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''}`}
-            onClick={() => handleProjectSelect(project.id)}
-            onMouseEnter={() => setHoveredProjectId(project.id)}
-            onMouseLeave={() => setHoveredProjectId(null)}
-            style={{ '--project-color': project.hoverColor } as React.CSSProperties}
-          >
-            <span className={styles.navButtonName}>{project.name}</span>
-            <span className={styles.navButtonTagline}>{project.tagline}</span>
-          </button>
-        ))}
+        {categoryOrder.map((category) => {
+          const categoryProjects = projects.filter(p => p.category === category);
+          return (
+            <div key={category} className={styles.categoryGroup}>
+              <div className={styles.categoryButtons}>
+                {categoryProjects.map((project) => (
+                  <button
+                    key={project.id}
+                    className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''}`}
+                    onClick={() => handleProjectSelect(project.id)}
+                    onMouseEnter={() => setHoveredProjectId(project.id)}
+                    onMouseLeave={() => setHoveredProjectId(null)}
+                    style={{ '--project-color': project.hoverColor } as React.CSSProperties}
+                  >
+                    <span className={styles.navButtonName}>{project.name}</span>
+                    <span className={styles.navButtonTagline}>{project.tagline}</span>
+                  </button>
+                ))}
+              </div>
+              <div className={styles.bracket}>
+                <div className={styles.categoryLabel}>
+                  <span>{categoryLabels[category]}</span>
+                </div>
+              </div>
+            </div>
+          );
+        })}
         <button
           className={`${styles.aboutButton} ${showAbout ? styles.active : ''}`}
           onClick={handleAboutSelect}
@@ -115,17 +131,31 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, forceDarkMode 
 
               {/* Mobile navigation - hidden on desktop via CSS */}
               <div className={styles.mobileNav}>
-                {projects.map((project) => (
-                  <button
-                    key={project.id}
-                    className={styles.mobileNavButton}
-                    onClick={() => handleProjectSelect(project.id)}
-                    style={{ '--project-color': project.hoverColor } as React.CSSProperties}
-                  >
-                    <span className={styles.navButtonName}>{project.name}</span>
-                    <span className={styles.navButtonTagline}>{project.tagline}</span>
-                  </button>
-                ))}
+                {categoryOrder.map((category) => {
+                  const categoryProjects = projects.filter(p => p.category === category);
+                  return (
+                    <div key={category} className={styles.mobileCategoryGroup}>
+                      <div className={styles.mobileBracket}>
+                        <div className={styles.mobileCategoryLabel}>
+                          <span>{categoryLabels[category]}</span>
+                        </div>
+                      </div>
+                      <div className={styles.mobileCategoryButtons}>
+                        {categoryProjects.map((project) => (
+                          <button
+                            key={project.id}
+                            className={styles.mobileNavButton}
+                            onClick={() => handleProjectSelect(project.id)}
+                            style={{ '--project-color': project.hoverColor } as React.CSSProperties}
+                          >
+                            <span className={styles.navButtonName}>{project.name}</span>
+                            <span className={styles.navButtonTagline}>{project.tagline}</span>
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+                  );
+                })}
                 <button
                   className={styles.mobileAboutButton}
                   onClick={handleAboutSelect}

@@ -33,9 +33,74 @@
   flex-direction: column;
   justify-content: center;
   padding: 2em 1.5em;
+  padding-right: 0;
+  gap: 1rem;
+  min-width: 220px;
+}
+
+.categoryGroup {
+  display: flex;
+  align-items: stretch;
+}
+
+.categoryButtons {
+  display: flex;
+  flex-direction: column;
   gap: 0.5rem;
-  min-width: 200px;
-  max-width: 220px;
+  flex: 1;
+}
+
+.bracket {
+  position: relative;
+  width: 2rem;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+/* Top horizontal cap - extends left towards cards with gap */
+.bracket::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.35rem;
+  width: 0.35rem;
+  height: 1px;
+  background: #525252;
+}
+
+/* Bottom horizontal cap - extends left towards cards with gap */
+.bracket::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -0.35rem;
+  width: 0.35rem;
+  height: 1px;
+  background: #525252;
+}
+
+.categoryLabel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #525252;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.categoryLabel span {
+  background: #0a0a0a;
+  padding: 0.4em 0;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #525252;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 
 .navButton {
@@ -44,6 +109,8 @@
   justify-content: center;
   align-items: flex-start;
   padding: 0.875rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
   background: transparent;
   border: 1px solid var(--project-color, #525252);
   cursor: pointer;
@@ -89,6 +156,8 @@
 .aboutButton {
   margin-top: 1rem;
   padding: 0.75rem 1rem;
+  width: calc(100% - 2.5rem);
+  box-sizing: border-box;
   background: transparent;
   border: 1px solid #525252;
   color: #a3a3a3;
@@ -174,8 +243,80 @@
   .mobileNav {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 1rem;
     margin-top: 1.5rem;
+    margin-left: -1.25rem;
+    width: calc(100% + 1.25rem);
+    position: relative;
+    z-index: 11;
+  }
+
+  .mobileCategoryGroup {
+    display: flex;
+    align-items: stretch;
+    width: 100%;
+  }
+
+  .mobileCategoryButtons {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .mobileBracket {
+    position: relative;
+    width: 1.5rem;
+    flex-shrink: 0;
+    margin-right: 0.4rem;
+  }
+
+  /* Mobile top cap - extends right towards cards */
+  .mobileBracket::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -0.25rem;
+    width: 0.25rem;
+    height: 1px;
+    background: #525252;
+  }
+
+  /* Mobile bottom cap - extends right towards cards */
+  .mobileBracket::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    right: -0.25rem;
+    width: 0.25rem;
+    height: 1px;
+    background: #525252;
+  }
+
+  .mobileCategoryLabel {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: #525252;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .mobileCategoryLabel span {
+    background: #0a0a0a;
+    padding: 0.3em 0;
+    writing-mode: vertical-rl;
+    transform: rotate(180deg);
+    font-family: var(--font-mono), 'Courier New', monospace;
+    font-size: 0.5rem;
+    color: #525252;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   .mobileNavButton {
@@ -184,16 +325,22 @@
     justify-content: center;
     align-items: flex-start;
     padding: 0.75rem;
-    background: transparent;
+    width: 100%;
+    box-sizing: border-box;
+    background: linear-gradient(
+      to right,
+      transparent 0%,
+      color-mix(in srgb, var(--project-color, #525252) 25%, transparent) 100%
+    );
     border: 1px solid var(--project-color, #525252);
     cursor: pointer;
-    transition: background-color 0.15s ease;
+    transition: background 0.15s ease;
     text-align: left;
   }
 
   .mobileNavButton:hover,
   .mobileNavButton.active {
-    background-color: var(--project-color, #525252);
+    background: var(--project-color, #525252);
   }
 
   .mobileNavButton .navButtonName {
@@ -212,6 +359,7 @@
 
   .mobileAboutButton {
     margin-top: 0.5rem;
+    margin-left: calc(1.5rem + 0.4rem);
     padding: 0.6rem 0.75rem;
     background: transparent;
     border: 1px solid #525252;

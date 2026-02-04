@@ -10,11 +10,20 @@ export interface ProjectSection {
   content: string | string[]; // string for paragraph, string[] for list items
 }
 
+export type ProjectCategory = 'saas' | 'apps' | 'games';
+
+export const categoryLabels: Record<ProjectCategory, string> = {
+  saas: 'SaaS',
+  apps: 'Apps',
+  games: 'Games',
+};
+
 export interface Project {
   id: string;
   name: string;
   tagline: string; // Short tagline for gallery card
   description: string;
+  category: ProjectCategory;
   sections?: ProjectSection[]; // Optional structured sections for detailed view
   icon: {
     type: 'tabler' | 'svg' | 'placeholder';
@@ -27,11 +36,11 @@ export interface Project {
 }
 
 export const projects: Project[] = [
-  // SaaS Products
   {
     id: 'seatmap',
     name: 'MYSEATMAP',
     tagline: 'Real-time flight intelligence.',
+    category: 'saas',
     description: 'A full-stack serverless SaaS product helping airline employees make smarter standby and non-rev flight decisions. Built as 1/2 of Ody-Software.',
     sections: [
       {
@@ -64,6 +73,7 @@ export const projects: Project[] = [
     id: 'cartograph',
     name: 'CARTOGRAPH',
     tagline: 'Docs that write themselves.',
+    category: 'saas',
     description: 'AI-powered documentation that stays in sync with your code. Working title.',
     sections: [
       {
@@ -92,11 +102,11 @@ export const projects: Project[] = [
       { label: 'Shareable Documentation Example', url: 'https://cartograph.riperoni.com/share?token=3NRZJT9A9HMtgE7T8hG1OA', type: 'website' },
     ],
   },
-  // Apps
   {
     id: 'grid',
     name: 'GRID',
     tagline: 'Thoughtfully designed file management.',
+    category: 'apps',
     description: 'A beautifully crafted Android file manager. Now available on the Google Play Store.',
     sections: [
       {
@@ -125,11 +135,11 @@ export const projects: Project[] = [
       { label: 'Privacy Policy', url: '/privacy-policy/grid', type: 'privacy' },
     ],
   },
-  // Games
   {
     id: 'encom',
     name: 'ENCOM',
     tagline: 'Hexagon map service.',
+    category: 'games',
     description: 'One backend, three very different applications.',
     sections: [
       {
@@ -164,6 +174,7 @@ export const projects: Project[] = [
     id: 'groovy-picture-book',
     name: 'GROOVY PICTURE BOOK',
     tagline: 'Global Game Jam 2026.',
+    category: 'games',
     description: 'A platformer where you jump through a picture book made of cardboard cutouts, collecting pushpins as you punch into and out of different pages.',
     sections: [
       {
