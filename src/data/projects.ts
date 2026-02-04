@@ -31,7 +31,7 @@ export interface Project {
   };
   links: ProjectLink[];
   backgroundImage?: string; // Optional background image shown when project is selected
-  darkBackground?: boolean; // If true, force dark mode styling when this project is shown
+  brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
 }
 
@@ -187,6 +187,7 @@ export const projects: Project[] = [
       content: 'book',
     },
     backgroundImage: '/images/projects/groovy-picture-book-background.png',
+    brightBackground: true,
     hoverColor: '#ec4899',
     links: [
       { label: 'Play in Browser', url: 'https://nathanialf.github.io/GroovyPictureBook/GroovyPictureBook.html', type: 'website' },

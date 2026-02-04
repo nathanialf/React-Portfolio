@@ -53,7 +53,7 @@ export default function Homepage() {
         </div>
       ))}
 
-      <MainLayout onProjectChange={setSelectedProjectId} forceDarkMode={selectedProject?.darkBackground} />
+      <MainLayout onProjectChange={setSelectedProjectId} brightBackground={selectedProject?.brightBackground} />
       <Copyright fixed />
     </>
   );

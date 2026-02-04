@@ -12,24 +12,22 @@ const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;
-  forceDarkMode?: boolean;
+  brightBackground?: boolean;
 }
 
-const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, forceDarkMode }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackground }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
-  const [hoveredProjectId, setHoveredProjectId] = useState<string | null>(null);
 
   const selectedProject = selectedProjectId
     ? projects.find(p => p.id === selectedProjectId)
     : null;
 
-  // Report hovered or selected project to parent for background changes
-  // On mobile, hoveredProjectId won't change (no hover), so we use selectedProjectId
+  // Report selected project to parent for background changes (no hover)
   useEffect(() => {
-    onProjectChange?.(hoveredProjectId || selectedProjectId);
-  }, [hoveredProjectId, selectedProjectId, onProjectChange]);
+    onProjectChange?.(selectedProjectId);
+  }, [selectedProjectId, onProjectChange]);
 
   // Reset navigation state when returning via browser back button (bfcache)
   useEffect(() => {
@@ -82,8 +80,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, forceDarkMode 
                     key={project.id}
                     className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''}`}
                     onClick={() => handleProjectSelect(project.id)}
-                    onMouseEnter={() => setHoveredProjectId(project.id)}
-                    onMouseLeave={() => setHoveredProjectId(null)}
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
                     <span className={styles.navButtonName}>{project.name}</span>
@@ -115,7 +111,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, forceDarkMode 
               <ProjectDetail
                 project={selectedProject}
                 onBack={handleBackToMain}
-                forceDarkMode={forceDarkMode}
+                brightBackground={brightBackground}
                 onNavigate={handleNavigate}
                 backButtonClass={styles.backButton}
               />
