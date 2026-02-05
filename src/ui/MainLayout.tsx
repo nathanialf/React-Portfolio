@@ -9,6 +9,7 @@ import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
+const visibleProjects = projects.filter(p => !p.hidden);
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;
@@ -71,7 +72,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
       {/* Navigation - always visible */}
       <nav className={styles.nav}>
         {categoryOrder.map((category) => {
-          const categoryProjects = projects.filter(p => p.category === category);
+          const categoryProjects = visibleProjects.filter(p => p.category === category);
           return (
             <div key={category} className={styles.categoryGroup}>
               <div className={styles.categoryButtons}>
@@ -128,7 +129,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
               {/* Mobile navigation - hidden on desktop via CSS */}
               <div className={styles.mobileNav}>
                 {categoryOrder.map((category) => {
-                  const categoryProjects = projects.filter(p => p.category === category);
+                  const categoryProjects = visibleProjects.filter(p => p.category === category);
                   return (
                     <div key={category} className={styles.mobileCategoryGroup}>
                       <div className={styles.mobileBracket}>

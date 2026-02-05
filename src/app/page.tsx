@@ -8,13 +8,14 @@ import { projects } from '../data/projects';
 
 import styles from '../styles/Homepage.module.css';
 
-const projectsWithBackgrounds = projects.filter(p => p.backgroundImage);
+const visibleProjects = projects.filter(p => !p.hidden);
+const projectsWithBackgrounds = visibleProjects.filter(p => p.backgroundImage);
 
 export default function Homepage() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
 
   const selectedProject = selectedProjectId
-    ? projects.find(p => p.id === selectedProjectId)
+    ? visibleProjects.find(p => p.id === selectedProjectId)
     : null;
 
   const activeBackground = selectedProject?.backgroundImage;

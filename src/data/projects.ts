@@ -33,6 +33,7 @@ export interface Project {
   backgroundImage?: string; // Optional background image shown when project is selected
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
+  hidden?: boolean; // If true, project is not displayed
 }
 
 export const projects: Project[] = [
@@ -195,5 +196,53 @@ export const projects: Project[] = [
       { label: 'Global Game Jam', url: 'https://globalgamejam.org/games/2026/groovypicturebook-9', type: 'website' },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/GroovyPictureBook', type: 'github' },
     ],
+  },
+  {
+    id: 'claryn-health',
+    name: 'CLARYN HEALTH',
+    tagline: 'Coming soon.',
+    category: 'saas',
+    description: '',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
+    id: 'markio',
+    name: 'MARKIO',
+    tagline: 'Working title.',
+    category: 'saas',
+    description: '',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
+    id: 'vka-project',
+    name: 'VKA PROJECT',
+    tagline: 'Coming soon.',
+    category: 'games',
+    description: '',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
+    id: 'untitled-playdate',
+    name: 'UNTITLED PLAYDATE GAME',
+    tagline: 'Coming soon.',
+    category: 'games',
+    description: '',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
   },
 ];
