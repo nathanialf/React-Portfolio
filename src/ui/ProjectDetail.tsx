@@ -1,6 +1,6 @@
 import React from 'react';
 import { Project, ProjectSection } from '../data/projects';
-import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane } from '@tabler/icons-react';
+import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane, IconLock } from '@tabler/icons-react';
 import styles from '../styles/ProjectDetail.module.css';
 
 interface ProjectDetailProps {
@@ -78,7 +78,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
       <div className={styles.links}>
         <h3 className={styles.linksTitle}>Links</h3>
         <div className={styles.linkGrid}>
-          {project.links.map((link, index) => (
+          {project.links.filter(link => !link.hidden || process.env.NODE_ENV === 'development').map((link, index) => (
             link.disabled ? (
               <span
                 key={index}
@@ -91,12 +91,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
               <a
                 key={index}
                 href={link.url}
-                className={styles.link}
+                className={`${styles.link} ${link.hidden ? styles.hiddenLink : ''}`}
                 onClick={(e) => {
                   e.preventDefault();
                   onNavigate(link.url);
                 }}
               >
+                {link.hidden && <IconLock className={styles.lockIcon} stroke={1.5} />}
                 {getLinkIcon(link.type)}
                 <span>{link.label}</span>
               </a>
@@ -104,10 +105,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
               <a
                 key={index}
                 href={link.url}
-                className={styles.link}
+                className={`${styles.link} ${link.hidden ? styles.hiddenLink : ''}`}
                 target={link.type === 'privacy' ? '_self' : '_blank'}
                 rel={link.type === 'privacy' ? '' : 'noopener noreferrer'}
               >
+                {link.hidden && <IconLock className={styles.lockIcon} stroke={1.5} />}
                 {getLinkIcon(link.type)}
                 <span>{link.label}</span>
               </a>

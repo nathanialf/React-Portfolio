@@ -139,6 +139,35 @@
   color: rgba(255, 255, 255, 0.8);
 }
 
+.hiddenProject {
+  position: relative;
+  overflow: hidden;
+}
+
+.hiddenProject .navButtonName,
+.hiddenProject .navButtonTagline {
+  position: relative;
+  z-index: 1;
+}
+
+.navLockIcon {
+  position: absolute;
+  right: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 7rem;
+  height: 7rem;
+  color: #111111;
+  pointer-events: none;
+  z-index: 0;
+  transition: color 0.15s ease;
+}
+
+.hiddenProject:hover .navLockIcon,
+.hiddenProject.active .navLockIcon {
+  color: color-mix(in srgb, var(--project-color, #525252) 30%, #0a0a0a);
+}
+
 .navButtonName {
   font-family: var(--font-serif), 'Times New Roman', serif;
   font-weight: 700;

@@ -155,6 +155,33 @@
   transform: translateY(-3px);
 }
 
+.hiddenLink {
+  position: relative;
+  overflow: hidden;
+}
+
+.hiddenLink span {
+  position: relative;
+  z-index: 1;
+}
+
+.hiddenLink > svg:not(.lockIcon) {
+  position: relative;
+  z-index: 1;
+}
+
+.lockIcon {
+  position: absolute;
+  right: -0.75rem;
+  top: 50%;
+  transform: translateY(-50%) !important;
+  width: auto !important;
+  height: 175% !important;
+  color: #1f1f1f;
+  pointer-events: none;
+  z-index: 0;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .linkGrid {

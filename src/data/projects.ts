@@ -3,6 +3,7 @@ export interface ProjectLink {
   url: string;
   type: 'github' | 'website' | 'playstore' | 'privacy' | 'release' | 'dungeon' | 'hexagon-site' | 'plane';
   disabled?: boolean;
+  hidden?: boolean; // If true, link is only shown in development
 }
 
 export interface ProjectSection {
@@ -42,7 +43,7 @@ export const projects: Project[] = [
     name: 'MYSEATMAP',
     tagline: 'Real-time flight intelligence.',
     category: 'saas',
-    description: 'A full-stack serverless SaaS product helping airline employees make smarter standby and non-rev flight decisions. Built as 1/2 of Ody-Software.',
+    description: 'A full-stack serverless SaaS product helping airline employees make smarter standby and non-rev flight decisions. Built as CTO and 1/2 of Ody-Software.',
     sections: [
       {
         heading: 'The Problem',
@@ -68,19 +69,23 @@ export const projects: Project[] = [
       { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
       { label: 'Ody-Software', url: 'https://ody-software.com/', type: 'website' },
       { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
+      { label: 'Ody-Software Repository', url: 'https://github.com/nathanialf/ody-software', type: 'github', hidden: true },
+      { label: 'Frontend Repository', url: 'https://github.com/nathanialf/seatmap-frontend', type: 'github', hidden: true },
+      { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github', hidden: true },
     ],
   },
   {
     id: 'claryn-health',
     name: 'CLARYN HEALTH',
-    tagline: 'Coming soon.',
+    tagline: 'Workflow-native clinical intelligence.',
     category: 'saas',
-    description: 'Built as CTO and 1/2 of Claryn.',
+    description: 'A browser extension that reconciles fragmented labs, meds, imaging, and patient history into sign-off-ready documentation, directly inside Practice Fusion. Built as CTO and 1/2 of Claryn.',
     icon: {
       type: 'placeholder',
     },
+    hoverColor: '#eab308',
     links: [
-      { label: 'Claryn Health', url: 'https://clarynhealth.com', type: 'website' },
+      { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
     ],
     hidden: true,
   },
@@ -115,6 +120,7 @@ export const projects: Project[] = [
     links: [
       { label: 'Prototype Site', url: 'https://cartograph.riperoni.com', type: 'website' },
       { label: 'Shareable Documentation Example', url: 'https://cartograph.riperoni.com/share?token=3NRZJT9A9HMtgE7T8hG1OA', type: 'website' },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/cartograph', type: 'github', hidden: true },
     ],
   },
   {
@@ -224,8 +230,8 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: 'vka-project',
-    name: 'VKA PROJECT',
+    id: 'vka-first-combat',
+    name: 'VKA FIRST COMBAT',
     tagline: 'Coming soon.',
     category: 'games',
     description: 'Role: Producer/Project Manager.',
@@ -244,12 +250,14 @@ export const projects: Project[] = [
     icon: {
       type: 'placeholder',
     },
-    links: [],
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/tailing-person-53', type: 'github', hidden: true },
+    ],
     hidden: true,
   },
   {
-    id: 'untitled-remote-game',
-    name: 'UNTITLED REMOTE GAME',
+    id: 'untitled-party-game',
+    name: 'UNTITLED PARTY GAME',
     tagline: 'Coming soon.',
     category: 'games',
     description: 'Role: Project Manager.',
@@ -268,7 +276,9 @@ export const projects: Project[] = [
     icon: {
       type: 'placeholder',
     },
-    links: [],
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
+    ],
     hidden: true,
   },
 ];

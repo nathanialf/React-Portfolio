@@ -5,6 +5,7 @@ import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
+import { IconLock } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 
@@ -80,10 +81,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                 {categoryProjects.map((project) => (
                   <button
                     key={project.id}
-                    className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''}`}
+                    className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''} ${project.hidden ? styles.hiddenProject : ''}`}
                     onClick={() => handleProjectSelect(project.id)}
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
+                    {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
                     <span className={styles.navButtonName}>{project.name}</span>
                     <span className={styles.navButtonTagline}>{project.tagline}</span>
                   </button>
@@ -142,10 +144,11 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                         {categoryProjects.map((project) => (
                           <button
                             key={project.id}
-                            className={styles.mobileNavButton}
+                            className={`${styles.mobileNavButton} ${project.hidden ? styles.hiddenProject : ''}`}
                             onClick={() => handleProjectSelect(project.id)}
                             style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                           >
+                            {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
                             <span className={styles.navButtonName}>{project.name}</span>
                             <span className={styles.navButtonTagline}>{project.tagline}</span>
                           </button>
