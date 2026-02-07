@@ -9,7 +9,8 @@ import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
-const visibleProjects = projects.filter(p => !p.hidden);
+const isDev = process.env.NODE_ENV === 'development';
+const visibleProjects = projects.filter(p => isDev || !p.hidden);
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;

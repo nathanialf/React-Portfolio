@@ -71,6 +71,20 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'claryn-health',
+    name: 'CLARYN HEALTH',
+    tagline: 'Coming soon.',
+    category: 'saas',
+    description: 'Built as CTO and 1/2 of Claryn.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [
+      { label: 'Claryn Health', url: 'https://clarynhealth.com', type: 'website' },
+    ],
+    hidden: true,
+  },
+  {
     id: 'cartograph',
     name: 'CARTOGRAPH',
     tagline: 'Docs that write themselves.',
@@ -198,23 +212,11 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'claryn-health',
-    name: 'CLARYN HEALTH',
-    tagline: 'Coming soon.',
-    category: 'saas',
-    description: '',
-    icon: {
-      type: 'placeholder',
-    },
-    links: [],
-    hidden: true,
-  },
-  {
     id: 'markio',
     name: 'MARKIO',
     tagline: 'Working title.',
     category: 'saas',
-    description: '',
+    description: 'Role: CTO.',
     icon: {
       type: 'placeholder',
     },
@@ -226,7 +228,7 @@ export const projects: Project[] = [
     name: 'VKA PROJECT',
     tagline: 'Coming soon.',
     category: 'games',
-    description: '',
+    description: 'Role: Producer/Project Manager.',
     icon: {
       type: 'placeholder',
     },
@@ -238,7 +240,31 @@ export const projects: Project[] = [
     name: 'UNTITLED PLAYDATE GAME',
     tagline: 'Coming soon.',
     category: 'games',
-    description: '',
+    description: 'Role: Programmer.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
+    id: 'untitled-remote-game',
+    name: 'UNTITLED REMOTE GAME',
+    tagline: 'Coming soon.',
+    category: 'games',
+    description: 'Role: Project Manager.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
+    id: 'the-glass-house',
+    name: 'THE GLASS HOUSE',
+    tagline: 'Coming soon.',
+    category: 'games',
+    description: 'Built as Lead Programmer and 1/3 of Arcane Misfits.',
     icon: {
       type: 'placeholder',
     },

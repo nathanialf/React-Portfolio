@@ -10,7 +10,8 @@ interface ProjectsSectionProps {
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onProjectSelect }) => {
-  const visibleProjects = projects.filter(p => !p.hidden);
+  const isDev = process.env.NODE_ENV === 'development';
+  const visibleProjects = projects.filter(p => isDev || !p.hidden);
   const groupedProjects = categoryOrder.map(category => ({
     category,
     label: categoryLabels[category],
