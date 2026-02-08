@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
-import { IconLock } from '@tabler/icons-react';
+import { IconLock, IconArrowLeft } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 
@@ -22,6 +22,19 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
+  const [navOverflows, setNavOverflows] = useState(false);
+  const navRef = useRef<HTMLElement>(null);
+
+  const checkNavOverflow = useCallback(() => {
+    const el = navRef.current;
+    if (el) setNavOverflows(el.scrollHeight > el.clientHeight);
+  }, []);
+
+  useEffect(() => {
+    checkNavOverflow();
+    window.addEventListener('resize', checkNavOverflow);
+    return () => window.removeEventListener('resize', checkNavOverflow);
+  }, [checkNavOverflow]);
 
   const selectedProject = selectedProjectId
     ? projects.find(p => p.id === selectedProjectId)
@@ -72,7 +85,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
       </div>
 
       {/* Navigation - always visible */}
-      <nav className={styles.nav}>
+      <nav ref={navRef} className={`${styles.nav} ${navOverflows ? styles.navOverflowing : ''}`}>
         {categoryOrder.map((category) => {
           const categoryProjects = visibleProjects.filter(p => p.category === category);
           return (
@@ -109,6 +122,12 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
 
       {/* Main content area */}
       <div className={styles.main}>
+        {(selectedProject || showAbout) && (
+          <button className={styles.mobileBackButton} onClick={handleBackToMain}>
+            <IconArrowLeft stroke={2} width="1.2em" height="1.2em" />
+            <span>Back to Home</span>
+          </button>
+        )}
         <div className={`${styles.content} ${isNavigating ? styles.contentFading : ''}`}>
           {selectedProject ? (
             <div key={`project-${selectedProject.id}`} className={styles.projectView}>
@@ -163,6 +182,9 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                 >
                   About & Contact
                 </button>
+                <div className={styles.mobileNavCopyright}>
+                  &copy; {new Date().getFullYear()} Nathanial Fine
+                </div>
               </div>
             </div>
           )}
