@@ -5,6 +5,7 @@
   padding: 3rem 1rem;
   font-size: 0.7rem;
   letter-spacing: 0.05em;
+  line-height: 1;
 }
 
 .fixed {
@@ -19,5 +20,12 @@
   font-size: 0.7rem;
   letter-spacing: 0.05em;
   z-index: 10;
+}
+
+@media screen and (max-width: 768px) {
+  .fixed {
+    position: static;
+    padding: 2rem 1rem;
+  }
 }
 
