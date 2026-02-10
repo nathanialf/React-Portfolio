@@ -86,6 +86,8 @@ export const projects: Project[] = [
     hoverColor: '#eab308',
     links: [
       { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
+      { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/claryn-health', type: 'github', hidden: true },
     ],
     hidden: true,
   },
@@ -230,20 +232,22 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: 'vka-first-combat',
-    name: 'VKA FIRST COMBAT',
+    id: 'the-glass-house',
+    name: 'THE GLASS HOUSE',
     tagline: 'Coming soon.',
     category: 'games',
-    description: 'Role: Producer/Project Manager.',
+    description: 'Built as Lead Programmer and 1/3 of Arcane Misfits.',
     icon: {
       type: 'placeholder',
     },
-    links: [],
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
+    ],
     hidden: true,
   },
   {
     id: 'untitled-playdate',
-    name: 'UNTITLED PLAYDATE GAME',
+    name: 'TAILING PERSON 53',
     tagline: 'Coming soon.',
     category: 'games',
     description: 'Role: Programmer.',
@@ -256,6 +260,18 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
+    id: 'vka-first-combat',
+    name: 'VKA FIRST COMBAT',
+    tagline: 'Coming soon.',
+    category: 'games',
+    description: 'Role: Producer/Project Manager.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
+  {
     id: 'untitled-party-game',
     name: 'UNTITLED PARTY GAME',
     tagline: 'Coming soon.',
@@ -265,20 +281,6 @@ export const projects: Project[] = [
       type: 'placeholder',
     },
     links: [],
-    hidden: true,
-  },
-  {
-    id: 'the-glass-house',
-    name: 'THE GLASS HOUSE',
-    tagline: 'Coming soon.',
-    category: 'games',
-    description: 'Built as Lead Programmer and 1/3 of Arcane Misfits.',
-    icon: {
-      type: 'placeholder',
-    },
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
-    ],
     hidden: true,
   },
 ];

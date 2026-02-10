@@ -197,6 +197,7 @@
   padding: 0.75rem 1rem;
   width: calc(100% - 2.5rem);
   box-sizing: border-box;
+  flex-shrink: 0;
   background: transparent;
   border: 1px solid #525252;
   color: #a3a3a3;
@@ -212,6 +213,15 @@
 .aboutButton.active {
   background-color: #525252;
   color: white;
+}
+
+.blogButton {
+  margin-top: -0.5rem;
+}
+
+.blogButton .navLockIcon {
+  width: 5.5rem;
+  height: 5.5rem;
 }
 
 .mobileNav {
@@ -419,6 +429,16 @@
   .mobileAboutButton.active {
     background-color: #525252;
     color: white;
+  }
+
+  .mobileBlogButton {
+    margin-top: -0.25rem;
+  }
+
+  .mobileBlogButton .navLockIcon {
+    width: 4rem;
+    height: 4rem;
+    color: #1a1a1a;
   }
 
   .main {

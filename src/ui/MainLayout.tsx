@@ -5,9 +5,11 @@ import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
-import { IconLock, IconArrowLeft } from '@tabler/icons-react';
+import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
+import aboutStyles from '../styles/AboutDetail.module.css';
+import projectStyles from '../styles/ProjectDetail.module.css';
 
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 const isDev = process.env.NODE_ENV === 'development';
@@ -21,6 +23,7 @@ interface MainLayoutProps {
 const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackground }) => {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [showAbout, setShowAbout] = useState(false);
+  const [showTools, setShowTools] = useState(false);
   const [isNavigating, setIsNavigating] = useState(false);
   const [navOverflows, setNavOverflows] = useState(false);
   const navRef = useRef<HTMLElement>(null);
@@ -59,16 +62,25 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
   const handleProjectSelect = (projectId: string) => {
     setSelectedProjectId(projectId);
     setShowAbout(false);
+    setShowTools(false);
   };
 
   const handleAboutSelect = () => {
     setShowAbout(true);
+    setShowTools(false);
+    setSelectedProjectId(null);
+  };
+
+  const handleToolsSelect = () => {
+    setShowTools(true);
+    setShowAbout(false);
     setSelectedProjectId(null);
   };
 
   const handleBackToMain = () => {
     setSelectedProjectId(null);
     setShowAbout(false);
+    setShowTools(false);
   };
 
   const handleNavigate = (url: string) => {
@@ -118,11 +130,29 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
         >
           About & Contact
         </button>
+        {isDev && (
+          <button
+            className={`${styles.aboutButton} ${styles.blogButton} ${styles.hiddenProject}`}
+            onClick={() => handleNavigate('/blog')}
+          >
+            <IconLock className={styles.navLockIcon} stroke={1.5} />
+            Blog
+          </button>
+        )}
+        {isDev && (
+          <button
+            className={`${styles.aboutButton} ${styles.blogButton} ${styles.hiddenProject} ${showTools ? styles.active : ''}`}
+            onClick={handleToolsSelect}
+          >
+            <IconLock className={styles.navLockIcon} stroke={1.5} />
+            Tools
+          </button>
+        )}
       </nav>
 
       {/* Main content area */}
       <div className={styles.main}>
-        {(selectedProject || showAbout) && (
+        {(selectedProject || showAbout || showTools) && (
           <button className={styles.mobileBackButton} onClick={handleBackToMain}>
             <IconArrowLeft stroke={2} width="1.2em" height="1.2em" />
             <span>Back to Home</span>
@@ -142,6 +172,32 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
           ) : showAbout ? (
             <div key="about" className={styles.projectView}>
               <AboutDetail onBack={handleBackToMain} backButtonClass={styles.backButton} />
+            </div>
+          ) : showTools ? (
+            <div key="tools" className={styles.projectView}>
+              <div className={aboutStyles.container}>
+                <button className={`${aboutStyles.backButton} ${styles.backButton}`} onClick={handleBackToMain}>
+                  <IconArrowLeft size={16} />
+                  <span>Back to Home</span>
+                </button>
+                <div className={projectStyles.links}>
+                  <h3 className={projectStyles.linksTitle}>Tools</h3>
+                  <div className={projectStyles.linkGrid}>
+                    <a href="/qr" className={projectStyles.link}>
+                      <IconQrcode stroke={2} width="1em" height="1em" />
+                      <span>QR Code Generator</span>
+                    </a>
+                    <a href="/midi" className={projectStyles.link}>
+                      <IconMusic stroke={2} width="1em" height="1em" />
+                      <span>MIDI Player</span>
+                    </a>
+                    <a href="/markdown" className={projectStyles.link}>
+                      <IconMarkdown stroke={2} width="1em" height="1em" />
+                      <span>Markdown Editor</span>
+                    </a>
+                  </div>
+                </div>
+              </div>
             </div>
           ) : (
             <div key="main" className={styles.mainView}>
@@ -182,6 +238,24 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                 >
                   About & Contact
                 </button>
+                {isDev && (
+                  <button
+                    className={`${styles.mobileAboutButton} ${styles.mobileBlogButton} ${styles.hiddenProject}`}
+                    onClick={() => handleNavigate('/blog')}
+                  >
+                    <IconLock className={styles.navLockIcon} stroke={1.5} />
+                    Blog
+                  </button>
+                )}
+                {isDev && (
+                  <button
+                    className={`${styles.mobileAboutButton} ${styles.mobileBlogButton} ${styles.hiddenProject}`}
+                    onClick={handleToolsSelect}
+                  >
+                    <IconLock className={styles.navLockIcon} stroke={1.5} />
+                    Tools
+                  </button>
+                )}
                 <div className={styles.mobileNavCopyright}>
                   &copy; {new Date().getFullYear()} Nathanial Fine
                 </div>
