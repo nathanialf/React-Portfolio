@@ -64,7 +64,7 @@ export const projects: Project[] = [
       type: 'svg',
       content: '/images/myseatmap-icon.svg',
     },
-    hoverColor: '#14b8a6',
+    hoverColor: '#00bba7',
     links: [
       { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
       { label: 'Ody-Software', url: 'https://ody-software.com/', type: 'website' },
@@ -79,11 +79,27 @@ export const projects: Project[] = [
     name: 'CLARYN HEALTH',
     tagline: 'Workflow-native clinical intelligence.',
     category: 'saas',
-    description: 'A browser extension that reconciles fragmented labs, meds, imaging, and patient history into sign-off-ready documentation, directly inside Practice Fusion. Built as CTO and 1/2 of Claryn.',
+    description: 'A Chrome extension that automates screening recommendations inside Practice Fusion EHR. It pulls patient data through FHIR, runs it through a HIPAA-compliant LLM, and injects the right screenings directly into the chart. Built as CTO and 1/2 of Claryn.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'Providers using Practice Fusion have no automated way to know which screenings are due. They manually cross-reference conditions, meds, and prior history against clinical guidelines, and things get missed.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Chrome extension with SMART on FHIR EHR Launch for seamless Practice Fusion auth',
+          'Direct FHIR R4 API integration pulling conditions, meds, vitals, labs, and prior screenings',
+          'HIPAA-compliant LLM inference through a minimal serverless backend on AWS Lambda',
+          'DOM injection engine that pre-fills screening forms directly in the EHR UI',
+          'Support for 15+ screening types across mental health, preventive care, and chronic disease management',
+        ],
+      },
+    ],
     icon: {
       type: 'placeholder',
     },
-    hoverColor: '#eab308',
+    hoverColor: '#f97316',
     links: [
       { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
       { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
@@ -211,7 +227,7 @@ export const projects: Project[] = [
     },
     backgroundImage: '/images/projects/groovy-picture-book-background.png',
     brightBackground: true,
-    hoverColor: '#ec4899',
+    hoverColor: '#8B5E3C',
     links: [
       { label: 'Play in Browser', url: 'https://nathanialf.github.io/GroovyPictureBook/GroovyPictureBook.html', type: 'website' },
       { label: 'itch.io', url: 'https://wiley-fox-productions.itch.io/groovy-picture-book', type: 'website' },
@@ -234,40 +250,92 @@ export const projects: Project[] = [
   {
     id: 'the-glass-house',
     name: 'THE GLASS HOUSE',
-    tagline: 'Coming soon.',
+    tagline: 'Psychological horror through dialogue.',
     category: 'games',
-    description: 'Built as Lead Programmer and 1/3 of Arcane Misfits.',
+    description: 'A psychological horror game where combat is entirely dialogue-based. Built as Lead Programmer with Arcane Misfits in Godot 4.',
+    sections: [
+      {
+        heading: 'The Concept',
+        content: 'You wake up in your childhood bedroom. The glow-in-the-dark stars on the ceiling are glowing a sick, pale red. You explore rooms of a house that is really a fractured mind, confronting Shadow Archetypes through dialogue choices rather than weapons.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Dialogue combat system with branching trees, conditional choices, and flag-driven state',
+          'Hidden sanity system (100 to 0) with five tiers that progressively corrupt the experience',
+          'Custom GLSL shader for wave distortion, chromatic aberration, vignette, and color shift',
+          'Hallucination layer that spawns fake UI elements and trick choices that drain sanity',
+          'Item database where names and descriptions change at low sanity',
+        ],
+      },
+    ],
     icon: {
       type: 'placeholder',
     },
+    hoverColor: '#8b1a3a',
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
+      { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release', hidden: true },
+      { label: 'Web Build (Dev)', url: 'https://dev.internal.defnf.com:8443/', type: 'website', hidden: true },
     ],
     hidden: true,
   },
   {
     id: 'untitled-playdate',
     name: 'TAILING PERSON 53',
-    tagline: 'Coming soon.',
+    tagline: 'A Playdate game about watching strangers.',
     category: 'games',
-    description: 'Role: Programmer.',
+    description: 'A Playdate game adapted from an original screenplay by Oscar Ballyvolane. You play a woman who follows strangers through Berlin, observing their routines and quiet moments through the Playdate\'s crank. Built as Programmer with Oscar Ballyvolane (Writer/Director) and Maxime Franchot (Art/Programming).',
+    sections: [
+      {
+        heading: 'The Game',
+        content: 'Person 53 is Lennard. Scruffy, old, unremarkable. You\'ve been tailing him for 17 days. Each environment is a new scene in his life: buying ice cream, playing chess in the park, struggling with a ticket machine. The crank drives a different mechanic in each setting. Follow too close and the study ends.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Scene-based game architecture with lifecycle hooks and managed transitions',
+          'Crank input system mapping physical rotation to per-environment mechanics',
+          'Menu system with custom bitmap font, gridview navigation, and nine-slice UI',
+          'CI/CD pipeline with GitHub Actions for automatic builds and versioned releases',
+        ],
+      },
+    ],
     icon: {
       type: 'placeholder',
     },
+    hoverColor: '#ffc500',
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/tailing-person-53', type: 'github', hidden: true },
+      { label: 'Releases', url: 'https://github.com/nathanialf/tailing-person-53/releases', type: 'release', hidden: true },
     ],
     hidden: true,
   },
   {
     id: 'vka-first-combat',
     name: 'VKA FIRST COMBAT',
-    tagline: 'Coming soon.',
+    tagline: 'Mission-based mech combat.',
     category: 'games',
-    description: 'Role: Producer/Project Manager.',
+    description: 'A mech combat game built in Unreal Engine 5. Mission-based single-player with customizable loadouts and tactical objectives. Built as Producer/Project Manager.',
+    sections: [
+      {
+        heading: 'The Game',
+        content: 'You pilot a mech through mission-based combat scenarios. Swap weapons, build loadouts, and take on objectives like target kills, navigation challenges, and timed survival. Two core enemy types plus bosses keep the combat varied.',
+      },
+      {
+        heading: 'What I Manage',
+        content: [
+          'Phase-gated roadmap across four milestones from gameplay lock to full release',
+          'Task ownership and dependency tracking across programming, art, animation, and sound',
+          'Scope control with strict feature lock gates to prevent creep',
+          'Early playtesting pipeline and QA targets (stable 60fps)',
+        ],
+      },
+    ],
     icon: {
       type: 'placeholder',
     },
+    hoverColor: '#ff0000',
     links: [],
     hidden: true,
   },

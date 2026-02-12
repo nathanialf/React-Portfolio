@@ -27,6 +27,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
   const [isNavigating, setIsNavigating] = useState(false);
   const [navOverflows, setNavOverflows] = useState(false);
   const navRef = useRef<HTMLElement>(null);
+  const contentRef = useRef<HTMLDivElement>(null);
 
   const checkNavOverflow = useCallback(() => {
     const el = navRef.current;
@@ -59,22 +60,29 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
     return () => window.removeEventListener('pageshow', handlePageShow);
   }, []);
 
+  const scrollContentToTop = () => {
+    contentRef.current?.scrollTo(0, 0);
+  };
+
   const handleProjectSelect = (projectId: string) => {
     setSelectedProjectId(projectId);
     setShowAbout(false);
     setShowTools(false);
+    scrollContentToTop();
   };
 
   const handleAboutSelect = () => {
     setShowAbout(true);
     setShowTools(false);
     setSelectedProjectId(null);
+    scrollContentToTop();
   };
 
   const handleToolsSelect = () => {
     setShowTools(true);
     setShowAbout(false);
     setSelectedProjectId(null);
+    scrollContentToTop();
   };
 
   const handleBackToMain = () => {
@@ -158,7 +166,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
             <span>Back to Home</span>
           </button>
         )}
-        <div className={`${styles.content} ${isNavigating ? styles.contentFading : ''}`}>
+        <div ref={contentRef} className={`${styles.content} ${isNavigating ? styles.contentFading : ''}`}>
           {selectedProject ? (
             <div key={`project-${selectedProject.id}`} className={styles.projectView}>
               <ProjectDetail
@@ -189,7 +197,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     </a>
                     <a href="/midi" className={projectStyles.link}>
                       <IconMusic stroke={2} width="1em" height="1em" />
-                      <span>MIDI Player</span>
+                      <span>MIDI Saxophone</span>
                     </a>
                     <a href="/markdown" className={projectStyles.link}>
                       <IconMarkdown stroke={2} width="1em" height="1em" />
