@@ -7,7 +7,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 - `npm run dev` - Start development server (accessible at localhost:3000)
 - `npm run build` - Build for production
 - `npm start` - Start production server
-- `npm run lint` - Note: Currently configured as "next link" which appears to be a typo, should likely be "next lint"
+- `npm run lint` - Run ESLint on src directory for .ts and .tsx files
 
 ## Architecture Overview
 

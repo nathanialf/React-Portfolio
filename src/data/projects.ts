@@ -105,7 +105,6 @@ export const projects: Project[] = [
       { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/claryn-health', type: 'github', hidden: true },
     ],
-    hidden: true,
   },
   {
     id: 'cartograph',
@@ -252,7 +251,7 @@ export const projects: Project[] = [
     name: 'THE GLASS HOUSE',
     tagline: 'Psychological horror through dialogue.',
     category: 'games',
-    description: 'A psychological horror game where combat is entirely dialogue-based. Built as Lead Programmer with Arcane Misfits in Godot 4.',
+    description: 'A psychological horror visual novel where combat is entirely dialogue-based. Built as Lead Programmer with Arcane Misfits in Godot 4.',
     sections: [
       {
         heading: 'The Concept',
@@ -261,31 +260,32 @@ export const projects: Project[] = [
       {
         heading: 'What I Built',
         content: [
-          'Dialogue combat system with branching trees, conditional choices, and flag-driven state',
-          'Hidden sanity system (100 to 0) with five tiers that progressively corrupt the experience',
-          'Custom GLSL shader for wave distortion, chromatic aberration, vignette, and color shift',
-          'Hallucination layer that spawns fake UI elements and trick choices that drain sanity',
-          'Item database where names and descriptions change at low sanity',
+          'Dialogue combat system with branching choices that shift based on prior decisions and sanity',
+          'Hidden sanity tracker that silently corrupts the experience across five tiers',
+          'Hallucination layer that spawns fake UI elements and trick choices to gaslight the player',
+          'Items, descriptions, and narration that quietly rewrite themselves as sanity drops',
         ],
       },
     ],
     icon: {
       type: 'placeholder',
     },
+    backgroundImage: '/images/projects/glass-house-background.png',
+    brightBackground: true,
     hoverColor: '#8b1a3a',
     links: [
+      { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
       { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release', hidden: true },
       { label: 'Web Build (Dev)', url: 'https://dev.internal.defnf.com:8443/', type: 'website', hidden: true },
     ],
-    hidden: true,
   },
   {
     id: 'untitled-playdate',
     name: 'TAILING PERSON 53',
     tagline: 'A Playdate game about watching strangers.',
     category: 'games',
-    description: 'A Playdate game adapted from an original screenplay by Oscar Ballyvolane. You play a woman who follows strangers through Berlin, observing their routines and quiet moments through the Playdate\'s crank. Built as Programmer with Oscar Ballyvolane (Writer/Director) and Maxime Franchot (Art/Programming).',
+    description: 'A narrative graphic novel for Playdate adapted from an original screenplay by Oscar Ballyvolane. You play a woman who follows strangers through Berlin, observing their routines and quiet moments through the Playdate\'s crank. Built as Programmer with Oscar Ballyvolane (Writer/Director) and Maxime Franchot (Art/Programming).',
     sections: [
       {
         heading: 'The Game',
@@ -296,7 +296,6 @@ export const projects: Project[] = [
         content: [
           'Scene-based game architecture with lifecycle hooks and managed transitions',
           'Crank input system mapping physical rotation to per-environment mechanics',
-          'Menu system with custom bitmap font, gridview navigation, and nine-slice UI',
           'CI/CD pipeline with GitHub Actions for automatic builds and versioned releases',
         ],
       },
