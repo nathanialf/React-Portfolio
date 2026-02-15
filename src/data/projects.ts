@@ -100,6 +100,7 @@ export const projects: Project[] = [
       type: 'placeholder',
     },
     hoverColor: '#f97316',
+    hidden: true,
     links: [
       { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
       { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
