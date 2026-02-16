@@ -5,7 +5,7 @@ import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
-import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown } from '@tabler/icons-react';
+import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2 } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 import aboutStyles from '../styles/AboutDetail.module.css';
@@ -202,6 +202,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     <a href="/markdown" className={projectStyles.link}>
                       <IconMarkdown stroke={2} width="1em" height="1em" />
                       <span>Markdown Editor</span>
+                    </a>
+                    <a href="/games" className={projectStyles.link}>
+                      <IconDeviceGamepad2 stroke={2} width="1em" height="1em" />
+                      <span>Favorite Video Games</span>
                     </a>
                   </div>
                 </div>

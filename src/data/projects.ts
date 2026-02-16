@@ -306,6 +306,7 @@ export const projects: Project[] = [
     },
     hoverColor: '#ffc500',
     links: [
+      { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/tailing-person-53', type: 'github', hidden: true },
       { label: 'Releases', url: 'https://github.com/nathanialf/tailing-person-53/releases', type: 'release', hidden: true },
     ],
@@ -337,6 +338,38 @@ export const projects: Project[] = [
     },
     hoverColor: '#ff0000',
     links: [],
+    hidden: true,
+  },
+  {
+    id: 'syndicate',
+    name: 'SYNDICATE',
+    tagline: 'A modern Android RSS reader.',
+    category: 'apps',
+    description: 'A clean, full-featured RSS/Atom feed reader for Android built with Kotlin and Jetpack Compose. Release postponed indefinitely.',
+    sections: [
+      {
+        heading: 'The Problem',
+        content: 'Most RSS readers are either bloated with features nobody asked for or abandoned and outdated. I wanted something clean, fast, and thoughtfully designed.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'Jetpack Compose UI with Material 3 dynamic theming and responsive two-pane tablet layout',
+          'RSS and Atom feed parsing with automatic favicon loading and duplicate detection',
+          'OPML import/export for feed backup and migration',
+          'Background sync via WorkManager with per-feed push notifications',
+          'Rich article rendering with inline images, code blocks, lists, and YouTube embeds',
+          'Clean architecture with Room, Hilt, Retrofit, and DataStore',
+        ],
+      },
+    ],
+    icon: {
+      type: 'placeholder',
+    },
+    hoverColor: '#f59e0b',
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/syndicate', type: 'github', hidden: true },
+    ],
     hidden: true,
   },
   {
