@@ -3,11 +3,11 @@ import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import remarkRehype from 'remark-rehype';
 import rehypeStringify from 'rehype-stringify';
-import Link from 'next/link';
-import Image from 'next/image';
-import { IconArrowLeft, IconRss } from '@tabler/icons-react';
+import { IconRss } from '@tabler/icons-react';
 import VerticalSidebar from '../../../ui/VerticalSidebar';
 import Copyright from '../../../ui/Copyright';
+import BlogPostHeader from '../../../ui/BlogPostHeader';
+import BlogPostContent from '../../../ui/BlogPostContent';
 import { getPostBySlug, getAllPostSlugs, formatDate } from '../../../lib/blog';
 import { isImageDark } from '../../../lib/image-brightness';
 import styles from '../../../styles/Blog.module.css';
@@ -85,7 +85,8 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
     .use(rehypeStringify, { allowDangerousHtml: true })
     .process(post.content);
 
-  const coverImageDark = post.coverImage ? await isImageDark(post.coverImage) : true;
+  // Use frontmatter value if set, otherwise detect
+  const coverImageDark = post.coverImageDark ?? (post.coverImage ? await isImageDark(post.coverImage) : true);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -125,52 +126,19 @@ export default async function BlogPostPage({ params }: BlogPostPageProps) {
       </a>
       <div className={styles.container}>
         <div className={styles.content}>
-          {post.coverImage ? (
-            <header className={`${styles.headerWithCover} ${coverImageDark ? styles.lightText : styles.darkText}`}>
-              <div className={styles.headerBackground}>
-                <Image src={post.coverImage} alt="" fill sizes="(max-width: 768px) 100vw, 700px" />
-              </div>
-              <div className={styles.headerContent}>
-                <Link href="/blog" className={styles.backLink}>
-                  <IconArrowLeft stroke={2} width="1em" height="1em" />
-                  <span>All Posts</span>
-                </Link>
-                <h1 className={styles.title}>{post.title}</h1>
-                <time className={styles.postDateHeader} dateTime={post.date}>
-                  {formatDate(post.date)}
-                </time>
-                {post.tags && post.tags.length > 0 && (
-                  <div className={styles.postTagsHeader}>
-                    {post.tags.map(tag => (
-                      <span key={tag} className={styles.tag}>{tag}</span>
-                    ))}
-                  </div>
-                )}
-              </div>
-            </header>
-          ) : (
-            <header className={styles.header}>
-              <Link href="/blog" className={styles.backLink}>
-                <IconArrowLeft stroke={2} width="1em" height="1em" />
-                <span>All Posts</span>
-              </Link>
-              <h1 className={styles.title}>{post.title}</h1>
-              <time className={styles.postDateHeader} dateTime={post.date}>
-                {formatDate(post.date)}
-              </time>
-              {post.tags && post.tags.length > 0 && (
-                <div className={styles.postTagsHeader}>
-                  {post.tags.map(tag => (
-                    <span key={tag} className={styles.tag}>{tag}</span>
-                  ))}
-                </div>
-              )}
-            </header>
-          )}
+          <BlogPostHeader
+            title={post.title}
+            date={post.date}
+            formattedDate={formatDate(post.date)}
+            coverImage={post.coverImage}
+            coverImageDark={coverImageDark}
+            tags={post.tags}
+          />
 
-          <main
+          <BlogPostContent
+            htmlContent={htmlContent.toString()}
+            tags={post.tags}
             className={styles.markdown}
-            dangerouslySetInnerHTML={{ __html: htmlContent.toString() }}
           />
           <Copyright />
         </div>

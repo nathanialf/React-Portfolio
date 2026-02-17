@@ -1,0 +1,802 @@
+/* Page-specific overrides */
+.container {
+  padding: 2rem 3rem 4rem;
+  overflow-y: auto;
+}
+
+.inner {
+  max-width: 900px;
+}
+
+.header {
+  margin-bottom: 0.5rem;
+}
+
+/* Table of Contents */
+.toc {
+  border-bottom: 1px solid #1a1a1a;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+}
+
+.tocLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #404040;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  margin-bottom: 0.35rem;
+}
+
+.tocList {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.tocItem {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: #525252;
+  line-height: 1.6;
+}
+
+.tocItem::before {
+  content: '\00a7';
+  margin-right: 0.25rem;
+  color: #333;
+}
+
+/* Section */
+.section {
+  margin-bottom: 1.25rem;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  border-bottom: 1px solid #262626;
+  padding-bottom: 0.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.sectionNumber {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #404040;
+  flex-shrink: 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-serif), 'Times New Roman', serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #d4d4d4;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.sectionDesc {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.65rem;
+  color: #525252;
+  margin: 0 0 0.5rem 0;
+  line-height: 1.5;
+}
+
+/* Component Entry */
+.entry {
+  border: 1px solid #1a1a1a;
+  margin-bottom: 0.5rem;
+  background: #0d0d0d;
+  overflow: hidden;
+}
+
+.entryHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.35rem 0.6rem;
+  border-bottom: 1px solid #1a1a1a;
+  background: #111;
+}
+
+.entryName {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #e5e5e5;
+  font-weight: 500;
+}
+
+.entryPath {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #333;
+}
+
+.entryBody {
+  padding: 0.5rem 0.6rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  overflow: hidden;
+}
+
+.entryBody > * {
+  min-width: 0;
+}
+
+.entryBodyFull {
+  padding: 0.5rem 0.6rem;
+}
+
+/* Spec table inside entries */
+.specTable {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.specTable td {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  padding: 0.15rem 0;
+  vertical-align: top;
+  line-height: 1.4;
+}
+
+.specTable td:first-child {
+  color: #404040;
+  width: 45%;
+  padding-right: 0.5rem;
+  white-space: nowrap;
+}
+
+.specTable td:last-child {
+  color: #737373;
+}
+
+/* Preview area */
+.preview {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  border: 1px solid #1a1a1a;
+  border-radius: 2px;
+  background: #0a0a0a;
+  padding: 0.5rem;
+}
+
+.previewLarge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+  border: 1px solid #1a1a1a;
+  border-radius: 2px;
+  background: #0a0a0a;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+/* Glyph grid */
+.glyphGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 0.5rem;
+  margin-top: 0.35rem;
+}
+
+.glyphCell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.25rem;
+  padding: 0.4rem;
+  border: 1px solid #1a1a1a;
+  background: #0a0a0a;
+}
+
+.glyphCell svg {
+  top: 0;
+  margin-right: 0;
+}
+
+.glyphLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #404040;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Color swatch row */
+.swatchRow {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-top: 0.35rem;
+}
+
+.swatch {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.swatchBox {
+  width: 12px;
+  height: 12px;
+  border: 1px solid #333;
+  flex-shrink: 0;
+}
+
+.swatchLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #525252;
+}
+
+/* Phase diagram */
+.phaseRow {
+  display: flex;
+  gap: 0;
+  margin-top: 0.35rem;
+  border: 1px solid #1a1a1a;
+}
+
+.phaseBlock {
+  flex: 1;
+  padding: 0.3rem 0.4rem;
+  border-right: 1px solid #1a1a1a;
+  text-align: center;
+}
+
+.phaseBlock:last-child {
+  border-right: none;
+}
+
+.phaseNumber {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #333;
+  display: block;
+}
+
+.phaseName {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #737373;
+  display: block;
+}
+
+.phasePercent {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #404040;
+  display: block;
+}
+
+/* Props list */
+.propsList {
+  list-style: none;
+  padding: 0;
+  margin: 0.25rem 0 0 0;
+}
+
+.propItem {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #525252;
+  padding: 0.1rem 0;
+  display: flex;
+  gap: 0.5rem;
+}
+
+.propName {
+  color: #737373;
+}
+
+.propType {
+  color: #404040;
+}
+
+.propDefault {
+  color: #333;
+}
+
+/* Marathon accent */
+.marathonAccent {
+  color: #bfff00;
+}
+
+/* Inline tag */
+.tag {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #404040;
+  border: 1px solid #262626;
+  padding: 0.05rem 0.3rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tagActive {
+  color: #bfff00;
+  border-color: #bfff0033;
+}
+
+/* Live demo area */
+.demo {
+  border: 1px solid #262626;
+  background: #0a0a0a;
+  padding: 0.75rem;
+  margin-top: 0.5rem;
+  position: relative;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.demoLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.demoLabel::after {
+  content: '';
+  flex: 1;
+  border-top: 1px solid #1a1a1a;
+}
+
+/* Scramble demo */
+.scrambleDemo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.scrambleLine {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  min-width: 0;
+  overflow: hidden;
+}
+
+.scrambleLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #333;
+  min-width: 4rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.scrambleOutput {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  color: #e5e5e5;
+  letter-spacing: 0.05em;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  min-width: 0;
+}
+
+/* Marathon text demo */
+.marathonDemo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 1rem 0;
+}
+
+.marathonLine {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.marathonLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #333;
+  min-width: 3.5rem;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+/* Dither image demo */
+.ditherDemo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.ditherFrame {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border: 1px solid #1a1a1a;
+}
+
+.ditherFrameLabel {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #404040;
+  background: rgba(10, 10, 10, 0.85);
+  padding: 0.2rem 0.35rem;
+  z-index: 2;
+  letter-spacing: 0.05em;
+}
+
+/* Project card demos — shared text styles */
+.demoCardName {
+  font-family: var(--font-serif), 'Times New Roman', serif;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  color: #f9fafb;
+  line-height: 1.2;
+  transition: color 0.15s ease;
+}
+
+.demoCardTagline {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #737373;
+  margin-top: 0.35rem;
+  letter-spacing: 0.02em;
+  transition: color 0.15s ease;
+}
+
+/* Desktop variant — transparent BG, vertical stack, bracket right */
+.desktopCategoryDemo {
+  display: flex;
+  align-items: stretch;
+}
+
+.desktopCardStack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.demoCard {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  background: transparent;
+  border: 1px solid var(--project-color, #525252);
+  cursor: pointer;
+  transition: background-color 0.15s ease;
+  text-align: left;
+}
+
+.demoCard:hover {
+  background-color: var(--project-color, #525252);
+}
+
+.demoCard:hover .demoCardName {
+  color: white;
+}
+
+.demoCard:hover .demoCardTagline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Desktop bracket — right side vertical line with caps */
+.desktopBracket {
+  position: relative;
+  width: 2rem;
+  flex-shrink: 0;
+  margin-left: 0.5rem;
+}
+
+.desktopBracket::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.35rem;
+  width: 0.35rem;
+  height: 1px;
+  background: #525252;
+}
+
+.desktopBracket::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: -0.35rem;
+  width: 0.35rem;
+  height: 1px;
+  background: #525252;
+}
+
+.desktopBracketLine {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #525252;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.desktopBracketLabel {
+  background: #0a0a0a;
+  padding: 0.4em 0;
+  writing-mode: vertical-rl;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.55rem;
+  color: #525252;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* Mobile variant — gradient BG, bracket left */
+.mobileCategoryDemo {
+  display: flex;
+  align-items: stretch;
+}
+
+.mobileBracketDemo {
+  position: relative;
+  width: 1.5rem;
+  flex-shrink: 0;
+  margin-right: 0.4rem;
+}
+
+.mobileBracketDemo::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -0.25rem;
+  width: 0.25rem;
+  height: 1px;
+  background: #525252;
+}
+
+.mobileBracketDemo::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  right: -0.25rem;
+  width: 0.25rem;
+  height: 1px;
+  background: #525252;
+}
+
+.mobileBracketLine {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: #525252;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileBracketLabel {
+  background: #0a0a0a;
+  padding: 0.3em 0;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #525252;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.mobileCardDemoGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  flex: 1;
+}
+
+.mobileCardDemo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.75rem 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  background: linear-gradient(
+    to right,
+    transparent 0%,
+    color-mix(in srgb, var(--project-color, #525252) 25%, transparent) 100%
+  );
+  border: 1px solid var(--project-color, #525252);
+  cursor: pointer;
+  transition: background 0.15s ease;
+  text-align: left;
+}
+
+.mobileCardDemo:hover {
+  background: var(--project-color, #525252);
+}
+
+.mobileCardDemo:hover .demoCardName {
+  color: white;
+}
+
+.mobileCardDemo:hover .demoCardTagline {
+  color: rgba(255, 255, 255, 0.8);
+}
+
+/* Sidebar demo inline */
+.sidebarDemo {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+
+.sidebarMini {
+  border-right: 1px solid #262626;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.35rem;
+  flex-shrink: 0;
+}
+
+.sidebarMini svg {
+  top: 0;
+  margin-right: 0;
+}
+
+.sidebarMiniLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.4rem;
+  color: #404040;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+}
+
+/* Opacity level bar */
+.levelBar {
+  display: flex;
+  gap: 0.35rem;
+  align-items: center;
+  margin-top: 0.35rem;
+}
+
+.levelDot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid #262626;
+}
+
+.levelDotLabel {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  color: #404040;
+  min-width: 1.5rem;
+}
+
+/* Sidebar dual demo */
+.sidebarDualDemo {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-top: 0.5rem;
+}
+
+.rssDemoMini {
+  border-left: 1px solid #262626;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+/* Divider */
+.divider {
+  border: none;
+  border-top: 1px solid #1a1a1a;
+  margin: 0.75rem 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .container {
+    padding: 1.5rem 1rem 3rem 3rem;
+  }
+
+  .entryBody {
+    grid-template-columns: 1fr;
+  }
+
+  .tocList {
+    gap: 0 1rem;
+  }
+
+  .ditherDemo {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebarDemo {
+    flex-direction: column;
+  }
+
+  .scrambleLine {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .scrambleLabel {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .marathonLine {
+    flex-direction: column;
+    gap: 0.25rem;
+    align-items: flex-start;
+  }
+
+  .marathonLabel {
+    text-align: left;
+    min-width: 0;
+  }
+
+  .phaseRow {
+    flex-direction: column;
+  }
+
+  .phaseBlock {
+    border-right: none;
+    border-bottom: 1px solid #1a1a1a;
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    text-align: left;
+  }
+
+  .phaseBlock:last-child {
+    border-bottom: none;
+  }
+
+  .glyphGrid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+  }
+
+  .entryPath {
+    display: none;
+  }
+}

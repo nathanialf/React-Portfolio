@@ -1,4 +1,5 @@
 import React from 'react';
+import Image from 'next/image';
 import { IconArrowLeft, IconMail, IconBrandLinkedin } from '@tabler/icons-react';
 import styles from '../styles/AboutDetail.module.css';
 
@@ -38,15 +39,15 @@ const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, backButtonClass }) =>
         <h2 className={styles.heading}>Previously</h2>
         <div className={styles.experience}>
           <div className={styles.company}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className={styles.companyLogo} />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg" alt="Amazon" className={styles.companyLogo} width={60} height={18} unoptimized />
             <span className={styles.years}>2023–2025</span>
           </div>
           <div className={styles.company}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" className={styles.companyLogo} />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS" className={styles.companyLogo} width={60} height={18} unoptimized />
             <span className={styles.years}>2020–2023</span>
           </div>
           <div className={styles.company}>
-            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" className={styles.companyLogo} />
+            <Image src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple" className={styles.companyLogo} width={18} height={18} unoptimized />
             <span className={styles.years}>2018–2020</span>
           </div>
         </div>

@@ -1,9 +1,9 @@
 'use client';
 
 import { useState, useRef, useEffect, useCallback } from 'react';
-import VerticalSidebar from '../../ui/VerticalSidebar';
-import Copyright from '../../ui/Copyright';
+import ToolPageLayout from '../../ui/ToolPageLayout';
 import styles from '../../styles/QR.module.css';
+import form from '../../styles/FormControls.module.css';
 
 type DotType = 'square' | 'dots' | 'rounded' | 'extra-rounded' | 'classy' | 'classy-rounded';
 type CornerSquareType = 'square' | 'dot' | 'extra-rounded';
@@ -186,200 +186,198 @@ export default function QRPage() {
   const isLowContrast = contrastRatio < 3;
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.sidebar}>
-        <VerticalSidebar />
-      </div>
-      <div className={styles.container}>
-        <div className={styles.content}>
-          <header className={styles.header}>
-            <h1 className={styles.title}>QR Generator</h1>
-            <p className={styles.subtitle}>Create styled QR codes</p>
-          </header>
-
-          <main className={styles.main}>
-            <div className={styles.preview}>
-              <div className={styles.qrContainer} style={{ backgroundColor: bgColor }}>
-                <div ref={qrRef} />
-              </div>
-              <button className={styles.downloadBtn} onClick={downloadQR}>
-                Download PNG
-              </button>
-            </div>
-
-            <div className={styles.controls}>
-              <div className={styles.controlGroup}>
-                <label htmlFor="url">URL / Text</label>
-                <input
-                  id="url"
-                  type="text"
-                  value={url}
-                  onChange={(e) => setUrl(e.target.value)}
-                  placeholder="Enter URL or text"
-                />
-              </div>
-
-              <div className={styles.sectionTitle}>Colors</div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="fgColor">Dot Color</label>
-                <div className={styles.colorInput}>
-                  <input
-                    id="fgColor"
-                    type="color"
-                    value={fgColor}
-                    onChange={(e) => setFgColor(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={fgColor}
-                    onChange={(e) => setFgColor(e.target.value)}
-                    className={styles.colorText}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="cornerSquareColor">Corner Square Color</label>
-                <div className={styles.colorInput}>
-                  <input
-                    id="cornerSquareColor"
-                    type="color"
-                    value={cornerSquareColor}
-                    onChange={(e) => setCornerSquareColor(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={cornerSquareColor}
-                    onChange={(e) => setCornerSquareColor(e.target.value)}
-                    className={styles.colorText}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="cornerDotColor">Corner Dot Color</label>
-                <div className={styles.colorInput}>
-                  <input
-                    id="cornerDotColor"
-                    type="color"
-                    value={cornerDotColor}
-                    onChange={(e) => setCornerDotColor(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={cornerDotColor}
-                    onChange={(e) => setCornerDotColor(e.target.value)}
-                    className={styles.colorText}
-                  />
-                </div>
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="bgColor">Background Color</label>
-                <div className={styles.colorInput}>
-                  <input
-                    id="bgColor"
-                    type="color"
-                    value={bgColor}
-                    onChange={(e) => setBgColor(e.target.value)}
-                  />
-                  <input
-                    type="text"
-                    value={bgColor}
-                    onChange={(e) => setBgColor(e.target.value)}
-                    className={styles.colorText}
-                  />
-                </div>
-                <small>Download will have transparent background</small>
-              </div>
-
-              {isLowContrast && (
-                <div className={styles.warning}>
-                  Low contrast may cause scanning issues
-                </div>
-              )}
-
-              <div className={styles.sectionTitle}>Styles</div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="dotStyle">Dot Style</label>
-                <select
-                  id="dotStyle"
-                  value={dotStyle}
-                  onChange={(e) => setDotStyle(e.target.value as DotType)}
-                >
-                  {dotStyles.map((style) => (
-                    <option key={style.value} value={style.value}>
-                      {style.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="cornerSquareStyle">Corner Square Style</label>
-                <select
-                  id="cornerSquareStyle"
-                  value={cornerSquareStyle}
-                  onChange={(e) => setCornerSquareStyle(e.target.value as CornerSquareType)}
-                >
-                  {cornerSquareStyles.map((style) => (
-                    <option key={style.value} value={style.value}>
-                      {style.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="cornerDotStyle">Corner Dot Style</label>
-                <select
-                  id="cornerDotStyle"
-                  value={cornerDotStyle}
-                  onChange={(e) => setCornerDotStyle(e.target.value as CornerDotType)}
-                >
-                  {cornerDotStyles.map((style) => (
-                    <option key={style.value} value={style.value}>
-                      {style.label}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              <div className={styles.sectionTitle}>Size & Quality</div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="size">Size: {size}px</label>
-                <input
-                  id="size"
-                  type="range"
-                  min="128"
-                  max="512"
-                  value={size}
-                  onChange={(e) => setSize(Number(e.target.value))}
-                />
-              </div>
-
-              <div className={styles.controlGroup}>
-                <label htmlFor="errorLevel">Error Correction</label>
-                <select
-                  id="errorLevel"
-                  value={errorLevel}
-                  onChange={(e) => setErrorLevel(e.target.value as ErrorCorrectionLevel)}
-                >
-                  <option value="L">Low (7%)</option>
-                  <option value="M">Medium (15%)</option>
-                  <option value="Q">Quartile (25%)</option>
-                  <option value="H">High (30%)</option>
-                </select>
-                <small>Higher levels allow more damage but increase density</small>
-              </div>
-            </div>
-          </main>
-          <Copyright />
+    <ToolPageLayout
+      title="QR Generator"
+      subtitle="Styled QR Code Tool"
+      innerClassName={styles.content}
+      headerClassName={styles.header}
+    >
+      <main className={styles.main}>
+        <div className={styles.preview}>
+          <div className={styles.qrContainer} style={{ backgroundColor: bgColor }}>
+            <div ref={qrRef} />
+          </div>
+          <button className={form.downloadButton} onClick={downloadQR}>
+            Download PNG
+          </button>
         </div>
-      </div>
-    </div>
+
+        <div className={styles.controls}>
+          <div className={form.controlGroup}>
+            <label htmlFor="url" className={form.controlLabel}>URL / Text</label>
+            <input
+              id="url"
+              type="text"
+              className={form.textInput}
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="Enter URL or text"
+            />
+          </div>
+
+          <div className={form.sectionTitle}>Colors</div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="fgColor" className={form.controlLabel}>Dot Color</label>
+            <div className={form.colorInput}>
+              <input
+                id="fgColor"
+                type="color"
+                value={fgColor}
+                onChange={(e) => setFgColor(e.target.value)}
+              />
+              <input
+                type="text"
+                value={fgColor}
+                onChange={(e) => setFgColor(e.target.value)}
+                className={`${form.textInput} ${form.colorText}`}
+              />
+            </div>
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="cornerSquareColor" className={form.controlLabel}>Corner Square Color</label>
+            <div className={form.colorInput}>
+              <input
+                id="cornerSquareColor"
+                type="color"
+                value={cornerSquareColor}
+                onChange={(e) => setCornerSquareColor(e.target.value)}
+              />
+              <input
+                type="text"
+                value={cornerSquareColor}
+                onChange={(e) => setCornerSquareColor(e.target.value)}
+                className={`${form.textInput} ${form.colorText}`}
+              />
+            </div>
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="cornerDotColor" className={form.controlLabel}>Corner Dot Color</label>
+            <div className={form.colorInput}>
+              <input
+                id="cornerDotColor"
+                type="color"
+                value={cornerDotColor}
+                onChange={(e) => setCornerDotColor(e.target.value)}
+              />
+              <input
+                type="text"
+                value={cornerDotColor}
+                onChange={(e) => setCornerDotColor(e.target.value)}
+                className={`${form.textInput} ${form.colorText}`}
+              />
+            </div>
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="bgColor" className={form.controlLabel}>Background Color</label>
+            <div className={form.colorInput}>
+              <input
+                id="bgColor"
+                type="color"
+                value={bgColor}
+                onChange={(e) => setBgColor(e.target.value)}
+              />
+              <input
+                type="text"
+                value={bgColor}
+                onChange={(e) => setBgColor(e.target.value)}
+                className={`${form.textInput} ${form.colorText}`}
+              />
+            </div>
+            <small className={form.controlHint}>Download will have transparent background</small>
+          </div>
+
+          {isLowContrast && (
+            <div className={form.warning}>
+              Low contrast may cause scanning issues
+            </div>
+          )}
+
+          <div className={form.sectionTitle}>Styles</div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="dotStyle" className={form.controlLabel}>Dot Style</label>
+            <select
+              id="dotStyle"
+              className={form.select}
+              value={dotStyle}
+              onChange={(e) => setDotStyle(e.target.value as DotType)}
+            >
+              {dotStyles.map((style) => (
+                <option key={style.value} value={style.value}>
+                  {style.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="cornerSquareStyle" className={form.controlLabel}>Corner Square Style</label>
+            <select
+              id="cornerSquareStyle"
+              className={form.select}
+              value={cornerSquareStyle}
+              onChange={(e) => setCornerSquareStyle(e.target.value as CornerSquareType)}
+            >
+              {cornerSquareStyles.map((style) => (
+                <option key={style.value} value={style.value}>
+                  {style.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="cornerDotStyle" className={form.controlLabel}>Corner Dot Style</label>
+            <select
+              id="cornerDotStyle"
+              className={form.select}
+              value={cornerDotStyle}
+              onChange={(e) => setCornerDotStyle(e.target.value as CornerDotType)}
+            >
+              {cornerDotStyles.map((style) => (
+                <option key={style.value} value={style.value}>
+                  {style.label}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className={form.sectionTitle}>Size & Quality</div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="size" className={form.controlLabel}>Size: {size}px</label>
+            <input
+              id="size"
+              type="range"
+              className={form.rangeSlider}
+              min="128"
+              max="512"
+              value={size}
+              onChange={(e) => setSize(Number(e.target.value))}
+            />
+          </div>
+
+          <div className={form.controlGroup}>
+            <label htmlFor="errorLevel" className={form.controlLabel}>Error Correction</label>
+            <select
+              id="errorLevel"
+              className={form.select}
+              value={errorLevel}
+              onChange={(e) => setErrorLevel(e.target.value as ErrorCorrectionLevel)}
+            >
+              <option value="L">Low (7%)</option>
+              <option value="M">Medium (15%)</option>
+              <option value="Q">Quartile (25%)</option>
+              <option value="H">High (30%)</option>
+            </select>
+            <small className={form.controlHint}>Higher levels allow more damage but increase density</small>
+          </div>
+        </div>
+      </main>
+    </ToolPageLayout>
   );
 }

@@ -31,6 +31,7 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
       date: data.date ? new Date(data.date).toISOString() : new Date().toISOString(),
       description: data.description || '',
       coverImage: data.coverImage,
+      coverImageDark: data.coverImageDark,
       tags: data.tags,
       content,
     };
@@ -53,8 +54,8 @@ export async function getAllPosts(): Promise<PostMetadata[]> {
           // eslint-disable-next-line @typescript-eslint/no-unused-vars
           const { content, ...metadata } = post;
 
-          // Calculate cover image brightness if present
-          if (metadata.coverImage) {
+          // Calculate cover image brightness if present and not set in frontmatter
+          if (metadata.coverImage && metadata.coverImageDark === undefined) {
             metadata.coverImageDark = await isImageDark(metadata.coverImage);
           }
 

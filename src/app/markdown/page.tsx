@@ -9,10 +9,10 @@ import { remark } from 'remark';
 import remarkGfm from 'remark-gfm';
 import html from 'remark-html';
 import { IconDownload, IconColumns, IconColumns1 } from '@tabler/icons-react';
-import VerticalSidebar from '../../ui/VerticalSidebar';
-import Copyright from '../../ui/Copyright';
+import ToolPageLayout from '../../ui/ToolPageLayout';
 import ScrambleText from '../../ui/ScrambleText';
 import styles from '../../styles/Markdown.module.css';
+import form from '../../styles/FormControls.module.css';
 
 const STORAGE_KEY = 'markdown-writer-content';
 const LAYOUT_KEY = 'markdown-writer-layout';
@@ -119,8 +119,13 @@ export default function MarkdownPage() {
     }
   }, []);
 
-  // Save layout preference when it changes
+  // Save layout preference when it changes (skip initial render)
+  const hasLoadedRef = useRef(false);
   useEffect(() => {
+    if (!hasLoadedRef.current) {
+      hasLoadedRef.current = true;
+      return;
+    }
     localStorage.setItem(LAYOUT_KEY, sideBySide ? 'side-by-side' : 'single');
   }, [sideBySide]);
 
@@ -262,84 +267,71 @@ export default function MarkdownPage() {
   };
 
   return (
-    <div className={styles.wrapper}>
-      <div className={styles.sidebar}>
-        <VerticalSidebar />
-      </div>
-      <div className={styles.container}>
-        <div className={styles.inner}>
-          <header className={styles.header}>
-            <div>
-              <h1 className={styles.title}>
-                <ScrambleText duration={600}>Markdown</ScrambleText>
-              </h1>
-              <p className={styles.subtitle}>
-                <ScrambleText delay={100} duration={500}>Local Editor</ScrambleText>
-              </p>
+    <ToolPageLayout
+      title={<ScrambleText duration={600}>Markdown</ScrambleText>}
+      subtitle={<ScrambleText delay={100} duration={500}>Local Editor</ScrambleText>}
+      wrapperClassName={styles.wrapper}
+      containerClassName={styles.container}
+      innerClassName={styles.inner}
+      headerClassName={styles.header}
+      headerRight={
+        <div className={styles.controls}>
+          <button
+            className={`${form.controlButton} ${styles.controlButtonMobile}`}
+            onClick={handleDownload}
+            title="Download"
+          >
+            <IconDownload size={14} stroke={1.5} />
+          </button>
+          <button
+            className={`${form.controlButton} ${styles.controlButtonMobile} ${styles.sideBySideButton} ${sideBySide ? styles.active : ''}`}
+            onClick={toggleSideBySide}
+            title={sideBySide ? 'Single Pane' : 'Side by Side'}
+          >
+            {sideBySide ? <IconColumns1 size={14} stroke={1.5} /> : <IconColumns size={14} stroke={1.5} />}
+          </button>
+          {!sideBySide && (
+            <button
+              className={`${form.controlButton} ${styles.controlButtonMobile} ${preview ? styles.active : ''}`}
+              onClick={togglePreview}
+            >
+              {preview ? 'Edit' : 'Preview'}
+            </button>
+          )}
+        </div>
+      }
+      fixedFooter
+    >
+      <div className={`${styles.editorContainer} ${sideBySide ? styles.splitContainer : ''}`}>
+        {sideBySide ? (
+          <>
+            <div className={styles.editorPane}>
+              <div className={styles.editorWrapper}>
+                <div ref={editorContainerRef} className={styles.codemirror} />
+              </div>
             </div>
-            <div className={styles.controls}>
-              <button
-                className={styles.controlButton}
-                onClick={handleDownload}
-                title="Download"
-              >
-                <IconDownload size={14} stroke={1.5} />
-              </button>
-              <button
-                className={`${styles.controlButton} ${styles.sideBySideButton} ${sideBySide ? styles.active : ''}`}
-                onClick={toggleSideBySide}
-                title={sideBySide ? 'Single Pane' : 'Side by Side'}
-              >
-                {sideBySide ? <IconColumns1 size={14} stroke={1.5} /> : <IconColumns size={14} stroke={1.5} />}
-              </button>
-              {!sideBySide && (
-                <button
-                  className={`${styles.controlButton} ${preview ? styles.active : ''}`}
-                  onClick={togglePreview}
-                >
-                  {preview ? 'Edit' : 'Preview'}
-                </button>
-              )}
-            </div>
-          </header>
-          <div className={`${styles.editorContainer} ${sideBySide ? styles.splitContainer : ''}`}>
-            {sideBySide ? (
-              <>
-                <div className={styles.editorPane}>
-                  <div className={styles.editorWrapper}>
-                    <div ref={editorContainerRef} className={styles.codemirror} />
-                  </div>
-                </div>
-                <div className={styles.previewPane}>
-                  <div className={styles.preview}>
-                    <div
-                      className={styles.markdown}
-                      dangerouslySetInnerHTML={{ __html: htmlContent }}
-                    />
-                  </div>
-                </div>
-              </>
-            ) : preview ? (
+            <div className={styles.previewPane}>
               <div className={styles.preview}>
                 <div
                   className={styles.markdown}
                   dangerouslySetInnerHTML={{ __html: htmlContent }}
                 />
               </div>
-            ) : (
-              <div className={styles.editorWrapper}>
-                <div ref={editorContainerRef} className={styles.codemirror} />
-              </div>
-            )}
+            </div>
+          </>
+        ) : preview ? (
+          <div className={styles.preview}>
+            <div
+              className={styles.markdown}
+              dangerouslySetInnerHTML={{ __html: htmlContent }}
+            />
           </div>
-          <div className={styles.mobileFooter}>
-            <Copyright />
+        ) : (
+          <div className={styles.editorWrapper}>
+            <div ref={editorContainerRef} className={styles.codemirror} />
           </div>
-        </div>
+        )}
       </div>
-      <div className={styles.desktopFooter}>
-        <Copyright fixed />
-      </div>
-    </div>
+    </ToolPageLayout>
   );
 }

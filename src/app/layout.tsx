@@ -14,6 +14,9 @@ export const metadata: Metadata = {
     default: 'Nathanial Fine'
   },
   description: 'Freelance software developer creating bespoke software solutions',
+  ...(process.env.NODE_ENV === 'development' && {
+    robots: { index: false, follow: false },
+  }),
   icons: {
     icon: [
       { url: '/favicon.svg?v=2', type: 'image/svg+xml' },

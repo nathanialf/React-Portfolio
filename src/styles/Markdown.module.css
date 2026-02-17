@@ -1,69 +1,19 @@
+/* Page-specific overrides */
 .wrapper {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  background: #0a0a0a;
-  overscroll-behavior: none;
-  overflow: hidden;
-}
-
-.sidebar {
-  position: fixed;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  z-index: 10;
-  display: flex;
   overscroll-behavior: none;
 }
 
 .container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  padding: 3rem 4rem;
   overflow: hidden;
   overscroll-behavior: none;
 }
 
 .inner {
-  max-width: 640px;
-  width: 100%;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  min-height: 0;
   overscroll-behavior: none;
 }
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.5rem;
-  flex-shrink: 0;
-}
-
-.title {
-  font-family: var(--font-serif), 'Times New Roman', serif;
-  font-size: 2.5rem;
-  font-weight: 700;
-  color: #e5e5e5;
-  margin: 0;
-  letter-spacing: 0.02em;
-  text-transform: uppercase;
-}
-
-.subtitle {
-  font-family: var(--font-mono), 'Courier New', monospace;
-  font-size: 0.75rem;
-  color: #404040;
-  margin: 0.5rem 0 0 0;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  /* Markdown uses flex-wrap instead of flex-direction: column on mobile */
 }
 
 .controls {
@@ -72,46 +22,11 @@
   gap: 1rem;
 }
 
-.controlButton {
-  font-family: var(--font-mono), 'Courier New', monospace;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: #525252;
-  background: none;
-  border: 1px solid #262626;
-  padding: 0 0.75rem;
-  height: 1.75rem;
-  cursor: pointer;
-  transition: color 0.15s ease, border-color 0.15s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.4rem;
-  line-height: 1;
-}
-
-.controlButton svg {
-  display: block;
-  flex-shrink: 0;
-  width: 14px;
-  height: 14px;
-  margin: auto;
-  position: relative;
-  top: -1px;
-}
-
 .sideBySideButton svg {
   top: 0;
 }
 
-.controlButton:hover {
-  color: #a3a3a3;
-  border-color: #404040;
-}
-
-.controlButton.active {
+.active {
   color: #a3a3a3;
   border-color: #404040;
 }
@@ -461,46 +376,24 @@
 /* Hide side-by-side on screens too small for two columns */
 @media (max-width: 1200px) {
   .sideBySideButton {
-    display: none;
+    display: none !important;
   }
 }
 
-.mobileFooter {
-  display: none;
-  flex-shrink: 0;
-}
-
-.desktopFooter {
-  display: block;
-}
-
-.mobileFooter > div {
-  padding: 0.25rem 0;
-}
-
-/* Mobile responsiveness */
 @media (max-width: 768px) {
-  .mobileFooter {
-    display: block;
-  }
-
-  .desktopFooter {
-    display: none;
-  }
-
-  .container {
-    padding: 1.5rem 3.5rem;
-  }
-
-  .title {
-    font-size: 2rem;
+  .header {
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.75rem;
   }
 
   .controls {
     gap: 0.5rem;
+    width: 100%;
   }
 
-  .controlButton {
+  .controlButtonMobile {
     font-size: 0.6rem;
     padding: 0.4rem 0.5rem;
   }
