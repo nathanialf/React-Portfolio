@@ -108,3 +108,9 @@
   margin: 0;
   flex-shrink: 0;
 }
+
+@media (max-width: 768px) {
+  .backButton {
+    display: none;
+  }
+}

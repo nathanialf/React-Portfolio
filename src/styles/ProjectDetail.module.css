@@ -184,6 +184,10 @@
 
 /* Mobile responsiveness */
 @media (max-width: 768px) {
+  .backButton {
+    display: none;
+  }
+
   .linkGrid {
     grid-template-columns: 1fr;
   }

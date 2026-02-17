@@ -47,8 +47,6 @@ export default function UIPage() {
       title="UI Reference"
       subtitle="DEFNF Design System &mdash; Component Specification"
       version="v1.0 / 2026"
-      containerClassName={styles.container}
-      innerClassName={styles.inner}
       headerClassName={styles.header}
     >
           {/* Table of Contents */}
@@ -660,7 +658,7 @@ export default function UIPage() {
                   </tbody>
                 </table>
 
-                <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem' }}>
+                <div className={styles.cardDemoPair}>
                   {/* Desktop variant */}
                   <div className={styles.demo} style={{ flex: 1 }}>
                     <div className={styles.demoLabel}>Desktop &mdash; Transparent, Bracket Right</div>

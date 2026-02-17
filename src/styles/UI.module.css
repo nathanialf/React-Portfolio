@@ -1,13 +1,4 @@
 /* Page-specific overrides */
-.container {
-  padding: 2rem 3rem 4rem;
-  overflow-y: auto;
-}
-
-.inner {
-  max-width: 900px;
-}
-
 .header {
   margin-bottom: 0.5rem;
 }
@@ -732,6 +723,12 @@
   margin: 0.75rem 0;
 }
 
+.cardDemoPair {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
 /* Mobile */
 @media (max-width: 768px) {
   .container {
@@ -740,6 +737,10 @@
 
   .entryBody {
     grid-template-columns: 1fr;
+  }
+
+  .cardDemoPair {
+    flex-direction: column;
   }
 
   .tocList {

@@ -469,6 +469,11 @@
     transition: color 0.15s ease;
   }
 
+  .mobileBackButton svg {
+    position: static;
+    margin: 0;
+  }
+
   .mobileBackButton:hover {
     color: #a3a3a3;
   }
