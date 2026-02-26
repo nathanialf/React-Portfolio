@@ -69,6 +69,7 @@ export const projects: Project[] = [
       { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
       { label: 'Ody-Software', url: 'https://ody-software.com/', type: 'website' },
       { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
+      { label: 'Dev Site', url: 'https://dev.myseatmap.com', type: 'website', hidden: true },
       { label: 'Ody-Software Repository', url: 'https://github.com/nathanialf/ody-software', type: 'github', hidden: true },
       { label: 'Frontend Repository', url: 'https://github.com/nathanialf/seatmap-frontend', type: 'github', hidden: true },
       { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github', hidden: true },
@@ -103,6 +104,7 @@ export const projects: Project[] = [
     hidden: true,
     links: [
       { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
+      { label: 'Dev Site', url: 'https://dev.clarynhealth.com', type: 'website', hidden: true },
       { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/claryn-health', type: 'github', hidden: true },
     ],
@@ -203,6 +205,8 @@ export const projects: Project[] = [
     links: [
       { label: 'Dungeon Crawler', url: 'https://dungeon.riperoni.com/', type: 'dungeon' },
       { label: '2D Explorer', url: 'https://encom.riperoni.com/', type: 'hexagon-site' },
+      { label: 'Dev 2D Explorer', url: 'https://encom-dev.riperoni.com', type: 'hexagon-site', hidden: true },
+      { label: 'Dev Dungeon Crawler', url: 'https://dungeon-dev.riperoni.com', type: 'dungeon', hidden: true },
       { label: 'encom-lambda Repository', url: 'https://github.com/nathanialf/encom-lambda', type: 'github' },
       { label: 'encom-frontend Repository', url: 'https://github.com/nathanialf/encom-frontend', type: 'github' },
       { label: 'encom-dungeon Repository', url: 'https://github.com/nathanialf/encom-dungeon', type: 'github' },
@@ -274,6 +278,7 @@ export const projects: Project[] = [
     backgroundImage: '/images/projects/glass-house-background.png',
     brightBackground: true,
     hoverColor: '#8b1a3a',
+    hidden: true,
     links: [
       { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
