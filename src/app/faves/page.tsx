@@ -27,7 +27,7 @@ const games = [
   { name: 'NieR Replicant ver.1.22474487139...', platforms: ['PS4', 'PC', 'Xbox One'], year: 2021, dev: 'Toylogic', publisher: 'Square Enix' },
   { name: 'ICO', platforms: ['PS2', 'PS3'], year: 2001, dev: 'Team Ico', publisher: 'Sony' },
   { name: 'Final Fantasy VI', platforms: ['SNES', 'GBA', 'PC'], year: 1994, dev: 'Square', publisher: 'Square' },
-  { name: 'Marathon 2 Durandal', platforms: ['Mac', 'PC', 'Xbox 360'], year: 1995, dev: 'Bungie', publisher: 'Bungie' },
+  { name: 'Marathon', platforms: ['PS5', 'Xbox Series X/S', 'PC'], year: 2026, dev: 'Bungie', publisher: 'Sony Interactive Entertainment' },
 ];
 
 export default function GamesPage() {

@@ -172,6 +172,47 @@
   color: color-mix(in srgb, var(--project-color, #525252) 30%, #0a0a0a);
 }
 
+/* Cancelled project - cyberpunk holographic caution tape */
+.cancelledProject {
+  position: relative;
+  overflow: hidden;
+}
+
+.cancelledProject .navButtonName,
+.cancelledProject .navButtonTagline {
+  position: relative;
+  z-index: 1;
+}
+
+.cancelledTape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(-18deg);
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  padding: 0.15em 2em;
+  width: 140%;
+  text-align: center;
+  z-index: 0;
+  pointer-events: none;
+  color: #7f1d1d;
+  background: rgba(127, 29, 29, 0.08);
+  border-top: 2px solid rgba(127, 29, 29, 0.4);
+  border-bottom: 2px solid rgba(127, 29, 29, 0.4);
+  transition: color 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.cancelledProject:hover .cancelledTape,
+.cancelledProject.active .cancelledTape {
+  color: #0a0a0a;
+  background: rgba(0, 0, 0, 0.15);
+  border-color: rgba(0, 0, 0, 0.3);
+}
+
 .navButtonName {
   font-family: var(--font-serif), 'Times New Roman', serif;
   font-weight: 700;
@@ -440,6 +481,7 @@
     height: 4rem;
     color: #1a1a1a;
   }
+
 
   .main {
     padding: 1.5rem 1rem;

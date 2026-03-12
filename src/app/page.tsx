@@ -9,7 +9,7 @@ import { projects } from '../data/projects';
 import styles from '../styles/Homepage.module.css';
 
 const isDev = process.env.NODE_ENV === 'development';
-const visibleProjects = projects.filter(p => isDev || !p.hidden);
+const visibleProjects = projects.filter(p => isDev || (!p.hidden && !p.cancelled));
 const projectsWithBackgrounds = visibleProjects.filter(p => p.backgroundImage);
 
 export default function Homepage() {

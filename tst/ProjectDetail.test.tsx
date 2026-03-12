@@ -47,7 +47,8 @@ describe('ProjectDetail', () => {
         return testProject.links?.some(projectLink => projectLink.url === href)
       })
       
-      expect(projectLinks.length).toBe(testProject.links.length)
+      const visibleLinks = testProject.links.filter(l => !l.hidden)
+      expect(projectLinks.length).toBe(visibleLinks.length)
     }
   })
 
@@ -58,7 +59,7 @@ describe('ProjectDetail', () => {
 
     expect(screen.getByText(gridProject.name)).toBeInTheDocument()
     // Use partial match for descriptions with newlines
-    expect(screen.getByText(/I wanted a simple way to manage files/)).toBeInTheDocument()
+    expect(screen.getByText(/beautifully crafted Android file manager/)).toBeInTheDocument()
   })
 
   it('has correct animation container', () => {

@@ -67,9 +67,9 @@ describe('CardContent', () => {
     expect(mockOnAboutSelect).toHaveBeenCalled()
   })
 
-  it('renders blog button', () => {
+  it('does not render blog button in production', () => {
     render(React.createElement(CardContent))
 
-    expect(screen.getByText('Blog')).toBeInTheDocument()
+    expect(screen.queryByText('Blog')).not.toBeInTheDocument()
   })
 })

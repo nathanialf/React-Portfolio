@@ -65,7 +65,10 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
       </button>
 
       <div className={styles.header}>
-        <h2 className={styles.title}>{project.name}</h2>
+        <div className={styles.titleRow}>
+          <h2 className={styles.title}>{project.name}</h2>
+          {project.cancelled && <span className={styles.cancelledBadge}>CANCELLED</span>}
+        </div>
         <p className={styles.description}>{project.description}</p>
       </div>
 

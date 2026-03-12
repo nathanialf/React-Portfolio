@@ -35,6 +35,7 @@ export interface Project {
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
   hidden?: boolean; // If true, project is not displayed
+  cancelled?: boolean; // If true, project is cancelled (shown only in dev with cancelled badge)
 }
 
 export const projects: Project[] = [
@@ -105,6 +106,7 @@ export const projects: Project[] = [
     links: [
       { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
       { label: 'Dev Site', url: 'https://dev.clarynhealth.com', type: 'website', hidden: true },
+      { label: 'Demo EHR', url: 'https://demoehr.dev.clarynhealth.com', type: 'website', hidden: true },
       { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/claryn-health', type: 'github', hidden: true },
     ],
@@ -240,18 +242,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'markio',
-    name: 'MARKIO',
-    tagline: 'Working title.',
-    category: 'saas',
-    description: 'Role: CTO.',
-    icon: {
-      type: 'placeholder',
-    },
-    links: [],
-    hidden: true,
-  },
-  {
     id: 'the-glass-house',
     name: 'THE GLASS HOUSE',
     tagline: 'Psychological horror through dialogue.',
@@ -278,9 +268,8 @@ export const projects: Project[] = [
     backgroundImage: '/images/projects/glass-house-background.png',
     brightBackground: true,
     hoverColor: '#8b1a3a',
-    hidden: true,
+    cancelled: true,
     links: [
-      { label: 'Coming Soon', url: '#', type: 'website', disabled: true },
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
       { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release', hidden: true },
       { label: 'Web Build (Dev)', url: 'https://dev.internal.defnf.com:8443/', type: 'website', hidden: true },
@@ -322,7 +311,7 @@ export const projects: Project[] = [
     name: 'VKA FIRST COMBAT',
     tagline: 'Mission-based mech combat.',
     category: 'games',
-    description: 'A mech combat game built in Unreal Engine 5. Mission-based single-player with customizable loadouts and tactical objectives. Built as Producer/Project Manager.',
+    description: 'A mech combat game built in Unreal Engine 5. Mission-based single-player with customizable loadouts and tactical objectives. Built as Programmer and Producer/Project Manager.',
     sections: [
       {
         heading: 'The Game',
@@ -378,8 +367,8 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: 'untitled-party-game',
-    name: 'UNTITLED PARTY GAME',
+    id: 'people-pleaser',
+    name: 'PEOPLE PLEASER',
     tagline: 'Coming soon.',
     category: 'games',
     description: 'Role: Project Manager.',

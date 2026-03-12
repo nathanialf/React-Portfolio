@@ -11,7 +11,7 @@ const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onProjectSelect }) => {
   const isDev = process.env.NODE_ENV === 'development';
-  const visibleProjects = projects.filter(p => isDev || !p.hidden);
+  const visibleProjects = projects.filter(p => isDev || (!p.hidden && !p.cancelled));
   const groupedProjects = categoryOrder.map(category => ({
     category,
     label: categoryLabels[category],

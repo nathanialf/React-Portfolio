@@ -13,7 +13,7 @@ import projectStyles from '../styles/ProjectDetail.module.css';
 
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 const isDev = process.env.NODE_ENV === 'development';
-const visibleProjects = projects.filter(p => isDev || !p.hidden);
+const visibleProjects = projects.filter(p => isDev || (!p.hidden && !p.cancelled));
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;
@@ -114,11 +114,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                 {categoryProjects.map((project) => (
                   <button
                     key={project.id}
-                    className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''} ${project.hidden ? styles.hiddenProject : ''}`}
+                    className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''} ${project.hidden ? styles.hiddenProject : ''} ${project.cancelled ? styles.cancelledProject : ''}`}
                     onClick={() => handleProjectSelect(project.id)}
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
                     {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
+                    {project.cancelled && (
+                      <span className={styles.cancelledTape}>CANCELLED</span>
+                    )}
                     <span className={styles.navButtonName}>{project.name}</span>
                     <span className={styles.navButtonTagline}>{project.tagline}</span>
                   </button>
@@ -235,11 +238,14 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                         {categoryProjects.map((project) => (
                           <button
                             key={project.id}
-                            className={`${styles.mobileNavButton} ${project.hidden ? styles.hiddenProject : ''}`}
+                            className={`${styles.mobileNavButton} ${project.hidden ? styles.hiddenProject : ''} ${project.cancelled ? styles.cancelledProject : ''}`}
                             onClick={() => handleProjectSelect(project.id)}
                             style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                           >
                             {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
+                            {project.cancelled && (
+                              <span className={styles.cancelledTape}>CANCELLED</span>
+                            )}
                             <span className={styles.navButtonName}>{project.name}</span>
                             <span className={styles.navButtonTagline}>{project.tagline}</span>
                           </button>

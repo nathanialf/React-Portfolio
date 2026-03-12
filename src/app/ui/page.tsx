@@ -652,6 +652,7 @@ export default function UIPage() {
                     <tr><td>Desktop BG</td><td>transparent</td></tr>
                     <tr><td>Mobile BG</td><td>gradient → 25% project-color (color-mix)</td></tr>
                     <tr><td>Hidden State</td><td>Lock icon overlay</td></tr>
+                    <tr><td>Cancelled State</td><td>Diagonal tape overlay, dark red</td></tr>
                     <tr><td>Bracket (Desktop)</td><td>Right side, vertical line + caps, label vertical-rl</td></tr>
                     <tr><td>Bracket (Mobile)</td><td>Left side, vertical line + caps, label rotated 180deg</td></tr>
                     <tr><td>Category Order</td><td>SaaS → Apps → Games</td></tr>
@@ -797,6 +798,50 @@ export default function UIPage() {
                         <IconBrandGithub stroke={2} width="1em" height="1em" />
                         <span>Source Code</span>
                       </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.entry}>
+              <div className={styles.entryHeader}>
+                <span className={styles.entryName}>Cancelled Variant</span>
+                <span className={styles.entryPath}>src/styles/MainLayout.module.css</span>
+              </div>
+              <div className={styles.entryBody}>
+                <div>
+                  <table className={styles.specTable}>
+                    <tbody>
+                      <tr><td>Tape Text</td><td>CANCELLED</td></tr>
+                      <tr><td>Font Size</td><td>1.1rem</td></tr>
+                      <tr><td>Letter Spacing</td><td>0.4em</td></tr>
+                      <tr><td>Angle</td><td>-18deg</td></tr>
+                      <tr><td>Text Color</td><td>#7f1d1d (idle) / #0a0a0a (hover)</td></tr>
+                      <tr><td>Background</td><td>rgba(127, 29, 29, 0.08)</td></tr>
+                      <tr><td>Border</td><td>2px solid rgba(127, 29, 29, 0.4)</td></tr>
+                      <tr><td>Hover</td><td>Black text, dark bg, dark border</td></tr>
+                      <tr><td>z-index</td><td>0 (behind card text at z-index 1)</td></tr>
+                      <tr><td>Detail Badge</td><td>Inline next to title, 1px border, same palette</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <div className={styles.demo}>
+                    <div className={styles.demoLabel}>Live &mdash; Nav Card + Detail Badge</div>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                      <button
+                        className={`${layoutStyles.navButton} ${layoutStyles.cancelledProject}`}
+                        style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
+                      >
+                        <span className={layoutStyles.cancelledTape}>CANCELLED</span>
+                        <span className={layoutStyles.navButtonName}>THE GLASS HOUSE</span>
+                        <span className={layoutStyles.navButtonTagline}>Psychological horror through dialogue.</span>
+                      </button>
+                      <div className={projectStyles.titleRow}>
+                        <h2 className={projectStyles.title} style={{ fontSize: '1.1rem' }}>THE GLASS HOUSE</h2>
+                        <span className={projectStyles.cancelledBadge}>CANCELLED</span>
+                      </div>
                     </div>
                   </div>
                 </div>
