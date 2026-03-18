@@ -270,8 +270,8 @@ export const projects: Project[] = [
     hoverColor: '#8b1a3a',
     cancelled: true,
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github', hidden: true },
-      { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release', hidden: true },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github' },
+      { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release' },
       { label: 'Web Build (Dev)', url: 'https://dev.internal.defnf.com:8443/', type: 'website', hidden: true },
     ],
   },
@@ -362,14 +362,13 @@ export const projects: Project[] = [
     },
     hoverColor: '#f59e0b',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/syndicate', type: 'github', hidden: true },
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/syndicate', type: 'github' },
     ],
-    hidden: true,
   },
   {
     id: 'people-pleaser',
     name: 'PEOPLE PLEASER',
-    tagline: 'Coming soon.',
+    tagline: 'A social horror game.',
     category: 'games',
     description: 'Role: Project Manager.',
     icon: {

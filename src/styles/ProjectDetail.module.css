@@ -64,11 +64,12 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  padding: 0.2em 0.6em;
+  padding: 0.35em 0.6em;
   border: 1px solid rgba(127, 29, 29, 0.5);
   color: #7f1d1d;
   background: rgba(127, 29, 29, 0.08);
   white-space: nowrap;
+  transform: translateY(1px);
 }
 
 .description {

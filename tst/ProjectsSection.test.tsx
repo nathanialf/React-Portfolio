@@ -32,7 +32,7 @@ describe('ProjectsSection', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
 
     const projectCards = screen.getAllByRole('button')
-    expect(projectCards.length).toBe(5)
+    expect(projectCards.length).toBe(6)
 
     // Check that each card has the correct structure
     projectCards.forEach(card => {
