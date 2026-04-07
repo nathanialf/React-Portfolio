@@ -377,4 +377,16 @@ export const projects: Project[] = [
     links: [],
     hidden: true,
   },
+  {
+    id: 'dawnfall-flowers-and-thorns',
+    name: 'DAWNFALL: FLOWERS AND THORNS',
+    tagline: 'A game by Black Onyx Studios.',
+    category: 'games',
+    description: 'Role: Project Manager at Black Onyx Studios. Heading to Kickstarter this fall.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [],
+    hidden: true,
+  },
 ];

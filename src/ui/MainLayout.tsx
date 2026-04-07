@@ -13,7 +13,7 @@ import projectStyles from '../styles/ProjectDetail.module.css';
 
 const categoryOrder: ProjectCategory[] = ['saas', 'apps', 'games'];
 const isDev = process.env.NODE_ENV === 'development';
-const visibleProjects = projects.filter(p => isDev || (!p.hidden && !p.cancelled));
+const visibleProjects = projects.filter(p => isDev || (!p.hidden));
 
 interface MainLayoutProps {
   onProjectChange?: (projectId: string | null) => void;
