@@ -119,9 +119,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
                     {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
-                    {project.cancelled && (
-                      <span className={styles.cancelledTape}>CANCELLED</span>
-                    )}
                     <span className={styles.navButtonName}>{project.name}</span>
                     <span className={styles.navButtonTagline}>{project.tagline}</span>
                   </button>
@@ -243,9 +240,6 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                             style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                           >
                             {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
-                            {project.cancelled && (
-                              <span className={styles.cancelledTape}>CANCELLED</span>
-                            )}
                             <span className={styles.navButtonName}>{project.name}</span>
                             <span className={styles.navButtonTagline}>{project.tagline}</span>
                           </button>
