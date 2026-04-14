@@ -5,7 +5,7 @@ import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
-import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2, IconComponents } from '@tabler/icons-react';
+import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2, IconComponents, IconGift } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 import aboutStyles from '../styles/AboutDetail.module.css';
@@ -206,6 +206,10 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     <a href="/faves" className={projectStyles.link}>
                       <IconDeviceGamepad2 stroke={2} width="1em" height="1em" />
                       <span>Favorite Video Games</span>
+                    </a>
+                    <a href="/free" className={projectStyles.link}>
+                      <IconGift stroke={2} width="1em" height="1em" />
+                      <span>Extra Games and Software</span>
                     </a>
                     <a href="/ui" className={projectStyles.link}>
                       <IconComponents stroke={2} width="1em" height="1em" />

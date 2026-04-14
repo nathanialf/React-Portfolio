@@ -27,6 +27,9 @@ yarn-error.log*
 # drafts
 tmp-*.md
 
+# private game key data
+src/app/free/keys.json
+
 # local env files
 .env.local
 .env.development.local

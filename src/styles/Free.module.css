@@ -1,0 +1,21 @@
+.notice {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.75rem;
+  color: #525252;
+  line-height: 1.8;
+  margin: 0 0 0.5rem 0;
+  padding-bottom: 1.25rem;
+  border-bottom: 1px solid #1a1a1a;
+}
+
+.unavailable {
+  opacity: 0.35;
+}
+
+.noteText {
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.6rem;
+  color: #404040;
+  margin-top: 0.15rem;
+  font-style: italic;
+}
