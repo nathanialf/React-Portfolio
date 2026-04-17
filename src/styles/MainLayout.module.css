@@ -115,10 +115,9 @@
 
 .navButton {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  padding: 0.875rem 1rem;
+  flex-direction: row;
+  align-items: stretch;
+  padding: 0;
   width: 100%;
   box-sizing: border-box;
   background: transparent;
@@ -126,6 +125,31 @@
   cursor: pointer;
   transition: background-color 0.15s ease, border-color 0.15s ease;
   text-align: left;
+  overflow: hidden;
+}
+
+.navButtonContent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 0.875rem 1rem;
+  flex: 1;
+}
+
+.cancelledBanner {
+  width: 1.5rem;
+  flex-shrink: 0;
+  background-color: var(--project-color, #525252);
+  color: #fff;
+  font-family: var(--font-mono), 'Courier New', monospace;
+  font-size: 0.5rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  writing-mode: vertical-rl;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .navButton:hover,
@@ -415,10 +439,9 @@
 
   .mobileNavButton {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 0.75rem;
+    flex-direction: row;
+    align-items: stretch;
+    padding: 0;
     width: 100%;
     box-sizing: border-box;
     background: linear-gradient(
@@ -430,6 +453,11 @@
     cursor: pointer;
     transition: background 0.15s ease;
     text-align: left;
+    overflow: hidden;
+  }
+
+  .mobileNavButton .navButtonContent {
+    padding: 0.75rem;
   }
 
   .mobileNavButton:hover,

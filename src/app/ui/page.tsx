@@ -789,8 +789,10 @@ export default function UIPage() {
                         style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
                       >
                         <IconLock className={layoutStyles.navLockIcon} stroke={1.5} />
-                        <span className={layoutStyles.navButtonName}>GLASS HOUSE</span>
-                        <span className={layoutStyles.navButtonTagline}>First-person horror.</span>
+                        <div className={layoutStyles.navButtonContent}>
+                          <span className={layoutStyles.navButtonName}>GLASS HOUSE</span>
+                          <span className={layoutStyles.navButtonTagline}>First-person horror.</span>
+                        </div>
                       </button>
                       <a className={`${projectStyles.link} ${projectStyles.hiddenLink}`}>
                         <IconLock className={projectStyles.lockIcon} stroke={1.5} />
@@ -798,6 +800,40 @@ export default function UIPage() {
                         <span>Source Code</span>
                       </a>
                     </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className={styles.entry}>
+              <div className={styles.entryHeader}>
+                <span className={styles.entryName}>Cancelled Variant</span>
+                <span className={styles.entryPath}>src/styles/MainLayout.module.css</span>
+              </div>
+              <div className={styles.entryBody}>
+                <div>
+                  <table className={styles.specTable}>
+                    <tbody>
+                      <tr><td>Banner</td><td>Right side, 1.5rem wide, full height</td></tr>
+                      <tr><td>Background</td><td>var(--project-color)</td></tr>
+                      <tr><td>Text</td><td>CANCELLED, #fff, 0.5rem mono 700, vertical-rl</td></tr>
+                      <tr><td>Letter Spacing</td><td>0.1em</td></tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div>
+                  <div className={styles.demo}>
+                    <div className={styles.demoLabel}>Live</div>
+                    <button
+                      className={`${layoutStyles.navButton} ${layoutStyles.cancelledProject}`}
+                      style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
+                    >
+                      <div className={layoutStyles.navButtonContent}>
+                        <span className={layoutStyles.navButtonName}>THE GLASS HOUSE</span>
+                        <span className={layoutStyles.navButtonTagline}>Psychological horror through dialogue.</span>
+                      </div>
+                      <div className={layoutStyles.cancelledBanner}>CANCELLED</div>
+                    </button>
                   </div>
                 </div>
               </div>

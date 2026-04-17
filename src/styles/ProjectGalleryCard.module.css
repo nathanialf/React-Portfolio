@@ -1,9 +1,7 @@
 .card {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1.25rem;
+    flex-direction: row;
+    align-items: stretch;
     height: 100px;
     background: transparent;
     border: 2px solid var(--project-color, #525252);
@@ -12,6 +10,16 @@
     transition: background-color 0.15s ease, border-color 0.15s ease;
     text-align: left;
     overflow: hidden;
+    padding: 0;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 1.25rem;
+    flex: 1;
 }
 
 .card:hover {
@@ -44,4 +52,20 @@
     margin-top: 0.5rem;
     letter-spacing: 0.02em;
     transition: color 0.15s ease;
+}
+
+.cancelledBanner {
+    width: 1.5rem;
+    background-color: var(--project-color, #525252);
+    color: #000;
+    font-family: var(--font-mono), 'Courier New', monospace;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
 }

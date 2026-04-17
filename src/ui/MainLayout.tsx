@@ -119,8 +119,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
                     {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
-                    <span className={styles.navButtonName}>{project.name}</span>
-                    <span className={styles.navButtonTagline}>{project.tagline}</span>
+                    <div className={styles.navButtonContent}>
+                      <span className={styles.navButtonName}>{project.name}</span>
+                      <span className={styles.navButtonTagline}>{project.tagline}</span>
+                    </div>
+                    {project.cancelled && (
+                      <div className={styles.cancelledBanner}>CANCELLED</div>
+                    )}
                   </button>
                 ))}
               </div>
@@ -244,8 +249,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                             style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                           >
                             {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
-                            <span className={styles.navButtonName}>{project.name}</span>
-                            <span className={styles.navButtonTagline}>{project.tagline}</span>
+                            <div className={styles.navButtonContent}>
+                              <span className={styles.navButtonName}>{project.name}</span>
+                              <span className={styles.navButtonTagline}>{project.tagline}</span>
+                            </div>
+                            {project.cancelled && (
+                              <div className={styles.cancelledBanner}>CANCELLED</div>
+                            )}
                           </button>
                         ))}
                       </div>

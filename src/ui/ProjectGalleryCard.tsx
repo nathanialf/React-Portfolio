@@ -15,8 +15,13 @@ const ProjectGalleryCard: React.FC<ProjectGalleryCardProps> = ({ project, onClic
       style={{ '--project-color': project.hoverColor } as React.CSSProperties}
       aria-label={`View ${project.name} project`}
     >
-      <span className={styles.name}>{project.name}</span>
-      <span className={styles.tagline}>{project.tagline}</span>
+      <div className={styles.content}>
+        <span className={styles.name}>{project.name}</span>
+        <span className={styles.tagline}>{project.tagline}</span>
+      </div>
+      {project.cancelled && (
+        <div className={styles.cancelledBanner}>CANCELLED</div>
+      )}
     </button>
   );
 };
