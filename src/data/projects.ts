@@ -378,6 +378,21 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
+    id: 'grimoire-void',
+    name: 'GRIMOIRE VOID',
+    tagline: 'A React-based wiki game.',
+    category: 'games',
+    description: 'A React-based wiki that is the primary game going forward, with an earlier 3D cartridge prototype built in Godot.',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [
+      { label: 'Wiki Repository', url: 'https://github.com/nathanialf/grimoire-void', type: 'github' },
+      { label: '3D Cartridge Prototype (Godot)', url: 'https://github.com/nathanialf/microfiche', type: 'github' },
+    ],
+    hidden: true,
+  },
+  {
     id: 'dawnfall-flowers-and-thorns',
     name: 'DAWNFALL: FLOWERS AND THORNS',
     tagline: 'A game by Black Onyx Studios.',
