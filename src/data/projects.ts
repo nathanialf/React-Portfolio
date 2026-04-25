@@ -216,6 +216,39 @@ export const projects: Project[] = [
     ],
   },
   {
+    id: 'grimoire-void',
+    name: 'GRIMOIRE VOID',
+    tagline: 'A restricted archive of the lost.',
+    category: 'games',
+    description: 'Working title. A wiki-as-game framed as a restricted archive recovered from a quarantined sector, with a Godot prototype exploring the same world.',
+    sections: [
+      {
+        heading: 'The Concept',
+        content: 'A fragmented world shaped by void contamination, told through the leaked records of the agency that catalogs it. Players read through bestiary entries, character dossiers, locations, items, lore, and field reports to piece the world together themselves.',
+      },
+      {
+        heading: 'What I Built',
+        content: [
+          'React-based wiki as the primary form, presented as a redacted, restricted archive',
+          'Pixelated typography and monospaced terminal styling for a bureaucratic horror tone',
+          'Cross-linked entries that reward following threads between bestiary, characters, locations, and reports',
+          '3D cartridge prototype in Godot, developed in tandem as an exploration of storytelling in the same world',
+        ],
+      },
+    ],
+    icon: {
+      type: 'placeholder',
+    },
+    backgroundImage: '/images/projects/grimoire-void-background.jpg',
+    hoverColor: '#b01030',
+    links: [
+      { label: 'Grimoire Void', url: 'https://grimoire.riperoni.com', type: 'website' },
+      { label: 'Wiki Repository', url: 'https://github.com/nathanialf/grimoire-void', type: 'github' },
+      { label: '3D Cartridge Prototype (Godot)', url: 'https://github.com/nathanialf/microfiche', type: 'github' },
+    ],
+    hidden: true,
+  },
+  {
     id: 'groovy-picture-book',
     name: 'GROOVY PICTURE BOOK',
     tagline: 'Global Game Jam 2026.',
@@ -375,21 +408,6 @@ export const projects: Project[] = [
       type: 'placeholder',
     },
     links: [],
-    hidden: true,
-  },
-  {
-    id: 'grimoire-void',
-    name: 'GRIMOIRE VOID',
-    tagline: 'A React-based wiki game.',
-    category: 'games',
-    description: 'A React-based wiki that is the primary game going forward, with an earlier 3D cartridge prototype built in Godot.',
-    icon: {
-      type: 'placeholder',
-    },
-    links: [
-      { label: 'Wiki Repository', url: 'https://github.com/nathanialf/grimoire-void', type: 'github' },
-      { label: '3D Cartridge Prototype (Godot)', url: 'https://github.com/nathanialf/microfiche', type: 'github' },
-    ],
     hidden: true,
   },
   {
