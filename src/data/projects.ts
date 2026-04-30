@@ -31,7 +31,7 @@ export interface Project {
     content?: string; // Icon name for tabler, SVG path for svg, or placeholder text
   };
   links: ProjectLink[];
-  backgroundImage?: string; // Optional background image shown when project is selected
+  backgroundImage?: string | string[]; // Optional background image(s); arrays are randomized on each open
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
   hidden?: boolean; // If true, project is not displayed
@@ -218,13 +218,13 @@ export const projects: Project[] = [
   {
     id: 'grimoire-void',
     name: 'GRIMOIRE VOID',
-    tagline: 'A restricted archive of the lost.',
+    tagline: 'A restricted archive.',
     category: 'games',
-    description: 'Working title. A wiki-as-game framed as a restricted archive recovered from a quarantined sector, with a Godot prototype exploring the same world.',
+    description: 'Working title. A wiki-as-game framed as a restricted archive recovered from a quarantined sector, with an in-wiki 3D museum and a Godot prototype exploring the same world.',
     sections: [
       {
         heading: 'The Concept',
-        content: 'A fragmented world shaped by void contamination, told through the leaked records of the agency that catalogs it. Players read through bestiary entries, character dossiers, locations, items, lore, and field reports to piece the world together themselves.',
+        content: 'I wanted to see if a wiki could be the game itself instead of a companion to one. Each entry type (bestiary, dossier, location, report) shares the same template, so the chrome stays consistent while the content varies. Inside the wiki, a first-person 3D museum scene lets you walk around with pointer-lock controls and a touch fallback for mobile. Scene transitions use custom visual effects like pixel-sort derez and datamosh to keep the bureaucratic-archive tone consistent between the flat pages and the 3D space. A terminal log overlay sits in the corner for ambience.',
       },
       {
         heading: 'What I Built',
@@ -232,6 +232,7 @@ export const projects: Project[] = [
           'React-based wiki as the primary form, presented as a redacted, restricted archive',
           'Pixelated typography and monospaced terminal styling for a bureaucratic horror tone',
           'Cross-linked entries that reward following threads between bestiary, characters, locations, and reports',
+          'First-person 3D museum embedded in the wiki via react-three-fiber, with voxel cartridge pedestals, pointer-lock controls, and a terminal log HUD',
           '3D cartridge prototype in Godot, developed in tandem as an exploration of storytelling in the same world',
         ],
       },
@@ -239,14 +240,17 @@ export const projects: Project[] = [
     icon: {
       type: 'placeholder',
     },
-    backgroundImage: '/images/projects/grimoire-void-background.jpg',
-    hoverColor: '#b01030',
+    backgroundImage: [
+      '/images/projects/grimoire-void/scene-1.jpg',
+      '/images/projects/grimoire-void/scene-2.jpg',
+      '/images/projects/grimoire-void/museum.jpg',
+    ],
+    hoverColor: '#901020',
     links: [
       { label: 'Grimoire Void', url: 'https://grimoire.riperoni.com', type: 'website' },
       { label: 'Wiki Repository', url: 'https://github.com/nathanialf/grimoire-void', type: 'github' },
       { label: '3D Cartridge Prototype (Godot)', url: 'https://github.com/nathanialf/microfiche', type: 'github' },
     ],
-    hidden: true,
   },
   {
     id: 'groovy-picture-book',
