@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { IconLock, IconExternalLink, IconBrandGithub, IconShield, IconRss } from '@tabler/icons-react';
+import { IconExternalLink, IconBrandGithub, IconShield, IconRss } from '@tabler/icons-react';
 import ToolPageLayout from '../../ui/ToolPageLayout';
 import VerticalSidebar from '../../ui/VerticalSidebar';
 import Copyright from '../../ui/Copyright';
@@ -771,12 +771,10 @@ export default function UIPage() {
                 <div>
                   <table className={styles.specTable}>
                     <tbody>
-                      <tr><td>Lock Icon</td><td>7rem &times; 7rem (desktop), 4rem (mobile)</td></tr>
-                      <tr><td>Icon Color</td><td>#111111 (idle)</td></tr>
-                      <tr><td>Hover Color</td><td>color-mix(project-color 30%, #0a0a0a)</td></tr>
-                      <tr><td>Position</td><td>absolute, right: -0.75rem, centered vertically</td></tr>
-                      <tr><td>Overflow</td><td>hidden (clipped to card bounds)</td></tr>
-                      <tr><td>Text z-index</td><td>1 (above lock icon at z-index 0)</td></tr>
+                      <tr><td>Banner</td><td>Right side, 1.5rem wide, full height</td></tr>
+                      <tr><td>Background</td><td>var(--project-color)</td></tr>
+                      <tr><td>Text</td><td>HIDDEN, #fff, 0.5rem mono 700, vertical-rl</td></tr>
+                      <tr><td>Letter Spacing</td><td>0.1em</td></tr>
                     </tbody>
                   </table>
                 </div>
@@ -788,16 +786,16 @@ export default function UIPage() {
                         className={`${layoutStyles.navButton} ${layoutStyles.hiddenProject}`}
                         style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
                       >
-                        <IconLock className={layoutStyles.navLockIcon} stroke={1.5} />
                         <div className={layoutStyles.navButtonContent}>
                           <span className={layoutStyles.navButtonName}>GLASS HOUSE</span>
                           <span className={layoutStyles.navButtonTagline}>First-person horror.</span>
                         </div>
+                        <div className={layoutStyles.hiddenBanner}>HIDDEN</div>
                       </button>
                       <a className={`${projectStyles.link} ${projectStyles.hiddenLink}`}>
-                        <IconLock className={projectStyles.lockIcon} stroke={1.5} />
                         <IconBrandGithub stroke={2} width="1em" height="1em" />
                         <span>Source Code</span>
+                        <div className={projectStyles.linkHiddenBanner}>HIDDEN</div>
                       </a>
                     </div>
                   </div>

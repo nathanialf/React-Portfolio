@@ -172,28 +172,8 @@
   overflow: hidden;
 }
 
-.hiddenProject .navButtonName,
-.hiddenProject .navButtonTagline {
-  position: relative;
-  z-index: 1;
-}
-
-.navLockIcon {
-  position: absolute;
-  right: -0.75rem;
-  top: 50%;
-  transform: translateY(-50%);
-  width: 7rem;
-  height: 7rem;
-  color: #111111;
-  pointer-events: none;
-  z-index: 0;
-  transition: color 0.15s ease;
-}
-
-.hiddenProject:hover .navLockIcon,
-.hiddenProject.active .navLockIcon {
-  color: color-mix(in srgb, var(--project-color, #525252) 30%, #0a0a0a);
+.hiddenBanner {
+  composes: cancelledBanner;
 }
 
 /* Cancelled project - cyberpunk holographic caution tape */
@@ -284,11 +264,6 @@
   margin-top: -0.5rem;
 }
 
-.blogButton .navLockIcon {
-  width: 5.5rem;
-  height: 5.5rem;
-}
-
 .mobileNav {
   display: none;
 }
@@ -305,6 +280,7 @@
   flex: 1;
   padding: 2em;
   min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -313,7 +289,13 @@
 
 .content {
   transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
+  overflow-y: auto;
+  max-height: 100%;
+  scrollbar-width: none;
+}
+
+.content::-webkit-scrollbar {
+  display: none;
 }
 
 .projectView {
@@ -502,12 +484,6 @@
 
   .mobileBlogButton {
     margin-top: -0.25rem;
-  }
-
-  .mobileBlogButton .navLockIcon {
-    width: 4rem;
-    height: 4rem;
-    color: #1a1a1a;
   }
 
 

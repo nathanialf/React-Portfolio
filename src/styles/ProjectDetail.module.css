@@ -180,28 +180,15 @@
 .hiddenLink {
   position: relative;
   overflow: hidden;
+  padding-right: 2.5rem;
 }
 
-.hiddenLink span {
-  position: relative;
-  z-index: 1;
-}
-
-.hiddenLink > svg:not(.lockIcon) {
-  position: relative;
-  z-index: 1;
-}
-
-.lockIcon {
+.linkHiddenBanner {
+  composes: hiddenBanner from './MainLayout.module.css';
   position: absolute;
-  right: -0.75rem;
-  top: 50%;
-  transform: translateY(-50%) !important;
-  width: auto !important;
-  height: 175% !important;
-  color: #1f1f1f;
-  pointer-events: none;
-  z-index: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
 }
 
 /* Mobile responsiveness */

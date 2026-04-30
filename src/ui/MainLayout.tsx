@@ -5,7 +5,7 @@ import ProjectDetail from './ProjectDetail';
 import AboutDetail from './AboutDetail';
 import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
-import { IconLock, IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2, IconComponents, IconGift } from '@tabler/icons-react';
+import { IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2, IconComponents, IconGift } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
 import introStyles from '../styles/CardContent.module.css';
 import aboutStyles from '../styles/AboutDetail.module.css';
@@ -118,11 +118,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     onClick={() => handleProjectSelect(project.id)}
                     style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                   >
-                    {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
                     <div className={styles.navButtonContent}>
                       <span className={styles.navButtonName}>{project.name}</span>
                       <span className={styles.navButtonTagline}>{project.tagline}</span>
                     </div>
+                    {project.hidden && (
+                      <div className={styles.hiddenBanner}>HIDDEN</div>
+                    )}
                     {project.cancelled && (
                       <div className={styles.cancelledBanner}>CANCELLED</div>
                     )}
@@ -143,24 +145,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
         >
           About & Contact
         </button>
-        {isDev && (
-          <button
-            className={`${styles.aboutButton} ${styles.blogButton} ${styles.hiddenProject}`}
-            onClick={() => handleNavigate('/blog')}
-          >
-            <IconLock className={styles.navLockIcon} stroke={1.5} />
-            Blog
-          </button>
-        )}
-        {isDev && (
-          <button
-            className={`${styles.aboutButton} ${styles.blogButton} ${styles.hiddenProject} ${showTools ? styles.active : ''}`}
-            onClick={handleToolsSelect}
-          >
-            <IconLock className={styles.navLockIcon} stroke={1.5} />
-            Tools
-          </button>
-        )}
+        <button
+          className={`${styles.aboutButton} ${styles.blogButton}`}
+          onClick={() => handleNavigate('/blog')}
+        >
+          Blog
+        </button>
+        <button
+          className={`${styles.aboutButton} ${styles.blogButton} ${showTools ? styles.active : ''}`}
+          onClick={handleToolsSelect}
+        >
+          Tools
+        </button>
       </nav>
 
       {/* Main content area */}
@@ -208,14 +204,20 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                       <IconMarkdown stroke={2} width="1em" height="1em" />
                       <span>Markdown Editor</span>
                     </a>
-                    <a href="/faves" className={projectStyles.link}>
-                      <IconDeviceGamepad2 stroke={2} width="1em" height="1em" />
-                      <span>Favorite Video Games</span>
-                    </a>
-                    <a href="/free" className={projectStyles.link}>
-                      <IconGift stroke={2} width="1em" height="1em" />
-                      <span>Extra Games and Software</span>
-                    </a>
+                    {isDev && (
+                      <a href="/faves" className={`${projectStyles.link} ${projectStyles.hiddenLink}`}>
+                        <IconDeviceGamepad2 stroke={2} width="1em" height="1em" />
+                        <span>Favorite Video Games</span>
+                        <div className={projectStyles.linkHiddenBanner}>HIDDEN</div>
+                      </a>
+                    )}
+                    {isDev && (
+                      <a href="/free" className={`${projectStyles.link} ${projectStyles.hiddenLink}`}>
+                        <IconGift stroke={2} width="1em" height="1em" />
+                        <span>Extra Games and Software</span>
+                        <div className={projectStyles.linkHiddenBanner}>HIDDEN</div>
+                      </a>
+                    )}
                     <a href="/ui" className={projectStyles.link}>
                       <IconComponents stroke={2} width="1em" height="1em" />
                       <span>UI Reference</span>
@@ -248,11 +250,13 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                             onClick={() => handleProjectSelect(project.id)}
                             style={{ '--project-color': project.hoverColor } as React.CSSProperties}
                           >
-                            {project.hidden && <IconLock className={styles.navLockIcon} stroke={1.5} />}
                             <div className={styles.navButtonContent}>
                               <span className={styles.navButtonName}>{project.name}</span>
                               <span className={styles.navButtonTagline}>{project.tagline}</span>
                             </div>
+                            {project.hidden && (
+                              <div className={styles.hiddenBanner}>HIDDEN</div>
+                            )}
                             {project.cancelled && (
                               <div className={styles.cancelledBanner}>CANCELLED</div>
                             )}
@@ -268,24 +272,18 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                 >
                   About & Contact
                 </button>
-                {isDev && (
-                  <button
-                    className={`${styles.mobileAboutButton} ${styles.mobileBlogButton} ${styles.hiddenProject}`}
-                    onClick={() => handleNavigate('/blog')}
-                  >
-                    <IconLock className={styles.navLockIcon} stroke={1.5} />
-                    Blog
-                  </button>
-                )}
-                {isDev && (
-                  <button
-                    className={`${styles.mobileAboutButton} ${styles.mobileBlogButton} ${styles.hiddenProject}`}
-                    onClick={handleToolsSelect}
-                  >
-                    <IconLock className={styles.navLockIcon} stroke={1.5} />
-                    Tools
-                  </button>
-                )}
+                <button
+                  className={`${styles.mobileAboutButton} ${styles.mobileBlogButton}`}
+                  onClick={() => handleNavigate('/blog')}
+                >
+                  Blog
+                </button>
+                <button
+                  className={`${styles.mobileAboutButton} ${styles.mobileBlogButton}`}
+                  onClick={handleToolsSelect}
+                >
+                  Tools
+                </button>
                 <div className={styles.mobileNavCopyright}>
                   &copy; {new Date().getFullYear()} Nathanial Fine
                 </div>

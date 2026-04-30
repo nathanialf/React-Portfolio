@@ -1,6 +1,6 @@
 import React from 'react';
 import { Project, ProjectSection } from '../data/projects';
-import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane, IconLock } from '@tabler/icons-react';
+import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane } from '@tabler/icons-react';
 import styles from '../styles/ProjectDetail.module.css';
 
 interface ProjectDetailProps {
@@ -100,9 +100,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
                   onNavigate(link.url);
                 }}
               >
-                {link.hidden && <IconLock className={styles.lockIcon} stroke={1.5} />}
                 {getLinkIcon(link.type)}
                 <span>{link.label}</span>
+                {link.hidden && <div className={styles.linkHiddenBanner}>HIDDEN</div>}
               </a>
             ) : (
               <a
@@ -112,9 +112,9 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
                 target={link.type === 'privacy' ? '_self' : '_blank'}
                 rel={link.type === 'privacy' ? '' : 'noopener noreferrer'}
               >
-                {link.hidden && <IconLock className={styles.lockIcon} stroke={1.5} />}
                 {getLinkIcon(link.type)}
                 <span>{link.label}</span>
+                {link.hidden && <div className={styles.linkHiddenBanner}>HIDDEN</div>}
               </a>
             )
           ))}

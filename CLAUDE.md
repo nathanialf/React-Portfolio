@@ -30,16 +30,9 @@ This is a Next.js 14+ React portfolio website using the App Router architecture.
 - Theme color defined as `#9fc2c2` in viewport metadata
 - Background image stored in `/public/images/darkmode/background.jpg`
 
-**Photography Section:**
-- Dynamic photo gallery using JSON data (`src/app/photography/photos.json`)
-- Server-side rendering with `fs.readFile()` for photo metadata
-- Photo metadata includes camera settings, title, and year
-- Images stored in `/public/photography/`
-
 ### Current Pages
 
 1. **Homepage (`/`)** - Main portfolio with floating card design
-2. **Photography (`/photography`)** - Photo gallery with EXIF-style metadata
 
 ### Styling System
 
