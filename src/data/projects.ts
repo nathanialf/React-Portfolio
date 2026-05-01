@@ -243,9 +243,9 @@ export const projects: Project[] = [
     backgroundImage: [
       '/images/projects/grimoire-void/scene-1.jpg',
       '/images/projects/grimoire-void/scene-2.jpg',
-      '/images/projects/grimoire-void/cartridge.png',
-      '/images/projects/grimoire-void/static.png',
-      '/images/projects/grimoire-void/glow.png',
+      '/images/projects/grimoire-void/cartridge.jpg',
+      '/images/projects/grimoire-void/static.jpg',
+      '/images/projects/grimoire-void/glow.jpg',
     ],
     hoverColor: '#901020',
     links: [
