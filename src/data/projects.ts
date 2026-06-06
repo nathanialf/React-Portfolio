@@ -403,6 +403,7 @@ export const projects: Project[] = [
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/syndicate', type: 'github' },
     ],
+    hidden: true,
   },
   {
     id: 'people-pleaser',
@@ -426,6 +427,20 @@ export const projects: Project[] = [
       type: 'placeholder',
     },
     links: [],
+    hidden: true,
+  },
+  {
+    id: 'ico-decomp',
+    name: 'ICO DECOMPILED',
+    tagline: 'Reverse Engineering',
+    category: 'games',
+    description: 'Test',
+    icon: {
+      type: 'placeholder',
+    },
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
+    ],
     hidden: true,
   },
 ];
