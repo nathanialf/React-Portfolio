@@ -20,6 +20,12 @@ const allBackgroundSources = Array.from(
   ),
 );
 
+const allBackgroundVideos = Array.from(
+  new Set(
+    visibleProjects.flatMap(p => (p.backgroundVideo ? [p.backgroundVideo] : [])),
+  ),
+);
+
 const pickBackground = (bg: string | string[] | undefined): string | undefined => {
   if (!bg) return undefined;
   if (typeof bg === 'string') return bg;
@@ -29,6 +35,7 @@ const pickBackground = (bg: string | string[] | undefined): string | undefined =
 export default function Homepage() {
   const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null);
   const [activeBackground, setActiveBackground] = useState<string | undefined>(undefined);
+  const [activeVideo, setActiveVideo] = useState<string | undefined>(undefined);
 
   const selectedProject = selectedProjectId
     ? visibleProjects.find(p => p.id === selectedProjectId)
@@ -38,16 +45,26 @@ export default function Homepage() {
     setSelectedProjectId(projectId);
     if (!projectId) {
       setActiveBackground(undefined);
+      setActiveVideo(undefined);
       return;
     }
     const project = visibleProjects.find(p => p.id === projectId);
+    // A video background takes precedence over any images.
+    if (project?.backgroundVideo) {
+      setActiveVideo(project.backgroundVideo);
+      setActiveBackground(undefined);
+      return;
+    }
+    setActiveVideo(undefined);
     setActiveBackground(pickBackground(project?.backgroundImage));
   }, []);
+
+  const hasActiveBackground = Boolean(activeBackground || activeVideo);
 
   return (
     <>
       {/* Default background */}
-      <div className={`${styles.defaultBackground} ${activeBackground ? styles.hidden : ''}`}>
+      <div className={`${styles.defaultBackground} ${hasActiveBackground ? styles.hidden : ''}`}>
         <Image
           src='/images/darkmode/background.jpg'
           alt='Background Photograph'
@@ -58,6 +75,24 @@ export default function Homepage() {
           priority
         />
       </div>
+
+      {/* Preload all project background videos */}
+      {allBackgroundVideos.map(src => (
+        <div
+          key={src}
+          className={`${styles.projectBackground} ${activeVideo === src ? styles.visible : styles.hidden}`}
+        >
+          <video
+            src={src}
+            autoPlay
+            loop
+            muted
+            playsInline
+            preload='auto'
+            style={{ width: '100%', height: '100%', objectFit: 'cover' }}
+          />
+        </div>
+      ))}
 
       {/* Preload all project backgrounds */}
       {allBackgroundSources.map(src => (

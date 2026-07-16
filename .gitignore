@@ -27,6 +27,9 @@ yarn-error.log*
 # drafts
 tmp-*.md
 
+# preserved proof artifacts — kept locally under archive/, too large to commit
+archive/myseatmap-proof/**/trace.zip
+
 # private game key data
 src/app/free/keys.json
 

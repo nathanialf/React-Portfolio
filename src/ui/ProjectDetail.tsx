@@ -14,6 +14,8 @@ interface ProjectDetailProps {
 const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBackground, onNavigate, backButtonClass }) => {
   const brightTextStyle = brightBackground ? { color: '#a3a3a3' } : undefined;
 
+  const visibleLinks = project.links.filter(link => !link.hidden || process.env.NODE_ENV === 'development');
+
   const getLinkIcon = (type: string) => {
     switch (type) {
       case 'github':
@@ -78,10 +80,11 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
         </div>
       )}
 
+      {visibleLinks.length > 0 && (
       <div className={styles.links}>
         <h3 className={styles.linksTitle}>Links</h3>
         <div className={styles.linkGrid}>
-          {project.links.filter(link => !link.hidden || process.env.NODE_ENV === 'development').map((link, index) => (
+          {visibleLinks.map((link, index) => (
             link.disabled ? (
               <span
                 key={index}
@@ -120,6 +123,7 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
           ))}
         </div>
       </div>
+      )}
     </div>
   );
 };
