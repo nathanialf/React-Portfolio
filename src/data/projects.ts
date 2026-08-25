@@ -75,41 +75,6 @@ export const projects: Project[] = [
     links: [],
   },
   {
-    id: 'claryn-health',
-    name: 'CLARYN HEALTH',
-    tagline: 'Workflow-native clinical intelligence.',
-    category: 'saas',
-    description: 'A Chrome extension that automates screening recommendations inside Practice Fusion EHR. It pulls patient data through FHIR, runs it through a HIPAA-compliant LLM, and injects the right screenings directly into the chart. Built as CTO and 1/2 of Claryn.',
-    sections: [
-      {
-        heading: 'The Problem',
-        content: 'Providers using Practice Fusion have no automated way to know which screenings are due. They manually cross-reference conditions, meds, and prior history against clinical guidelines, and things get missed.',
-      },
-      {
-        heading: 'What I Built',
-        content: [
-          'Chrome extension with SMART on FHIR EHR Launch for seamless Practice Fusion auth',
-          'Direct FHIR R4 API integration pulling conditions, meds, vitals, labs, and prior screenings',
-          'HIPAA-compliant LLM inference through a minimal serverless backend on AWS Lambda',
-          'DOM injection engine that pre-fills screening forms directly in the EHR UI',
-          'Support for 15+ screening types across mental health, preventive care, and chronic disease management',
-        ],
-      },
-    ],
-    icon: {
-      type: 'placeholder',
-    },
-    hoverColor: '#f97316',
-    hidden: true,
-    links: [
-      { label: 'Claryn Health', url: 'https://www.clarynhealth.com', type: 'website' },
-      { label: 'Dev Site', url: 'https://dev.clarynhealth.com', type: 'website', hidden: true },
-      { label: 'Demo EHR', url: 'https://demoehr.dev.clarynhealth.com', type: 'website', hidden: true },
-      { label: 'YC Application', url: 'https://apply.ycombinator.com/apps/a57613d8-fe65-4a11-92ed-cb08a259e831', type: 'website', hidden: true },
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/claryn-health', type: 'github', hidden: true },
-    ],
-  },
-  {
     id: 'cartograph',
     name: 'CARTOGRAPH',
     tagline: 'Docs that write themselves.',
@@ -279,40 +244,6 @@ export const projects: Project[] = [
     ],
   },
   {
-    id: 'the-glass-house',
-    name: 'THE GLASS HOUSE',
-    tagline: 'Psychological horror through dialogue.',
-    category: 'games',
-    description: 'A psychological horror visual novel where combat is entirely dialogue-based. Built as Lead Programmer with Arcane Misfits in Godot 4.',
-    sections: [
-      {
-        heading: 'The Concept',
-        content: 'You wake up in your childhood bedroom. The glow-in-the-dark stars on the ceiling are glowing a sick, pale red. You explore rooms of a house that is really a fractured mind, confronting Shadow Archetypes through dialogue choices rather than weapons.',
-      },
-      {
-        heading: 'What I Built',
-        content: [
-          'Dialogue combat system with branching choices that shift based on prior decisions and sanity',
-          'Hidden sanity tracker that silently corrupts the experience across five tiers',
-          'Hallucination layer that spawns fake UI elements and trick choices to gaslight the player',
-          'Items, descriptions, and narration that quietly rewrite themselves as sanity drops',
-        ],
-      },
-    ],
-    icon: {
-      type: 'placeholder',
-    },
-    backgroundImage: '/images/projects/glass-house-background.png',
-    brightBackground: true,
-    hoverColor: '#8b1a3a',
-    cancelled: true,
-    links: [
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/glass-house', type: 'github' },
-      { label: 'Releases', url: 'https://github.com/nathanialf/glass-house/releases', type: 'release' },
-      { label: 'Web Build (Dev)', url: 'https://dev.internal.defnf.com:8443/', type: 'website', hidden: true },
-    ],
-  },
-  {
     id: 'untitled-playdate',
     name: 'TAILING PERSON 53',
     tagline: 'A Playdate game about watching strangers.',
@@ -344,31 +275,34 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: 'vka-first-combat',
-    name: 'VKA FIRST COMBAT',
-    tagline: 'Mission-based mech combat.',
+    id: 'contact-force',
+    name: 'CONTACT FORCE',
+    tagline: 'Zero-gravity deathmatch.',
     category: 'games',
-    description: 'A mech combat game built in Unreal Engine 5. Mission-based single-player with customizable loadouts and tactical objectives. Built as Programmer and Producer/Project Manager.',
+    description: 'A four-player free-for-all deathmatch set in zero gravity, built in Godot 4. You walk the outside of floating structures until you push off into open space, where the only way to steer is to shoot. Working title; the project repo is Ejecta.',
     sections: [
       {
         heading: 'The Game',
-        content: 'You pilot a mech through mission-based combat scenarios. Swap weapons, build loadouts, and take on objectives like target kills, navigation challenges, and timed survival. Two core enemy types plus bosses keep the combat varied.',
+        content: 'Every arena is a handful of structures floating in a wrapping play space: leave one edge and you reappear on the other. Attached to a block you walk its surface and round its corners as if it were flat ground. Detached, you are a body with momentum: your stick rotates you to line up a landing, and firing your weapon kicks you 180° off the shot like recoil. Landing feet first is clean, landing head first hurts.',
       },
       {
-        heading: 'What I Manage',
+        heading: 'What I Built',
         content: [
-          'Phase-gated roadmap across four milestones from gameplay lock to full release',
-          'Task ownership and dependency tracking across programming, art, animation, and sound',
-          'Scope control with strict feature lock gates to prevent creep',
-          'Early playtesting pipeline and QA targets (stable 60fps)',
+          'Surface-walking movement that carries momentum around corners, plus free-flight physics where recoil is the thrust',
+          'Two-tap kill model: the first hit punctures your suit, vents air, and flings you off with a one-second window to be finished',
+          'Weapons, knife melee, and ricochet timing that lets a well-placed slash save you from a hazard',
+          'Full front end: player join and skin select, match configuration, HUD, pause, settings, and rematch flow',
+          'Godot editor tooling for designers: grid-snapped block prefabs, a copyable arena template, and a live tuning panel over every physics value',
         ],
       },
     ],
     icon: {
       type: 'placeholder',
     },
-    hoverColor: '#ff0000',
-    links: [],
+    hoverColor: '#ff6b35',
+    links: [
+      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/ejecta', type: 'github', hidden: true },
+    ],
     hidden: true,
   },
   {
@@ -404,8 +338,8 @@ export const projects: Project[] = [
     hidden: true,
   },
   {
-    id: 'people-pleaser',
-    name: 'PEOPLE PLEASER',
+    id: 'new-years-nightmare',
+    name: "NEW YEAR'S NIGHTMARE",
     tagline: 'A social horror game.',
     category: 'games',
     description: 'Role: Project Manager.',

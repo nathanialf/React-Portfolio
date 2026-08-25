@@ -784,11 +784,11 @@ export default function UIPage() {
                     <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                       <button
                         className={`${layoutStyles.navButton} ${layoutStyles.hiddenProject}`}
-                        style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
+                        style={{ '--project-color': '#ff6b35' } as React.CSSProperties}
                       >
                         <div className={layoutStyles.navButtonContent}>
-                          <span className={layoutStyles.navButtonName}>GLASS HOUSE</span>
-                          <span className={layoutStyles.navButtonTagline}>First-person horror.</span>
+                          <span className={layoutStyles.navButtonName}>CONTACT FORCE</span>
+                          <span className={layoutStyles.navButtonTagline}>Zero-gravity deathmatch.</span>
                         </div>
                         <div className={layoutStyles.hiddenBanner}>HIDDEN</div>
                       </button>
@@ -824,11 +824,11 @@ export default function UIPage() {
                     <div className={styles.demoLabel}>Live</div>
                     <button
                       className={`${layoutStyles.navButton} ${layoutStyles.cancelledProject}`}
-                      style={{ '--project-color': '#8b1a3a' } as React.CSSProperties}
+                      style={{ '--project-color': '#ff6b35' } as React.CSSProperties}
                     >
                       <div className={layoutStyles.navButtonContent}>
-                        <span className={layoutStyles.navButtonName}>THE GLASS HOUSE</span>
-                        <span className={layoutStyles.navButtonTagline}>Psychological horror through dialogue.</span>
+                        <span className={layoutStyles.navButtonName}>EXAMPLE PROJECT</span>
+                        <span className={layoutStyles.navButtonTagline}>Shelved before release.</span>
                       </div>
                       <div className={layoutStyles.cancelledBanner}>CANCELLED</div>
                     </button>
@@ -1374,7 +1374,6 @@ export default function UIPage() {
                       { color: '#22c55e', label: 'Grid' },
                       { color: '#8b5cf6', label: 'ENCOM' },
                       { color: '#8B5E3C', label: 'Groovy' },
-                      { color: '#8b1a3a', label: 'Glass House' },
                       { color: '#bfff00', label: 'Marathon' },
                       { color: '#9fc2c2', label: 'Theme' },
                     ].map(({ color, label }) => (
