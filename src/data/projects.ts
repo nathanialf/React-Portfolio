@@ -45,11 +45,11 @@ export const projects: Project[] = [
     name: 'MYSEATMAP',
     tagline: 'Real-time flight intelligence.',
     category: 'saas',
-    description: 'A full-stack serverless SaaS product that helped airline employees make smarter standby and non-rev flight decisions. Built as CTO and 1/2 of Ody-Software. The service operated until July 2026, when it was shut down after the team was unable to secure vendor funding to continue operation.',
+    description: 'A full-stack serverless SaaS product helping airline employees make smarter standby and non-rev flight decisions.',
     sections: [
       {
         heading: 'The Problem',
-        content: 'My business partner, who had connections in the airline industry, saw a gap: employees with flight benefits had no easy way to assess seat availability across multiple data sources before committing to flights.',
+        content: 'My business partner, who has connections in the airline industry, saw a gap in how employees with flight benefits have no easy way to assess seat availability across multiple data sources before committing to flights.',
       },
       {
         heading: 'What I Built',
@@ -68,11 +68,15 @@ export const projects: Project[] = [
     },
     hoverColor: '#00bba7',
     backgroundVideo: '/images/projects/myseatmap/journey.webm',
-    // MySeatMap was shut down in July 2026 after the team was unable to secure
-    // vendor funding to continue operation. The project stays visible as a
-    // portfolio piece, but all links have been removed since the product and
-    // its infrastructure have been wound down.
-    links: [],
+    links: [
+      { label: 'MySeatMap', url: 'https://myseatmap.com', type: 'plane' },
+      { label: 'Privacy Policy', url: '/privacy-policy/myseatmap', type: 'privacy' },
+      { label: 'Dev Site', url: 'https://dev.myseatmap.com', type: 'website', hidden: true },
+      { label: 'Ody-Software', url: 'https://ody-software.com/', type: 'website', hidden: true },
+      { label: 'Ody-Software Repository', url: 'https://github.com/nathanialf/ody-software', type: 'github', hidden: true },
+      { label: 'Frontend Repository', url: 'https://github.com/nathanialf/seatmap-frontend', type: 'github', hidden: true },
+      { label: 'Backend Repository', url: 'https://github.com/nathanialf/seatmap-backend', type: 'github', hidden: true },
+    ],
   },
   {
     id: 'cartograph',
