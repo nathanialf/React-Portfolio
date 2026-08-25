@@ -36,6 +36,16 @@ const AboutDetail: React.FC<AboutDetailProps> = ({ onBack, backButtonClass }) =>
       </div>
 
       <div className={styles.section}>
+        <h2 className={styles.heading}>Currently</h2>
+        <div className={styles.experience}>
+          <div className={styles.company}>
+            <Image src="/images/klearforce-logo.svg" alt="Klearforce" className={`${styles.companyLogo} ${styles.companyLogoKlearforce}`} width={119} height={18} />
+            <span className={styles.years}>2026–Present</span>
+          </div>
+        </div>
+      </div>
+
+      <div className={styles.section}>
         <h2 className={styles.heading}>Previously</h2>
         <div className={styles.experience}>
           <div className={styles.company}>

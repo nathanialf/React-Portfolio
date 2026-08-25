@@ -76,6 +76,10 @@
   filter: brightness(0) invert(0.45);
 }
 
+.companyLogoKlearforce {
+  height: 0.72rem;
+}
+
 .years {
   font-family: var(--font-mono), 'Courier New', monospace;
   font-size: 0.75rem;
