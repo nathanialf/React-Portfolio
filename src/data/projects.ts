@@ -367,16 +367,27 @@ export const projects: Project[] = [
   },
   {
     id: 'ico-decomp',
-    name: 'ICO DECOMPILED',
+    name: 'ICO',
     tagline: 'Reverse Engineering',
     category: 'games',
-    description: 'Test',
+    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001), and a static recompilation of the same game so it runs natively on a PC. Disc games get harder to run every year. Emulators approximate the hardware, and the game itself is a binary nobody can read or change. Decompiling it recovers source code that rebuilds the game byte for byte. Recompiling it produces an executable that does not need a PS2 at all. Neither repository contains any game data, and both require your own copy of the disc.',
+    sections: [
+      {
+        heading: 'Decompilation',
+        content: 'Most functions match with a simple loop. Write C, diff the compiled output against the original, keep whatever lowers the number of instructions that differ. The hard ones do not work that way, because what is left over is one problem spread across the whole function, like register allocation, where every difference moves together. I built a harness for those. It runs the analysis through model workers under rules I set, and the rules are the point. Differences get resolved in the order they appear, one at a time. Every claim about why the compiler emitted a particular instruction has to cite the compiler source, its debug output, or the game code before anything gets compiled, so guesses do not survive contact with the loop. The diff count is allowed to go up when a structural change is correct, because it drops in groups once the shape is right. The harness only supports the work. Nothing counts as matched until a full build produces a binary with the same SHA-1 as the game.',
+      },
+      {
+        heading: 'Recompilation',
+        content: 'Every instruction in the game binary is translated to C ahead of time, compiled for the host, and linked against a runtime that implements the PS2 hardware the game expects. No emulation and no interpretation at runtime. It is playable, with a launcher, settings, and remappable input.',
+      },
+    ],
     icon: {
       type: 'placeholder',
     },
+    hoverColor: '#d9c9a3',
     links: [
-      { label: 'GitHub Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
+      { label: 'Decompilation Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
+      { label: 'Recompilation Repository', url: 'https://github.com/nathanialf/ico-recomp', type: 'github' },
     ],
-    hidden: true,
   },
 ];
