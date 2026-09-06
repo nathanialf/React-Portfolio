@@ -159,12 +159,12 @@
 
 .navButton:hover .navButtonName,
 .navButton.active .navButtonName {
-  color: white;
+  color: var(--project-text-color, #ffffff);
 }
 
 .navButton:hover .navButtonTagline,
 .navButton.active .navButtonTagline {
-  color: rgba(255, 255, 255, 0.8);
+  color: var(--project-text-muted, rgba(255, 255, 255, 0.8));
 }
 
 .hiddenProject {
@@ -458,7 +458,7 @@
 
   .mobileNavButton:hover .navButtonTagline,
   .mobileNavButton.active .navButtonTagline {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--project-text-muted, rgba(255, 255, 255, 0.8));
   }
 
   .mobileAboutButton {

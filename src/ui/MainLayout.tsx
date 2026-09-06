@@ -7,6 +7,7 @@ import VerticalSidebar from './VerticalSidebar';
 import { projects, categoryLabels, ProjectCategory } from '../data/projects';
 import { IconArrowLeft, IconQrcode, IconMusic, IconMarkdown, IconDeviceGamepad2, IconComponents, IconGift } from '@tabler/icons-react';
 import styles from '../styles/MainLayout.module.css';
+import { contrastTextVars } from '../lib/contrast';
 import introStyles from '../styles/CardContent.module.css';
 import aboutStyles from '../styles/AboutDetail.module.css';
 import projectStyles from '../styles/ProjectDetail.module.css';
@@ -116,7 +117,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                     key={project.id}
                     className={`${styles.navButton} ${selectedProjectId === project.id ? styles.active : ''} ${project.hidden ? styles.hiddenProject : ''} ${project.cancelled ? styles.cancelledProject : ''}`}
                     onClick={() => handleProjectSelect(project.id)}
-                    style={{ '--project-color': project.hoverColor } as React.CSSProperties}
+                    style={{ '--project-color': project.hoverColor, ...contrastTextVars(project.hoverColor) } as React.CSSProperties}
                   >
                     <div className={styles.navButtonContent}>
                       <span className={styles.navButtonName}>{project.name}</span>
@@ -248,7 +249,7 @@ const MainLayout: React.FC<MainLayoutProps> = ({ onProjectChange, brightBackgrou
                             key={project.id}
                             className={`${styles.mobileNavButton} ${project.hidden ? styles.hiddenProject : ''} ${project.cancelled ? styles.cancelledProject : ''}`}
                             onClick={() => handleProjectSelect(project.id)}
-                            style={{ '--project-color': project.hoverColor } as React.CSSProperties}
+                            style={{ '--project-color': project.hoverColor, ...contrastTextVars(project.hoverColor) } as React.CSSProperties}
                           >
                             <div className={styles.navButtonContent}>
                               <span className={styles.navButtonName}>{project.name}</span>

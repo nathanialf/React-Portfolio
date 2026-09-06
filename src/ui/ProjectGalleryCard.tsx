@@ -1,5 +1,6 @@
 import React from 'react';
 import { Project } from '../data/projects';
+import { contrastTextVars } from '../lib/contrast';
 import styles from '../styles/ProjectGalleryCard.module.css';
 
 interface ProjectGalleryCardProps {
@@ -12,7 +13,10 @@ const ProjectGalleryCard: React.FC<ProjectGalleryCardProps> = ({ project, onClic
     <button
       className={styles.card}
       onClick={onClick}
-      style={{ '--project-color': project.hoverColor } as React.CSSProperties}
+      style={{
+        '--project-color': project.hoverColor,
+        ...contrastTextVars(project.hoverColor),
+      } as React.CSSProperties}
       aria-label={`View ${project.name} project`}
     >
       <div className={styles.content}>

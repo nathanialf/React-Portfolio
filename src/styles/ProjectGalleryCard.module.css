@@ -27,11 +27,11 @@
 }
 
 .card:hover .name {
-    color: white;
+    color: var(--project-text-color, #ffffff);
 }
 
 .card:hover .tagline {
-    color: rgba(255, 255, 255, 0.8);
+    color: var(--project-text-muted, rgba(255, 255, 255, 0.8));
 }
 
 .name {
