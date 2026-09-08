@@ -2,6 +2,7 @@ import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react'
 import { jest } from '@jest/globals'
 import ProjectsSection from '../src/ui/ProjectsSection'
+import { projects } from '../src/data/projects'
 
 describe('ProjectsSection', () => {
   const mockOnProjectSelect = jest.fn()
@@ -31,8 +32,12 @@ describe('ProjectsSection', () => {
   it('renders project cards as clickable buttons', () => {
     render(<ProjectsSection onProjectSelect={mockOnProjectSelect} />)
 
+    // Derived from the data, not hardcoded: the component renders one card per
+    // non-hidden project, so a literal count goes stale every time an entry is
+    // added or dropped.
+    const expected = projects.filter(p => !p.hidden).length
     const projectCards = screen.getAllByRole('button')
-    expect(projectCards.length).toBe(6)
+    expect(projectCards.length).toBe(expected)
 
     // Check that each card has the correct structure
     projectCards.forEach(card => {
