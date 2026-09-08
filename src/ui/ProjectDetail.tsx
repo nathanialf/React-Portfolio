@@ -1,6 +1,7 @@
 import React from 'react';
 import { Project, ProjectSection } from '../data/projects';
 import { IconArrowLeft, IconExternalLink, IconBrandGithub, IconBrandGooglePlay, IconShield, IconHexagon, IconWall, IconPlane } from '@tabler/icons-react';
+import ProgressBadge from './ProgressBadge';
 import styles from '../styles/ProjectDetail.module.css';
 
 interface ProjectDetailProps {
@@ -70,6 +71,13 @@ const ProjectDetail: React.FC<ProjectDetailProps> = ({ project, onBack, brightBa
         <div className={styles.titleRow}>
           <h2 className={styles.title}>{project.name}</h2>
           {project.cancelled && <span className={styles.cancelledBadge}>CANCELLED</span>}
+          {project.progress && (
+            <ProgressBadge
+              endpoint={project.progress.endpoint}
+              dashboard={project.progress.dashboard}
+              accentColor={project.hoverColor}
+            />
+          )}
         </div>
         <p className={styles.description}>{project.description}</p>
       </div>

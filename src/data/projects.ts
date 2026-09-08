@@ -35,6 +35,10 @@ export interface Project {
   backgroundVideo?: string; // Optional background video (webm/mp4); takes precedence over backgroundImage, plays muted/looping with no controls
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
+  progress?: {
+    endpoint: string; // Same-origin API returning a ProgressSummary
+    dashboard: string; // Public dashboard the badge links to
+  };
   hidden?: boolean; // If true, project is not displayed
   cancelled?: boolean; // If true, project is cancelled (shown only in dev with cancelled badge)
 }
@@ -385,6 +389,10 @@ export const projects: Project[] = [
       type: 'placeholder',
     },
     hoverColor: '#d9c9a3',
+    progress: {
+      endpoint: '/api/ico-progress',
+      dashboard: 'https://nathanialf.github.io/ico/#pal',
+    },
     links: [
       { label: 'Decompilation Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
       { label: 'Recompilation Repository', url: 'https://github.com/nathanialf/ico-recomp', type: 'github' },

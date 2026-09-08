@@ -1,8 +1,48 @@
 import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
 import { jest } from '@jest/globals'
+import { render, screen, fireEvent, waitFor } from '@testing-library/react'
 import ProjectDetail from '../src/ui/ProjectDetail'
 import { projects } from '../src/data/projects'
+
+describe('ProjectDetail progress badge', () => {
+  const icoProject = projects.find(p => p.id === 'ico-decomp')!
+  const noProgressProject = projects.find(p => p.id === 'encom')!
+
+  afterEach(() => {
+    localStorage.clear()
+    // @ts-expect-error - clearing the mock installed per test
+    delete global.fetch
+  })
+
+  it('renders the badge for a project that declares progress', async () => {
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        json: () => Promise.resolve({
+          progress: {
+            matchedFuncs: 4053, totalFuncs: 5741, funcPct: 70.6,
+            matchedBytes: 623856, totalBytes: 1612740, bytePct: 38.7,
+            version: 'pal',
+          },
+        }),
+      })
+    ) as unknown as typeof fetch
+
+    render(<ProjectDetail project={icoProject} onBack={jest.fn()} />)
+
+    const badge = await screen.findByText('38.7%')
+    expect(badge).toHaveAttribute('href', icoProject.progress!.dashboard)
+  })
+
+  it('does not fetch for a project without progress', async () => {
+    global.fetch = jest.fn() as unknown as typeof fetch
+
+    render(<ProjectDetail project={noProgressProject} onBack={jest.fn()} />)
+
+    await waitFor(() => expect(screen.getByText(noProgressProject.name)).toBeInTheDocument())
+    expect(global.fetch).not.toHaveBeenCalled()
+    expect(screen.queryByText(/%$/)).not.toBeInTheDocument()
+  })
+})
 
 describe('ProjectDetail', () => {
   const mockOnBack = jest.fn()
