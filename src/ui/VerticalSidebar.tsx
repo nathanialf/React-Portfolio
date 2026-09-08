@@ -91,8 +91,11 @@ const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
       });
   }, []);
 
-  const days = contributions.slice(-182); // ~6 months
-  const firstDate = new Date(days[0]?.date || new Date());
+  const days = contributions.slice(-364); // 52 weeks
+  // Parse as local time: `new Date('2026-03-01')` is UTC midnight, but getDay()
+  // reads local, which shifts the whole grid a row west of UTC.
+  const [year, month, day] = (days[0]?.date ?? '').split('-').map(Number);
+  const firstDate = year ? new Date(year, month - 1, day) : new Date();
   const padDays = firstDate.getDay();
 
   const allDays: (ContributionDay | null)[] = [
@@ -100,12 +103,16 @@ const VerticalSidebar: React.FC<VerticalSidebarProps> = ({ disableLink }) => {
     ...days
   ];
 
-  const weeks: (ContributionDay | null)[][] = [];
+  const allWeeks: (ContributionDay | null)[][] = [];
   for (let i = 0; i < allDays.length; i += 7) {
     const week = allDays.slice(i, i + 7);
     while (week.length < 7) week.push(null);
-    weeks.push(week);
+    allWeeks.push(week);
   }
+
+  // padDays makes 364 days fall into 52 or 53 rows depending on the start
+  // weekday; clamp so the graph height does not jitter day to day.
+  const weeks = allWeeks.slice(-52);
 
   const getColor = (level: number | undefined) => {
     if (!level) return 'transparent';
