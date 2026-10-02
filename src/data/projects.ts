@@ -374,15 +374,11 @@ export const projects: Project[] = [
     name: 'ICO',
     tagline: 'Reverse engineering.',
     category: 'games',
-    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001), and a static recompilation of the same game so it runs natively on a PC. Disc games get harder to run every year. Emulators approximate the hardware, and the game itself is a binary nobody can read or change. Decompiling it recovers source code that rebuilds the game byte for byte. Recompiling it produces an executable that does not need a PS2 at all. Neither repository contains any game data, and both require your own copy of the disc.',
+    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001). Disc games get harder to run every year. Emulators approximate the hardware, and the game itself is a binary nobody can read or change. Decompiling it recovers source code that rebuilds the game byte for byte. The repository contains no game data and requires your own copy of the disc.',
     sections: [
       {
         heading: 'Decompilation',
         content: 'The standard matching loop scores each edit by how many instructions still differ from the ROM and keeps whatever lowers the count. That works while the differences are independent. It stalls when the residual is a whole-function property, where register allocation, reload placement and scheduling move together and no single-site edit lowers the count. I built a convergence harness for those. It keeps an edit that makes a code class match the ROM even when the raw count rises, because the count then falls in groups once the shape re-aligns. Divergences get resolved in the function\u2019s own order, one at a time. A claim becomes fact only on independent sources: the compiler source at file and line, its own -d dumps, or the ROM\u2019s rows at an address. Where a pass decides the codegen, the harness states that pass\u2019s required input as a predicate over its own variables, marks each conjunct against the dumps, and derives backwards to the C construct that satisfies the ones that fail. The compiler and its flags are fixed, so a matching source shape exists for every function. A supervisor runs one worker at a time, measures the result, audits it against the ROM text, and relaunches. Nothing counts as matched until a full build produces a binary with the same SHA-1 as the game.',
-      },
-      {
-        heading: 'Recompilation',
-        content: 'Every instruction in the game binary is translated to C ahead of time, compiled for the host, and linked against a runtime that implements the PS2 hardware the game expects. No emulation and no interpretation at runtime. It is playable, with a launcher, settings, and remappable input.',
       },
     ],
     icon: {
@@ -395,7 +391,9 @@ export const projects: Project[] = [
     },
     links: [
       { label: 'Decompilation Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
-      { label: 'Recompilation Repository', url: 'https://github.com/nathanialf/ico-recomp', type: 'github' },
+      { label: 'Latest Release', url: 'https://github.com/nathanialf/ico/releases/latest', type: 'release' },
+      { label: 'PC Port Repository', url: 'https://github.com/nathanialf/ico-pc', type: 'github' },
+      { label: 'Recompilation Repository', url: 'https://github.com/nathanialf/ico-recomp', type: 'github', hidden: true },
     ],
   },
 ];
