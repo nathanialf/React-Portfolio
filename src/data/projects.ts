@@ -374,11 +374,15 @@ export const projects: Project[] = [
     name: 'ICO',
     tagline: 'Reverse engineering.',
     category: 'games',
-    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001). Disc games get harder to run every year. Emulators approximate the hardware, and the game itself is a binary nobody can read or change. Decompiling it recovers source code that rebuilds the game byte for byte. The repository contains no game data and requires your own copy of the disc.',
+    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001) and a native PC port built from it. The decompilation recovers C source that rebuilds the original game byte for byte, so the code the developers wrote can be read, studied, and kept. ICO has only ever shipped on PlayStation consoles; the port runs that same code natively on Windows and Linux, including the Steam Deck, and plays the game as it shipped by default. Neither repository contains game data; both require your own copy of the disc.',
     sections: [
       {
         heading: 'Decompilation',
         content: 'Matching usually works by trial and error: tweak the C, recompile, and keep the change if fewer instructions differ from the original. That breaks down when the remaining differences are tangled together, like register allocation and instruction order shifting as a group, so no single tweak helps. I built a harness for those cases. It keeps a change that gets the code\u2019s shape right even if the diff briefly grows, since the rest tends to fall into place afterwards. It only trusts what it can check against the compiler\u2019s source, its debug output, or the game itself, and when one compiler pass decides the output, it works out what that pass needs and reasons backwards to the C that produces it. Because the compiler and flags are fixed, a matching version of every function exists. The job is finding it. Nothing counts as done until a full build produces a binary identical to the original game.',
+      },
+      {
+        heading: 'PC Port',
+        content: 'The port compiles the decompiled C as a native program. A platform layer stands in for the console hardware and Sony\u2019s libraries: it draws through Vulkan (with a Direct3D 12 backend on Windows), plays the game\u2019s sound and films, and reads its data from an archive extracted from your disc image on first run. The target is the original game, with the same logic, timing, and pictures. Higher resolutions, widescreen, frame interpolation, 60 Hz, controller remapping, and achievements are all there, but each sits behind a setting that defaults to the original, so nothing changes unless you choose it. The port is a fork of the decompilation and never drifts from it. Names, fixes, and host changes land in the decompilation first, gated so the PS2 build still matches, and then merge into the port.',
       },
     ],
     icon: {
