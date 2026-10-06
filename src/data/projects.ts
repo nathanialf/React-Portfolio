@@ -382,7 +382,7 @@ export const projects: Project[] = [
       },
       {
         heading: 'PC Port',
-        content: 'The port compiles the decompiled C as a native program. A platform layer replaces the PS2 hardware and Sony\u2019s libraries. The target is the original game, with the same logic, timing, and pictures. Higher resolutions, widescreen, frame interpolation, 60 Hz, controller remapping, and achievements are all there, but each sits behind a setting that defaults to the original, so nothing changes unless you choose it. Every fix lands in the decompilation first, so the port never drifts from it.',
+        content: 'The port compiles the decompiled C as a native program. A platform layer replaces the PS2 hardware and Sony\u2019s libraries. The target is the original game, with the same logic, timing, and pictures. Higher resolutions, widescreen, frame interpolation, 60 Hz, controller remapping, and achievements are all there, but each sits behind a setting that defaults to the original, so nothing changes unless you choose it.',
       },
     ],
     icon: {
