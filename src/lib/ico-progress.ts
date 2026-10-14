@@ -8,6 +8,25 @@ export interface ProgressSummary {
   version: string | null;
 }
 
+export interface ProgressTarget {
+  id: string; // Path segment for the data (/ico/<id>/progress.json) and the dashboard hash (/ico/#<id>)
+  short: string; // Badge label, matching the dashboard's version picker
+  name: string; // Full name for the tooltip
+}
+
+export interface TargetProgress extends ProgressSummary {
+  target: ProgressTarget;
+}
+
+// The dashboard's four targets, in its picker order. The data path for NTSC is
+// `us` (published from the decomp's `ntsc` branch), not `ntsc`.
+export const ICO_TARGETS: ProgressTarget[] = [
+  { id: 'pal', short: 'PAL', name: 'PAL retail (SCES-50760)' },
+  { id: 'us', short: 'NTSC', name: 'NTSC retail (SLUS-20218)' },
+  { id: 'jpn', short: 'JPN', name: 'JPN retail (SCPS-11003)' },
+  { id: 'aug6', short: 'Proto', name: 'Aug-6-2001 prototype' },
+];
+
 interface ProgressTotals {
   matched_funcs?: unknown;
   total_funcs?: unknown;

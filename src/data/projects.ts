@@ -36,8 +36,8 @@ export interface Project {
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
   progress?: {
-    endpoint: string; // Same-origin API returning a ProgressSummary
-    dashboard: string; // Public dashboard the badge links to
+    endpoint: string; // Same-origin API returning { targets: TargetProgress[] }
+    dashboard: string; // Public dashboard root; each target's badge links to <dashboard>#<id>
   };
   hidden?: boolean; // If true, project is not displayed
   cancelled?: boolean; // If true, project is cancelled (shown only in dev with cancelled badge)
@@ -230,15 +230,27 @@ export const projects: Project[] = [
     name: 'ICO',
     tagline: 'Reverse engineering.',
     category: 'games',
-    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001) and a native PC port built from it. The decompilation recovers C source that rebuilds the original game byte for byte. ICO has only ever shipped on PlayStation consoles; the port runs that same code natively on Windows, Linux, the Steam Deck, and Android phones and tablets, and plays the game as it shipped by default. Neither repository contains game data; both require your own copy of the disc.',
+    description: 'A clean-room decompilation of ICO (PlayStation 2, 2001) and a native PC port built from it. The decompilation recovers C source that rebuilds the original game byte for byte. ICO has only ever shipped on PlayStation consoles; the port runs that same code natively on Windows, Linux, the Steam Deck, Android, iPhone, and Apple-silicon Macs, and plays the game as it shipped by default. Neither repository contains game data; both require your own copy of the disc.',
     sections: [
       {
         heading: 'Decompilation',
         content: 'Matching usually works by trial and error: tweak the C, recompile, and keep the change if fewer instructions differ from the original. That breaks down when the remaining differences are tangled together, like register allocation and instruction order shifting as a group, so no single tweak helps. I built a harness for those cases. It keeps a change that gets the code\u2019s shape right even if the diff briefly grows, since the rest tends to fall into place afterwards. It only trusts what it can verify against the compiler or the game. Because the compiler and flags are fixed, a matching version of every function exists. The job is finding it. Nothing counts as done until a full build produces a binary identical to the original game.',
       },
       {
-        heading: 'PC and Android Port',
-        content: 'The port compiles the decompiled C as a native program. A platform layer replaces the PS2 hardware and Sony\u2019s libraries. The target is the original game, with the same logic, timing, and pictures. Higher resolutions, widescreen, frame interpolation, 60 Hz, controller remapping, and achievements are all there, but each sits behind a setting that defaults to the original, so nothing changes unless you choose it. The same code also builds as a 64-bit Android app. It draws with Vulkan, adds on-screen touch controls alongside gamepad support, and lowers its own resolution when a phone falls behind. Android support is still experimental.',
+        heading: 'Native Port',
+        content: 'The port compiles the decompiled C as a native program. A platform layer replaces the PS2 hardware and Sony\u2019s libraries. The target is the original game, with the same logic, timing, and pictures. Higher resolutions, widescreen, frame interpolation, 60 Hz, controller remapping, and achievements are all there, but each sits behind a setting that defaults to the original, so nothing changes unless you choose it.',
+      },
+      {
+        heading: 'Platforms',
+        content: [
+          'Windows 10 and 11: my main test machine. Draws with Vulkan, or Direct3D 12 if you choose it.',
+          'Linux (x86-64): built and checked by automated tests on every release.',
+          'Steam Deck: runs the Linux build, and can add itself to Steam for Game Mode.',
+          'Linux on 64-bit ARM handhelds and boards: built on every release.',
+          'Android 10 or newer: draws with Vulkan, adds on-screen touch controls alongside gamepad support, and lowers its own resolution when a phone falls behind.',
+          'iPhone (iOS 15 or newer): contributed by katsifolis. Runs through LiveContainer, since the port is not on the App Store.',
+          'Apple-silicon Macs (macOS 12 or newer): contributed by braito4. I don\u2019t own an Apple device, so both Apple builds ship untested on my end and rely on reports from players.',
+        ],
       },
     ],
     icon: {
@@ -247,7 +259,7 @@ export const projects: Project[] = [
     hoverColor: '#d9c9a3',
     progress: {
       endpoint: '/api/ico-progress',
-      dashboard: 'https://nathanialf.github.io/ico/#pal',
+      dashboard: 'https://nathanialf.github.io/ico/',
     },
     links: [
       { label: 'Decompilation Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },

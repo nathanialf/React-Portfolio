@@ -1,8 +1,9 @@
 import { NextResponse } from 'next/server';
-import { summarizeProgress } from '../../../lib/ico-progress';
+import { ICO_TARGETS, TargetProgress, summarizeProgress } from '../../../lib/ico-progress';
 
-// The dashboard publishes three targets: main -> pal (PAL retail, SCES-50760),
-// ntsc -> us, aug6 -> the Aug-6-2001 prototype. We track main, hence `pal`.
+// The dashboard publishes four targets, one per decomp branch:
+// main -> pal (PAL retail, SCES-50760), ntsc -> us, jpn -> jpn, aug6 -> the
+// Aug-6-2001 prototype. Each lives at <base>/<id>/progress.json.
 // The site root's /progress.json is a compat copy that always holds the *aug6*
 // data for stale browser caches -- do not point at it.
 //
@@ -11,35 +12,45 @@ import { summarizeProgress } from '../../../lib/ico-progress';
 //
 // The URL is a constant, not a query param: taking it from the caller would
 // turn this route into an open proxy.
-const PROGRESS_URL = process.env.ICO_PROGRESS_URL
-  || 'https://nathanialf.github.io/ico/pal/progress.json';
+const PROGRESS_BASE_URL = 'https://nathanialf.github.io/ico';
 
-export async function GET() {
+async function fetchTarget(target: typeof ICO_TARGETS[number]): Promise<TargetProgress | null> {
   try {
-    const response = await fetch(PROGRESS_URL, {
+    const response = await fetch(`${PROGRESS_BASE_URL}/${target.id}/progress.json`, {
       next: { revalidate: 3600 }, // Cache for 1 hour
     });
 
-    if (!response.ok) {
-      return NextResponse.json({ progress: null });
+    if (!response.ok) return null;
+
+    const summary = summarizeProgress(await response.json());
+    if (!summary) {
+      console.warn(`ICO progress: unexpected payload shape for ${target.id}`);
+      return null;
     }
 
-    const progress = summarizeProgress(await response.json());
-
-    if (!progress) {
-      console.warn('ICO progress: unexpected payload shape');
-    }
-
-    return NextResponse.json(
-      { progress },
-      {
-        headers: {
-          'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
-        },
-      }
-    );
+    return { ...summary, target };
   } catch (error) {
-    console.error('ICO progress fetch error:', error);
-    return NextResponse.json({ progress: null });
+    console.error(`ICO progress fetch error for ${target.id}:`, error);
+    return null;
   }
+}
+
+export async function GET() {
+  // A target that fails drops out on its own rather than taking the rest with it
+  const results = await Promise.all(ICO_TARGETS.map(fetchTarget));
+  const targets = results.filter((t): t is TargetProgress => t !== null);
+
+  // Nothing came back: don't let the CDN hold an empty list for an hour
+  if (targets.length === 0) {
+    return NextResponse.json({ targets });
+  }
+
+  return NextResponse.json(
+    { targets },
+    {
+      headers: {
+        'Cache-Control': 'public, max-age=0, s-maxage=3600, stale-while-revalidate=86400',
+      },
+    }
+  );
 }
