@@ -66,6 +66,15 @@ describe('ProgressBadge', () => {
     expect(links[1]).toHaveTextContent('NTSC 12.5%')
   })
 
+  it('shows a fully matched target as a whole 100%', async () => {
+    mockFetch(resolving({
+      targets: [{ ...targets[0], matchedBytes: 1612740, bytePct: 100 }],
+    }))
+    render(<ProgressBadge {...props} />)
+
+    expect(await screen.findByRole('link')).toHaveTextContent('PAL 100%')
+  })
+
   it('deep-links each badge to its target on the dashboard', async () => {
     mockFetch(resolving({ targets }))
     render(<ProgressBadge {...props} />)

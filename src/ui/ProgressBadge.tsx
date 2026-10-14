@@ -82,7 +82,7 @@ const ProgressBadge: React.FC<ProgressBadgeProps> = ({ endpoint, dashboard, acce
           title={`${target.name}: ${matchedBytes.toLocaleString()} / ${totalBytes.toLocaleString()} .text bytes matched · ${matchedFuncs.toLocaleString()} / ${totalFuncs.toLocaleString()} functions (${funcPct}%)`}
           aria-label={`${target.name}: ${bytePct}% of code bytes matched. Opens the progress dashboard in a new tab.`}
         >
-          {target.short} {bytePct.toFixed(1)}%
+          {target.short} {matchedBytes === totalBytes ? '100' : bytePct.toFixed(1)}%
         </a>
       ))}
     </>
