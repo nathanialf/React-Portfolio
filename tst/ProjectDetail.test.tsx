@@ -18,19 +18,20 @@ describe('ProjectDetail progress badge', () => {
     global.fetch = jest.fn(() =>
       Promise.resolve({
         json: () => Promise.resolve({
-          progress: {
+          targets: [{
+            target: { id: 'pal', short: 'PAL', name: 'PAL retail (SCES-50760)' },
             matchedFuncs: 4053, totalFuncs: 5741, funcPct: 70.6,
             matchedBytes: 623856, totalBytes: 1612740, bytePct: 38.7,
             version: 'pal',
-          },
+          }],
         }),
       })
     ) as unknown as typeof fetch
 
     render(<ProjectDetail project={icoProject} onBack={jest.fn()} />)
 
-    const badge = await screen.findByText('38.7%')
-    expect(badge).toHaveAttribute('href', icoProject.progress!.dashboard)
+    const badge = await screen.findByText('PAL 38.7%')
+    expect(badge).toHaveAttribute('href', `${icoProject.progress!.dashboard}#pal`)
   })
 
   it('does not fetch for a project without progress', async () => {

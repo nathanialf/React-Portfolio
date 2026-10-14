@@ -2,17 +2,32 @@ import React from 'react'
 import { render, screen, waitFor } from '@testing-library/react'
 import { jest } from '@jest/globals'
 import ProgressBadge from '../src/ui/ProgressBadge'
-import { ProgressSummary } from '../src/lib/ico-progress'
+import { ICO_TARGETS, TargetProgress } from '../src/lib/ico-progress'
 
-const summary: ProgressSummary = {
-  matchedFuncs: 4053,
-  totalFuncs: 5741,
-  funcPct: 70.6,
-  matchedBytes: 623856,
-  totalBytes: 1612740,
-  bytePct: 38.7,
-  version: 'pal',
-}
+const [pal, ntsc] = ICO_TARGETS
+
+const targets: TargetProgress[] = [
+  {
+    target: pal,
+    matchedFuncs: 4053,
+    totalFuncs: 5741,
+    funcPct: 70.6,
+    matchedBytes: 623856,
+    totalBytes: 1612740,
+    bytePct: 38.7,
+    version: 'pal',
+  },
+  {
+    target: ntsc,
+    matchedFuncs: 1200,
+    totalFuncs: 5741,
+    funcPct: 20.9,
+    matchedBytes: 201234,
+    totalBytes: 1612740,
+    bytePct: 12.5,
+    version: 'us',
+  },
+]
 
 const props = {
   endpoint: '/api/ico-progress',
@@ -20,7 +35,7 @@ const props = {
   accentColor: '#d9c9a3',
 }
 
-const CACHE_KEY = `progress:${props.endpoint}`
+const CACHE_KEY = `progress:v2:${props.endpoint}`
 
 describe('ProgressBadge', () => {
   beforeEach(() => {
@@ -41,54 +56,76 @@ describe('ProgressBadge', () => {
     expect(container).toBeEmptyDOMElement()
   })
 
-  it('leads with the byte percentage and links to the dashboard', async () => {
-    mockFetch(resolving({ progress: summary }))
+  it('renders one badge per target with its shorthand and byte percentage', async () => {
+    mockFetch(resolving({ targets }))
     render(<ProgressBadge {...props} />)
 
-    const link = await screen.findByRole('link')
-    expect(link).toHaveTextContent('38.7%')
-    expect(link).toHaveAttribute('href', props.dashboard)
-    expect(link).toHaveAttribute('target', '_blank')
-    expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    const links = await screen.findAllByRole('link')
+    expect(links).toHaveLength(2)
+    expect(links[0]).toHaveTextContent('PAL 38.7%')
+    expect(links[1]).toHaveTextContent('NTSC 12.5%')
+  })
+
+  it('deep-links each badge to its target on the dashboard', async () => {
+    mockFetch(resolving({ targets }))
+    render(<ProgressBadge {...props} />)
+
+    const links = await screen.findAllByRole('link')
+    expect(links[0]).toHaveAttribute('href', `${props.dashboard}#pal`)
+    expect(links[1]).toHaveAttribute('href', `${props.dashboard}#us`)
+    links.forEach(link => {
+      expect(link).toHaveAttribute('target', '_blank')
+      expect(link).toHaveAttribute('rel', 'noopener noreferrer')
+    })
   })
 
   it('keeps the function count in the tooltip, not the badge text', async () => {
-    mockFetch(resolving({ progress: summary }))
+    mockFetch(resolving({ targets }))
     render(<ProgressBadge {...props} />)
 
-    const link = await screen.findByRole('link')
+    const [link] = await screen.findAllByRole('link')
+    expect(link.getAttribute('title')).toContain('PAL retail (SCES-50760)')
     expect(link.getAttribute('title')).toContain('4,053 / 5,741 functions (70.6%)')
     expect(link).not.toHaveTextContent('70.6')
   })
 
-  it('caches the summary for the next visit', async () => {
-    mockFetch(resolving({ progress: summary }))
+  it('caches the targets for the next visit', async () => {
+    mockFetch(resolving({ targets }))
     render(<ProgressBadge {...props} />)
 
-    await screen.findByRole('link')
+    await screen.findAllByRole('link')
     await waitFor(() => expect(localStorage.getItem(CACHE_KEY)).not.toBeNull())
-    expect(JSON.parse(localStorage.getItem(CACHE_KEY)!)).toEqual(summary)
+    expect(JSON.parse(localStorage.getItem(CACHE_KEY)!)).toEqual(targets)
   })
 
   it('renders the cached value without waiting on the fetch', () => {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(summary))
+    localStorage.setItem(CACHE_KEY, JSON.stringify(targets))
     mockFetch(() => new Promise(() => {}))
 
     render(<ProgressBadge {...props} />)
-    expect(screen.getByRole('link')).toHaveTextContent('38.7%')
+    expect(screen.getAllByRole('link')[0]).toHaveTextContent('PAL 38.7%')
   })
 
   it('keeps the cached value when the fetch fails', async () => {
-    localStorage.setItem(CACHE_KEY, JSON.stringify(summary))
+    localStorage.setItem(CACHE_KEY, JSON.stringify(targets))
     mockFetch(() => Promise.reject(new Error('offline')))
 
     render(<ProgressBadge {...props} />)
     await waitFor(() => expect(global.fetch).toHaveBeenCalled())
-    expect(screen.getByRole('link')).toHaveTextContent('38.7%')
+    expect(screen.getAllByRole('link')).toHaveLength(2)
   })
 
-  it('renders nothing when the route reports no progress', async () => {
-    mockFetch(resolving({ progress: null }))
+  it('ignores a single-summary cache left by the old badge', () => {
+    localStorage.setItem(`progress:${props.endpoint}`, JSON.stringify(targets[0]))
+    localStorage.setItem(CACHE_KEY, JSON.stringify(targets[0]))
+    mockFetch(() => new Promise(() => {}))
+
+    const { container } = render(<ProgressBadge {...props} />)
+    expect(container).toBeEmptyDOMElement()
+  })
+
+  it('renders nothing when the route reports no targets', async () => {
+    mockFetch(resolving({ targets: [] }))
     const { container } = render(<ProgressBadge {...props} />)
 
     await waitFor(() => expect(global.fetch).toHaveBeenCalled())

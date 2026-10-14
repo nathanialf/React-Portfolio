@@ -36,8 +36,8 @@ export interface Project {
   brightBackground?: boolean; // If true, use dark text for readability on bright backgrounds
   hoverColor?: string; // Border color when hovering over the badge
   progress?: {
-    endpoint: string; // Same-origin API returning a ProgressSummary
-    dashboard: string; // Public dashboard the badge links to
+    endpoint: string; // Same-origin API returning { targets: TargetProgress[] }
+    dashboard: string; // Public dashboard root; each target's badge links to <dashboard>#<id>
   };
   hidden?: boolean; // If true, project is not displayed
   cancelled?: boolean; // If true, project is cancelled (shown only in dev with cancelled badge)
@@ -247,7 +247,7 @@ export const projects: Project[] = [
     hoverColor: '#d9c9a3',
     progress: {
       endpoint: '/api/ico-progress',
-      dashboard: 'https://nathanialf.github.io/ico/#pal',
+      dashboard: 'https://nathanialf.github.io/ico/',
     },
     links: [
       { label: 'Decompilation Repository', url: 'https://github.com/nathanialf/ico', type: 'github' },
