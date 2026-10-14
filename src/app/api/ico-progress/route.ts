@@ -12,8 +12,7 @@ import { ICO_TARGETS, TargetProgress, summarizeProgress } from '../../../lib/ico
 //
 // The URL is a constant, not a query param: taking it from the caller would
 // turn this route into an open proxy.
-const PROGRESS_BASE_URL = process.env.ICO_PROGRESS_BASE_URL
-  || 'https://nathanialf.github.io/ico';
+const PROGRESS_BASE_URL = 'https://nathanialf.github.io/ico';
 
 async function fetchTarget(target: typeof ICO_TARGETS[number]): Promise<TargetProgress | null> {
   try {
