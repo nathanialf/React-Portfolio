@@ -386,6 +386,7 @@ export const projects: Project[] = [
     hoverColor: '#f59e0b',
     links: [
       { label: 'GitHub Repository', url: 'https://github.com/nathanialf/syndicate', type: 'github' },
+      { label: 'Privacy Policy', url: '/privacy-policy/syndicate', type: 'privacy' },
     ],
     hidden: true,
   },
