@@ -24,9 +24,9 @@ export const ICO_TARGETS: ProgressTarget[] = [
   { id: 'pal', short: 'PAL', name: 'PAL retail (SCES-50760)' },
   { id: 'us', short: 'NTSC', name: 'NTSC retail (SLUS-20218)' },
   { id: 'jpn', short: 'JPN', name: 'JPN retail (SCPS-11003)' },
-  { id: 'kor', short: 'Korea', name: 'Korean retail (SCPS-56001)' },
-  { id: 'aug6', short: 'Proto', name: 'Aug-6-2001 prototype' },
-  { id: 'jun26', short: 'Demo', name: 'Jun-26-2001 demo' },
+  { id: 'kor', short: 'KOR', name: 'Korean retail (SCPS-56001)' },
+  { id: 'aug6', short: 'AUG6', name: 'Aug-6-2001 prototype' },
+  { id: 'jun26', short: 'JUN26', name: 'Jun-26-2001 demo' },
 ];
 
 interface ProgressTotals {
