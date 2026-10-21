@@ -1,9 +1,10 @@
 import { NextResponse } from 'next/server';
 import { ICO_TARGETS, TargetProgress, summarizeProgress } from '../../../lib/ico-progress';
 
-// The dashboard publishes four targets, one per decomp branch:
-// main -> pal (PAL retail, SCES-50760), ntsc -> us, jpn -> jpn, aug6 -> the
-// Aug-6-2001 prototype. Each lives at <base>/<id>/progress.json.
+// The dashboard publishes six targets, each from its own decomp branch:
+// pal -> pal (PAL retail, SCES-50760), ntsc -> us, jpn -> jpn, kor -> kor,
+// aug6 -> the Aug-6-2001 prototype, jun26 -> the Jun-26-2001 demo. Each lives
+// at <base>/<id>/progress.json.
 // The site root's /progress.json is a compat copy that always holds the *aug6*
 // data for stale browser caches -- do not point at it.
 //
